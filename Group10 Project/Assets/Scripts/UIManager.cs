@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
-    public GameObject PausePanel;
     public GameObject Dialogue;
 
 
@@ -27,7 +26,10 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        TurnPages();
+        if (Dialogue != null)
+        {
+            TurnPages();
+        }
     }
 
 
@@ -44,10 +46,6 @@ public class UIManager : MonoBehaviour
         if (DialoguePanel != null)
         {
             DialoguePanel.gameObject.SetActive(true);
-        }
-        if (PausePanel != null)
-        {
-            PausePanel.gameObject.SetActive(false);
         }
     }
 
@@ -66,6 +64,19 @@ public class UIManager : MonoBehaviour
         {
             //what happen after pressing space
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+            AnswerPanel.SetActive(true);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //what happen after clicking dialogue
+            RectTransform rect = Dialogue.GetComponent<RectTransform>();
+            bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
+            if (mouseOnDia)
+            {
+                Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+                AnswerPanel.SetActive(true);
+            }
         }
     }
     public void NextScene()
@@ -91,19 +102,13 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void CallPause()
-    {
-        DialoguePanel.SetActive(false);
-        AnswerPanel.SetActive(false);
-        PausePanel.SetActive(true);
-    }
 
     public void CallContinue()
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
-        PausePanel.SetActive(false);
     }
+
 
     public void ExitGame()
     {

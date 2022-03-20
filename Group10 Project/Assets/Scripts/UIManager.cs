@@ -70,9 +70,9 @@ public class UIManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //what happen after clicking dialogue
-            RectTransform rect = Dialogue.GetComponent<RectTransform>();
+            RectTransform rect = AnswerPanel.GetComponent<RectTransform>();
             bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
-            if (mouseOnDia)
+            if (!mouseOnDia)
             {
                 Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
                 AnswerPanel.SetActive(true);

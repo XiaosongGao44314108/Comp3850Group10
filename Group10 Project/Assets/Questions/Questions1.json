@@ -1,0 +1,44 @@
+{
+	"Questions": [
+		{
+			"Question": "What's 1 + 1?",
+			"ans0": "1",
+			"ans1": "2",
+			"ans2": "11",
+			"ans3": "One",
+			"Correct": 1,
+			"TimeLimit": 30,
+			"Points": 20
+		},
+		{
+			"Question": "What's 44 % 10?",
+			"ans0": "4",
+			"an1s": "2",
+			"ans2": "1",
+			"ans3": "3",
+			"Correct": 0,
+			"TimeLimit": 30,
+			"Points": 50
+		},
+		{
+			"Question": "What's 30-5?",
+			"ans0": "35",
+			"ans1": "20",
+			"ans2": "25",
+			"ans3": "6",
+			"Correct": 2,
+			"TimeLimit": 20,
+			"Points": 40
+		},
+		{
+			"Question": "What's 7 * 8?",
+			"ans0": "56",
+			"ans1": "15",
+			"ans2": "64",
+			"ans3": "72",
+			"Correct": 0,
+			"TimeLimit": 40,
+			"Points": 100
+		}
+	]
+}

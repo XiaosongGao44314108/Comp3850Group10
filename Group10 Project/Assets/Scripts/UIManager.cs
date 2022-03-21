@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
     public GameObject Dialogue;
+    public QuestionManager QManager;
 
     public string DialogueText;
     public string QuestionText;
@@ -62,8 +63,9 @@ public class UIManager : MonoBehaviour
         if (Input.GetButton("TurnPages"))
         {
             //what happen after pressing space
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
+            QManager.SetQuestionText();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -73,8 +75,9 @@ public class UIManager : MonoBehaviour
             bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
             if (!mouseOnDia)
             {
-                Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+                //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
                 AnswerPanel.SetActive(true);
+                QManager.SetQuestionText();
             }
         }
     }

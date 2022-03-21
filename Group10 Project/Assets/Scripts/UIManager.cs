@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject DialoguePanel;
     public GameObject Dialogue;
 
-
     public string DialogueText;
     public string QuestionText;
 

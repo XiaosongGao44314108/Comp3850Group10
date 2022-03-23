@@ -14,6 +14,7 @@ public class QuestionManager : MonoBehaviour
     public UIManager UIManager;
 
     private int currentQuestionIdx = 0;
+    private bool answer = true;
 
     [System.Serializable]
     public class Question
@@ -39,7 +40,6 @@ public class QuestionManager : MonoBehaviour
     void Start()
     {
         questionList = JsonUtility.FromJson<QuestionList>(jsonFile.text);
-        Debug.Log(questionList.questions[0].ans0);
     }
 
 	public void SetQuestionText()
@@ -59,8 +59,12 @@ public class QuestionManager : MonoBehaviour
         if (question.correctIdx == answerIdx)
         {
             //points += question.points
-            NextQuestion();
-        }
+            answer = true;
+        }else{
+            answer = false;
+        }        
+        NextQuestion();
+        UIManager.CallContinue(answer);
     }
     
 

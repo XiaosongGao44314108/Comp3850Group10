@@ -393,8 +393,8 @@ MonoBehaviour:
   questionTextBox: {fileID: 1076085036}
   ans0TextBox: {fileID: 1826182540}
   ans1TextBox: {fileID: 782012555}
-  ans2TextBox: {fileID: 0}
-  ans3TextBox: {fileID: 0}
+  ans2TextBox: {fileID: 1873037993}
+  ans3TextBox: {fileID: 1507884806}
   UIManager: {fileID: 186150122}
   questionList:
     questions: []
@@ -462,6 +462,11 @@ MonoBehaviour:
   DialoguePanel: {fileID: 1265814474}
   Dialogue: {fileID: 1076085034}
   QManager: {fileID: 87542883}
+  answers:
+  - {fileID: 762800302}
+  - {fileID: 1942193446}
+  - {fileID: 1018018319}
+  - {fileID: 606567129}
   DialogueText: 
   QuestionText: 
 --- !u!1 &606567127

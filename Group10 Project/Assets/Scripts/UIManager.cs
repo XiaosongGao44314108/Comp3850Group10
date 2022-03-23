@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     public string DialogueText;
     public string QuestionText;
 
-    private bool answered;
+   // private bool answered;
 
 
     void Start()
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
-        answered = false;
+        //answered = false;
         SetPanels();
         SetDialogue();
         for(int i = 0; i<answers.Length;i++){

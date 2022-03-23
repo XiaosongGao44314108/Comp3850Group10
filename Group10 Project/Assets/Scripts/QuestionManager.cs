@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class QuestionManager : MonoBehaviour
 {
     public TextAsset jsonFile;
-    public Text questionTextBox;
-    public Text ans0TextBox;
-    public Text ans1TextBox;
-    public Text ans2TextBox;
-    public Text ans3TextBox;
+    public TextMeshProUGUI questionTextBox;
+    public TextMeshProUGUI ans0TextBox;
+    public TextMeshProUGUI ans1TextBox;
+    public TextMeshProUGUI ans2TextBox;
+    public TextMeshProUGUI ans3TextBox;
+    public UIManager UIManager;
 
     private int currentQuestionIdx = 0;
+    private bool answer = true;
 
+    [System.Serializable]
     public class Question
 	{
-        public string questionText;
+        public string question;
         public string ans0;
         public string ans1;
         public string ans2;
@@ -42,11 +45,11 @@ public class QuestionManager : MonoBehaviour
 	public void SetQuestionText()
 	{
         Question question = questionList.questions[currentQuestionIdx];
-        questionTextBox.text = question.questionText;
-        ans0TextBox.text = question.ans0;
-        ans1TextBox.text = question.ans1;
-        ans2TextBox.text = question.ans2;
-        ans3TextBox.text = question.ans3;
+        questionTextBox.SetText(question.question);
+        ans0TextBox.SetText(question.ans0);
+        ans1TextBox.SetText(question.ans1);
+        ans2TextBox.SetText(question.ans2);
+        ans3TextBox.SetText(question.ans3);
     }
 
     public void AnswerQuestion(int answerIdx)
@@ -56,8 +59,12 @@ public class QuestionManager : MonoBehaviour
         if (question.correctIdx == answerIdx)
         {
             //points += question.points
-            NextQuestion();
-        }
+            answer = true;
+        }else{
+            answer = false;
+        }        
+        NextQuestion();
+        UIManager.CallContinue(answer);
     }
     
 

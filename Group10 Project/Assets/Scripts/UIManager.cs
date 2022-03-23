@@ -4,23 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+
 public class UIManager : MonoBehaviour
 {
     public GameObject MenuPanel;
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
     public GameObject Dialogue;
+    public QuestionManager QManager;
+    public Button[] answers;
 
     public string DialogueText;
     public string QuestionText;
+
+   // private bool answered;
+
 
     void Start()
     {
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
+        //answered = false;
         SetPanels();
         SetDialogue();
+        for(int i = 0; i<answers.Length;i++){
+            int closureIndex = i ; //prevents closure problem
+            answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
+        }
     }
 
     void Update()
@@ -62,8 +73,10 @@ public class UIManager : MonoBehaviour
         if (Input.GetButton("TurnPages"))
         {
             //what happen after pressing space
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
+            QManager.SetQuestionText();
+            
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -73,8 +86,11 @@ public class UIManager : MonoBehaviour
             bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
             if (!mouseOnDia)
             {
-                Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+                //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+                
                 AnswerPanel.SetActive(true);
+                QManager.SetQuestionText();
+    
             }
         }
     }
@@ -102,10 +118,19 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void CallContinue()
+    public void CallContinue(bool answer)
     {
         DialoguePanel.SetActive(true);
-        AnswerPanel.SetActive(true);
+        AnswerPanel.SetActive(false);
+        if(answer){
+            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+        }else{
+            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, let's try again";
+        }
+    }
+
+    public void TaskOnClick(int idx){
+      QManager.AnswerQuestion(idx);
     }
 
 

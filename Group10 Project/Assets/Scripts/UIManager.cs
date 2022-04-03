@@ -10,26 +10,32 @@ public class UIManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
+    public GameObject ReviewOrNotPanel;
+    public GameObject ReviewPanel;
+    public GameObject FeedbackPanel;
     public GameObject Dialogue;
     public QuestionManager QManager;
     public Button[] answers;
 
     public string DialogueText;
     public string QuestionText;
+    private bool feedbacking; //stop calling next question if providing feedback
 
-   // private bool answered;
+    // private bool answered;
 
 
     void Start()
     {
+        feedbacking = false;
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
         //answered = false;
         SetPanels();
         SetDialogue();
-        for(int i = 0; i<answers.Length;i++){
-            int closureIndex = i ; //prevents closure problem
+        for (int i = 0; i < answers.Length; i++)
+        {
+            int closureIndex = i; //prevents closure problem
             answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
         }
     }
@@ -57,6 +63,18 @@ public class UIManager : MonoBehaviour
         {
             DialoguePanel.gameObject.SetActive(true);
         }
+        if (ReviewOrNotPanel != null)
+        {
+            ReviewOrNotPanel.gameObject.SetActive(false);
+        }
+        if (ReviewPanel != null)
+        {
+            ReviewPanel.gameObject.SetActive(false);
+        }
+        if (FeedbackPanel != null)
+        {
+            FeedbackPanel.gameObject.SetActive(false);
+        }
     }
 
     public void SetDialogue()
@@ -70,16 +88,16 @@ public class UIManager : MonoBehaviour
 
     public void TurnPages()
     {
-        if (Input.GetButton("TurnPages"))
+        if (Input.GetButton("TurnPages") && feedbacking == false)
         {
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
             QManager.SetQuestionText();
-            
+
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && feedbacking == false)
         {
             //what happen after clicking dialogue
             RectTransform rect = AnswerPanel.GetComponent<RectTransform>();
@@ -87,10 +105,10 @@ public class UIManager : MonoBehaviour
             if (!mouseOnDia)
             {
                 //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-                
+
                 AnswerPanel.SetActive(true);
                 QManager.SetQuestionText();
-    
+
             }
         }
     }
@@ -122,15 +140,67 @@ public class UIManager : MonoBehaviour
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
-        if(answer){
+        if (answer)
+        {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
-        }else{
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, let's try again";
+        }
+        else
+        {
+            //player answers incorrectly.
+
+            ReviewOrNot();
         }
     }
 
-    public void TaskOnClick(int idx){
-      QManager.AnswerQuestion(idx);
+    public void TaskOnClick(int idx)
+    {
+        QManager.AnswerQuestion(idx);
+    }
+
+    public void ReviewOrNot()
+    {
+        feedbacking = true;
+        //let player chooses whether to review videos/images about incorrect answer
+        //Active ReviewOrNotPanel after answer incorrectly
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrectly?";
+        ReviewOrNotPanel.gameObject.SetActive(true);
+    }
+
+    public void CallReview()
+    {
+        //Player choose to review videos/images about incorrect answer
+        //Disactive ReviewOrNot Panel
+        //Active Review Panel
+        //Clear contents in dialogue box
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        ReviewPanel.gameObject.SetActive(true);
+    }
+
+    public void CallSimilarQuestion()
+    {
+        ReviewPanel.gameObject.SetActive(false);
+        //display different question of similar type at her
+        //do not know how to implement yet
+        //need to add more contents at here later
+
+        //ReviewOrNot Panel may not be actived yet if player chooses not to review related images
+        ReviewPanel.gameObject.SetActive(false);
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        GetFeedback();
+    }
+
+    public void GetFeedback()
+    {
+        //Get feedback from the player
+        FeedbackPanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do u feel about this question?";
+    }
+
+    public void CallNextQuestion()
+    {
+        FeedbackPanel.gameObject.SetActive(false);
+        feedbacking = false;
     }
 
 

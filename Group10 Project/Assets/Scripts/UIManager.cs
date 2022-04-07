@@ -10,28 +10,49 @@ public class UIManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
+    public GameObject ReviewOrNotPanel;
+    public GameObject ReviewPanel;
+    public GameObject FeedbackPanel;
     public GameObject Dialogue;
+    public GameObject ElaborateFeedbackPanel;
     public QuestionManager QManager;
     public Button[] answers;
+    public Button feedbackYes;
+    public Button feedbackNo;
+    public Button finishReviewButton;
+    public Button goodButton;
+    public Button badButton;
+    public Button continueButton;
+    public TextMeshProUGUI elaborateFeedback;
 
     public string DialogueText;
     public string QuestionText;
+    private bool feedbacking; //stop calling next question if providing feedback
+    private bool retry;
 
-   // private bool answered;
 
 
     void Start()
     {
+        feedbacking = false;
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
         //answered = false;
         SetPanels();
         SetDialogue();
-        for(int i = 0; i<answers.Length;i++){
-            int closureIndex = i ; //prevents closure problem
+        for (int i = 0; i < answers.Length; i++)
+        {
+            int closureIndex = i; //prevents closure problem
             answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
         }
+        feedbackYes.onClick.AddListener(() =>FeedbackYes());
+        feedbackNo.onClick.AddListener(() =>FeedbackNo());
+        finishReviewButton.onClick.AddListener(() =>CallSimilarQuestion());
+        goodButton.onClick.AddListener(() =>Continue());
+        badButton.onClick.AddListener(() =>Continue());
+        continueButton.onClick.AddListener(() =>ContinueAfterFeedback());
+
     }
 
     void Update()
@@ -57,6 +78,19 @@ public class UIManager : MonoBehaviour
         {
             DialoguePanel.gameObject.SetActive(true);
         }
+        if (ReviewOrNotPanel != null)
+        {
+            ReviewOrNotPanel.gameObject.SetActive(false);
+        }
+        if (ReviewPanel != null)
+        {
+            ReviewPanel.gameObject.SetActive(false);
+        }
+        if (FeedbackPanel != null)
+        {
+            FeedbackPanel.gameObject.SetActive(false);
+        }
+        ElaborateFeedbackPanel.SetActive(false);
     }
 
     public void SetDialogue()
@@ -70,28 +104,14 @@ public class UIManager : MonoBehaviour
 
     public void TurnPages()
     {
-        if (Input.GetButton("TurnPages"))
+        if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
         {
+            retry = false;
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
-            QManager.SetQuestionText();
-            
-        }
+            QManager.SetQuestionText(false);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            //what happen after clicking dialogue
-            RectTransform rect = AnswerPanel.GetComponent<RectTransform>();
-            bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
-            if (!mouseOnDia)
-            {
-                //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-                
-                AnswerPanel.SetActive(true);
-                QManager.SetQuestionText();
-    
-            }
         }
     }
     public void NextScene()
@@ -122,15 +142,95 @@ public class UIManager : MonoBehaviour
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
-        if(answer){
+        if (answer && !retry)
+        {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
-        }else{
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, let's try again";
+        }
+        else if(answer && retry)
+        {
+            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+            GetFeedback();
+        }
+        else if(!answer && retry)
+        {
+            ElaborateFeedback();
+        }
+        else
+        {
+            //player answers incorrectly.
+            retry  = true;
+            ReviewOrNot();
         }
     }
 
-    public void TaskOnClick(int idx){
-      QManager.AnswerQuestion(idx);
+    public void ElaborateFeedback(){
+        ElaborateFeedbackPanel.SetActive(true);
+        elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
+    }
+
+    public void TaskOnClick(int idx)
+    {
+        QManager.AnswerQuestion(idx);
+    }
+
+    public void ReviewOrNot()
+    {
+        feedbacking = true;
+        //let player chooses whether to review videos/images about incorrect answer
+        //Active ReviewOrNotPanel after answer incorrectly
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrectly?";
+        ReviewOrNotPanel.gameObject.SetActive(true);
+    }
+
+    public void CallReview()
+    {
+        //Player choose to review videos/images about incorrect answer
+        //Disactive ReviewOrNot Panel
+        //Active Review Panel
+        //Clear contents in dialogue box
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        ReviewPanel.gameObject.SetActive(true);
+    }
+
+    public void CallSimilarQuestion()
+    {
+        ReviewPanel.gameObject.SetActive(false);
+        //display different question of similar type at her
+        //do not know how to implement yet
+        //need to add more contents at here later
+
+        //ReviewOrNot Panel may not be actived yet if player chooses not to review related images
+        ReviewPanel.gameObject.SetActive(false);
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        //setup question
+        DialoguePanel.SetActive(true);
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(true);
+        //GetFeedback();
+    }
+
+    public void GetFeedback()
+    {
+        //Get feedback from the player
+        FeedbackPanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
+    }
+
+    public void FeedbackYes(){
+       CallReview();
+    }
+
+    public void FeedbackNo(){
+        DialoguePanel.SetActive(true);
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(true);
+    }
+
+    public void CallNextQuestion()
+    {
+        FeedbackPanel.gameObject.SetActive(false);
+        feedbacking = false;
     }
 
 
@@ -141,5 +241,24 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    //temporary method
+    public void Continue(){
+        retry = false;
+            //what happen after pressing space
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(false);
+    }
+     
+    public void ContinueAfterFeedback(){
+        QManager.NextQuestion();
+        ElaborateFeedbackPanel.SetActive(false);
+        retry = false;
+            //what happen after pressing space
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(false);
     }
 }

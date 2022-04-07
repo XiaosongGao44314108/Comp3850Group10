@@ -262,6 +262,7 @@ public class UIManager : MonoBehaviour
     //temporary method
     public void Continue(){
         retry = false;
+        CorrectReviewPanel.SetActive(false);
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);

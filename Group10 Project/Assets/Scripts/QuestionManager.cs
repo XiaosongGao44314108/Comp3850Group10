@@ -60,10 +60,11 @@ public class QuestionManager : MonoBehaviour
         {
             //points += question.points
             answer = true;
+            NextQuestion();
         }else{
             answer = false;
         }        
-        NextQuestion();
+        
         UIManager.CallContinue(answer);
     }
     

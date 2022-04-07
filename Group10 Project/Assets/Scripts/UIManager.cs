@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public GameObject Dialogue;
     public QuestionManager QManager;
     public Button[] answers;
+    public Button feedbackYes;
+    public Button feedbackNo;
 
     public string DialogueText;
     public string QuestionText;
@@ -38,6 +40,8 @@ public class UIManager : MonoBehaviour
             int closureIndex = i; //prevents closure problem
             answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
         }
+        feedbackYes.onClick.AddListener(FeedbackYes());
+        feedbackNo.onClick.AddListener(FeedbackNo());
     }
 
     void Update()
@@ -88,28 +92,13 @@ public class UIManager : MonoBehaviour
 
     public void TurnPages()
     {
-        if (Input.GetButton("TurnPages") && feedbacking == false)
+        if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
         {
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
             QManager.SetQuestionText();
 
-        }
-
-        if (Input.GetMouseButtonDown(0) && feedbacking == false)
-        {
-            //what happen after clicking dialogue
-            RectTransform rect = AnswerPanel.GetComponent<RectTransform>();
-            bool mouseOnDia = RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition);
-            if (!mouseOnDia)
-            {
-                //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-
-                AnswerPanel.SetActive(true);
-                QManager.SetQuestionText();
-
-            }
         }
     }
     public void NextScene()
@@ -147,7 +136,6 @@ public class UIManager : MonoBehaviour
         else
         {
             //player answers incorrectly.
-
             ReviewOrNot();
         }
     }
@@ -187,14 +175,23 @@ public class UIManager : MonoBehaviour
         //ReviewOrNot Panel may not be actived yet if player chooses not to review related images
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
-        GetFeedback();
+        //GetFeedback();
     }
 
     public void GetFeedback()
     {
         //Get feedback from the player
         FeedbackPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do u feel about this question?";
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
+    }
+
+    public void FeedbackYes(){
+        DialoguePanel.SetActive(true);
+        AnswerPanel.SetActive(true);
+    }
+
+    public void FeedbackNo(){
+        
     }
 
     public void CallNextQuestion()

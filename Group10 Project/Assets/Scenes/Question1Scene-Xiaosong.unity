@@ -874,6 +874,7 @@ MonoBehaviour:
   FeedbackPanel: {fileID: 1924014803}
   Dialogue: {fileID: 1076085034}
   ElaborateFeedbackPanel: {fileID: 1086853069}
+  CorrectReviewPanel: {fileID: 1238304070}
   QManager: {fileID: 87542883}
   answers:
   - {fileID: 762800302}
@@ -886,6 +887,8 @@ MonoBehaviour:
   goodButton: {fileID: 1194557963}
   badButton: {fileID: 1168482507}
   continueButton: {fileID: 256542090}
+  acceptReviewButton: {fileID: 1371310805}
+  refuseReviewButton: {fileID: 1907138770}
   elaborateFeedback: {fileID: 627007865}
   DialogueText: 
   QuestionText: 

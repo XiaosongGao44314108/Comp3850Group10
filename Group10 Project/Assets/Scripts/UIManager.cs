@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject FeedbackPanel;
     public GameObject Dialogue;
     public GameObject ElaborateFeedbackPanel;
+    public GameObject CorrectReviewPanel;
     public QuestionManager QManager;
     public Button[] answers;
     public Button feedbackYes;
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
     public Button goodButton;
     public Button badButton;
     public Button continueButton;
+    public Button acceptReviewButton;
+    public Button refuseReviewButton;
     public TextMeshProUGUI elaborateFeedback;
 
     public string DialogueText;
@@ -52,6 +55,8 @@ public class UIManager : MonoBehaviour
         goodButton.onClick.AddListener(() =>Continue());
         badButton.onClick.AddListener(() =>Continue());
         continueButton.onClick.AddListener(() =>ContinueAfterFeedback());
+        acceptReviewButton.onClick.AddListener(() =>CallReview());
+        refuseReviewButton.onClick.AddListener(() =>Continue());
 
     }
 
@@ -90,7 +95,14 @@ public class UIManager : MonoBehaviour
         {
             FeedbackPanel.gameObject.SetActive(false);
         }
-        ElaborateFeedbackPanel.SetActive(false);
+        if(ElaborateFeedbackPanel != null){
+            ElaborateFeedbackPanel.SetActive(false); 
+        }
+        if(CorrectReviewPanel != null){
+            CorrectReviewPanel.SetActive(false);
+        }
+        
+        
     }
 
     public void SetDialogue()
@@ -110,7 +122,7 @@ public class UIManager : MonoBehaviour
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
-            QManager.SetQuestionText(false);
+            QManager.SetQuestionText(retry);
 
         }
     }
@@ -144,6 +156,7 @@ public class UIManager : MonoBehaviour
         AnswerPanel.SetActive(false);
         if (answer && !retry)
         {
+            ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
         else if(answer && retry)
@@ -188,9 +201,12 @@ public class UIManager : MonoBehaviour
         //Disactive ReviewOrNot Panel
         //Active Review Panel
         //Clear contents in dialogue box
+        AnswerPanel.gameObject.SetActive(false);
+        CorrectReviewPanel.gameObject.SetActive(false);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
         ReviewOrNotPanel.gameObject.SetActive(false);
         ReviewPanel.gameObject.SetActive(true);
+       
     }
 
     public void CallSimilarQuestion()
@@ -206,7 +222,7 @@ public class UIManager : MonoBehaviour
         //setup question
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(true);
+        QManager.SetQuestionText(retry);
         //GetFeedback();
     }
 
@@ -224,7 +240,7 @@ public class UIManager : MonoBehaviour
     public void FeedbackNo(){
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(true);
+        QManager.SetQuestionText(retry);
     }
 
     public void CallNextQuestion()
@@ -249,7 +265,7 @@ public class UIManager : MonoBehaviour
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(false);
+        QManager.SetQuestionText(retry);
     }
      
     public void ContinueAfterFeedback(){
@@ -258,7 +274,17 @@ public class UIManager : MonoBehaviour
         retry = false;
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(false);
+        GetFeedback();
+    }
+
+    //ask player if they want to review question
+    public void ReviewQuestion(){
+        CorrectReviewPanel.SetActive(true);
+        feedbacking = true;
+    }
+
+    //review the question
+    public void QuestionReview(){
+
     }
 }

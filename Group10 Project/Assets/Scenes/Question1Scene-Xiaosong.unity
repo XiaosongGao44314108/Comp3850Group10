@@ -742,6 +742,8 @@ MonoBehaviour:
   - {fileID: 1942193446}
   - {fileID: 1018018319}
   - {fileID: 606567129}
+  feedbackYes: {fileID: 301073763}
+  feedbackNo: {fileID: 96699177}
   DialogueText: 
   QuestionText: 
 --- !u!1 &301073761

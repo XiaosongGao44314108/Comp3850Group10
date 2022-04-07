@@ -18,12 +18,13 @@ public class UIManager : MonoBehaviour
     public Button[] answers;
     public Button feedbackYes;
     public Button feedbackNo;
+    public Button finishReviewButton;
 
     public string DialogueText;
     public string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
 
-    // private bool answered;
+
 
 
     void Start()
@@ -40,8 +41,9 @@ public class UIManager : MonoBehaviour
             int closureIndex = i; //prevents closure problem
             answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
         }
-        feedbackYes.onClick.AddListener(FeedbackYes());
-        feedbackNo.onClick.AddListener(FeedbackNo());
+        feedbackYes.onClick.AddListener(() =>FeedbackYes());
+        feedbackNo.onClick.AddListener(() =>FeedbackNo());
+        feedbackNo.onClick.AddListener(() =>CallSimilarQuestion());
     }
 
     void Update()
@@ -97,7 +99,7 @@ public class UIManager : MonoBehaviour
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
-            QManager.SetQuestionText();
+            QManager.SetQuestionText(false);
 
         }
     }
@@ -175,6 +177,10 @@ public class UIManager : MonoBehaviour
         //ReviewOrNot Panel may not be actived yet if player chooses not to review related images
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
+        //setup question
+        DialoguePanel.SetActive(true);
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(true);
         //GetFeedback();
     }
 
@@ -186,12 +192,13 @@ public class UIManager : MonoBehaviour
     }
 
     public void FeedbackYes(){
-        DialoguePanel.SetActive(true);
-        AnswerPanel.SetActive(true);
+       CallReview();
     }
 
     public void FeedbackNo(){
-        
+        DialoguePanel.SetActive(true);
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(true);
     }
 
     public void CallNextQuestion()

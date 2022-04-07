@@ -8,17 +8,19 @@
 			"ans3": "One",
 			"correctIdx": 1,
 			"timeLimit": 30,
-			"points": 20
+			"points": 20,
+			"hint":"It's 2"
 		},
 		{
 			"question": "What's 44 % 10?",
 			"ans0": "4",
-			"an1s": "2",
+			"ans1": "2",
 			"ans2": "1",
 			"ans3": "3",
 			"correctIdx": 0,
 			"timeLimit": 30,
-			"points": 50
+			"points": 50,
+			"hint":"It's 4"
 		},
 		{
 			"question": "What's 30-5?",
@@ -28,7 +30,8 @@
 			"ans3": "6",
 			"correctIdx": 2,
 			"timeLimit": 20,
-			"points": 40
+			"points": 40,
+			"hint":"It's 25"
 		},
 		{
 			"question": "What's 7 * 8?",
@@ -38,7 +41,8 @@
 			"ans3": "72",
 			"correctIdx": 0,
 			"timeLimit": 40,
-			"points": 100
+			"points": 100,
+			"hint":"It's 56"
 		}
 	]
 }

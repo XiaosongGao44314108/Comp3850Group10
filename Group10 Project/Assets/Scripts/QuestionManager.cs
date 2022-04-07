@@ -27,6 +27,7 @@ public class QuestionManager : MonoBehaviour
         public int correctIdx;
         public int timeLimit;
         public int points;
+        public string hint;
     }
 
     [System.Serializable]
@@ -42,14 +43,19 @@ public class QuestionManager : MonoBehaviour
         questionList = JsonUtility.FromJson<QuestionList>(jsonFile.text);
     }
 
-	public void SetQuestionText()
+	public void SetQuestionText(bool hint)
 	{
         Question question = questionList.questions[currentQuestionIdx];
-        questionTextBox.SetText(question.question);
+        if(hint){
+            questionTextBox.SetText(question.question+" Hint:"+question.hint);
+        }else{
+            questionTextBox.SetText(question.question);
+        }
         ans0TextBox.SetText(question.ans0);
         ans1TextBox.SetText(question.ans1);
         ans2TextBox.SetText(question.ans2);
         ans3TextBox.SetText(question.ans3);
+        
     }
 
     public void AnswerQuestion(int answerIdx)
@@ -72,7 +78,7 @@ public class QuestionManager : MonoBehaviour
     private void NextQuestion()
 	{
         currentQuestionIdx++;
-        SetQuestionText();
+        SetQuestionText(false);
     }
 
 }

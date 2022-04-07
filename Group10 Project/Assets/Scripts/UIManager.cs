@@ -19,11 +19,13 @@ public class UIManager : MonoBehaviour
     public Button feedbackYes;
     public Button feedbackNo;
     public Button finishReviewButton;
+    public Button goodButton;
+    public Button badButton;
 
     public string DialogueText;
     public string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
-
+    private bool retry;
 
 
 
@@ -43,7 +45,10 @@ public class UIManager : MonoBehaviour
         }
         feedbackYes.onClick.AddListener(() =>FeedbackYes());
         feedbackNo.onClick.AddListener(() =>FeedbackNo());
-        feedbackNo.onClick.AddListener(() =>CallSimilarQuestion());
+        finishReviewButton.onClick.AddListener(() =>CallSimilarQuestion());
+        goodButton.onClick.AddListener(() =>Continue());
+        badButton.onClick.AddListener(() =>Continue());
+
     }
 
     void Update()
@@ -96,6 +101,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
         {
+            retry = false;
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
             AnswerPanel.SetActive(true);
@@ -131,13 +137,19 @@ public class UIManager : MonoBehaviour
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
-        if (answer)
+        if (answer && !retry)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+        }
+        else if(answer && retry)
+        {
+            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+            GetFeedback();
         }
         else
         {
             //player answers incorrectly.
+            retry  = true;
             ReviewOrNot();
         }
     }
@@ -215,5 +227,14 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    //temporary method
+    public void Continue(){
+        retry = false;
+            //what happen after pressing space
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(false);
     }
 }

@@ -28,6 +28,7 @@ public class QuestionManager : MonoBehaviour
         public int timeLimit;
         public int points;
         public string hint;
+        public string elaborateFeedback;
     }
 
     [System.Serializable]
@@ -75,10 +76,14 @@ public class QuestionManager : MonoBehaviour
     }
     
 
-    private void NextQuestion()
+    public void NextQuestion()
 	{
         currentQuestionIdx++;
         SetQuestionText(false);
+    }
+
+    public string GetElaborateFeedback(){
+        return questionList.questions[currentQuestionIdx].elaborateFeedback;
     }
 
 }

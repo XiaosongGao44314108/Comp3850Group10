@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject ReviewPanel;
     public GameObject FeedbackPanel;
     public GameObject Dialogue;
+    public GameObject ElaborateFeedbackPanel;
     public QuestionManager QManager;
     public Button[] answers;
     public Button feedbackYes;
@@ -21,6 +22,8 @@ public class UIManager : MonoBehaviour
     public Button finishReviewButton;
     public Button goodButton;
     public Button badButton;
+    public Button continueButton;
+    public TextMeshProUGUI elaborateFeedback;
 
     public string DialogueText;
     public string QuestionText;
@@ -48,6 +51,7 @@ public class UIManager : MonoBehaviour
         finishReviewButton.onClick.AddListener(() =>CallSimilarQuestion());
         goodButton.onClick.AddListener(() =>Continue());
         badButton.onClick.AddListener(() =>Continue());
+        continueButton.onClick.AddListener(() =>ContinueAfterFeedback());
 
     }
 
@@ -86,6 +90,7 @@ public class UIManager : MonoBehaviour
         {
             FeedbackPanel.gameObject.SetActive(false);
         }
+        ElaborateFeedbackPanel.SetActive(false);
     }
 
     public void SetDialogue()
@@ -146,12 +151,21 @@ public class UIManager : MonoBehaviour
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             GetFeedback();
         }
+        else if(!answer && retry)
+        {
+            ElaborateFeedback();
+        }
         else
         {
             //player answers incorrectly.
             retry  = true;
             ReviewOrNot();
         }
+    }
+
+    public void ElaborateFeedback(){
+        ElaborateFeedbackPanel.SetActive(true);
+        elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
     }
 
     public void TaskOnClick(int idx)
@@ -231,6 +245,16 @@ public class UIManager : MonoBehaviour
 
     //temporary method
     public void Continue(){
+        retry = false;
+            //what happen after pressing space
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        AnswerPanel.SetActive(true);
+        QManager.SetQuestionText(false);
+    }
+     
+    public void ContinueAfterFeedback(){
+        QManager.NextQuestion();
+        ElaborateFeedbackPanel.SetActive(false);
         retry = false;
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;

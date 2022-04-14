@@ -1107,9 +1107,23 @@ MonoBehaviour:
   MenuPanel: {fileID: 418079617}
   AnswerPanel: {fileID: 0}
   DialoguePanel: {fileID: 0}
+  ReviewOrNotPanel: {fileID: 0}
+  ReviewPanel: {fileID: 0}
+  FeedbackPanel: {fileID: 0}
   Dialogue: {fileID: 0}
+  ElaborateFeedbackPanel: {fileID: 0}
+  CorrectReviewPanel: {fileID: 0}
   QManager: {fileID: 0}
   answers: []
+  feedbackYes: {fileID: 0}
+  feedbackNo: {fileID: 0}
+  finishReviewButton: {fileID: 0}
+  goodButton: {fileID: 0}
+  badButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  acceptReviewButton: {fileID: 0}
+  refuseReviewButton: {fileID: 0}
+  elaborateFeedback: {fileID: 0}
   DialogueText: 
   QuestionText: 
 --- !u!4 &2004680383

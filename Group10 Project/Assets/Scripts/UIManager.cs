@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
-        //answered = false;
         SetPanels();
         SetDialogue();
         for (int i = 0; i < answers.Length; i++)

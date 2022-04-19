@@ -3031,8 +3031,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuPanel: {fileID: 418079617}
-  GoalPanel: {fileID: 1923131668}
-  LevelPanel: {fileID: 159333928}
+  GoalPanel: {fileID: 0}
+  LevelPanel: {fileID: 0}
   AnswerPanel: {fileID: 0}
   DialoguePanel: {fileID: 63056093}
   ReviewOrNotPanel: {fileID: 0}
@@ -3052,6 +3052,7 @@ MonoBehaviour:
   acceptReviewButton: {fileID: 0}
   refuseReviewButton: {fileID: 0}
   elaborateFeedback: {fileID: 0}
+  timerGO: {fileID: 0}
   DialogueText: 
   QuestionText: 
 --- !u!4 &2004680383

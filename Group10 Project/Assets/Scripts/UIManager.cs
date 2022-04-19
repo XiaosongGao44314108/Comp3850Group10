@@ -68,10 +68,12 @@ public class UIManager : MonoBehaviour
         {
             TurnPages();
         }
-        if(!timer.IsActive()){
-            timerGO.SetActive(false);
-        }else{
-            timerSlider.value = timer.TimeLeft()/timer.timeLimit;
+        if(timerGO != null){
+            if(!timer.IsActive()){
+                timerGO.SetActive(false);
+            }else{
+                timerSlider.value = timer.TimeLeft()/timer.timeLimit;
+            }
         }
     }
 

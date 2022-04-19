@@ -7,8 +7,12 @@ public class Timer : MonoBehaviour
     public float timeLimit; //seconds
 
     private float timeLeft; //seconds
+    public float TimeLeft()
+    {
+        return timeLeft;
+    }
     private bool isActive;
-    
+
     // Start is called before the first frame update
     void Start()
     {

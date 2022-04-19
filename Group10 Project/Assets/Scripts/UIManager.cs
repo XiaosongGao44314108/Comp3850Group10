@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     private bool feedbacking; //stop calling next question if providing feedback
     private bool retry;
     private Timer timer;
+    private Slider timerSlider;
 
 
 
@@ -69,6 +70,8 @@ public class UIManager : MonoBehaviour
         }
         if(!timer.IsActive()){
             timerGO.SetActive(false);
+        }else{
+            timerSlider.value = timer.TimeLeft()/timer.timeLimit;
         }
     }
 
@@ -108,6 +111,7 @@ public class UIManager : MonoBehaviour
         if(timerGO != null){
             timerGO.SetActive(false);
             timer = timerGO.GetComponent<Timer>();
+            timerSlider = timerGO.GetComponent<Slider>();
         }
         
         

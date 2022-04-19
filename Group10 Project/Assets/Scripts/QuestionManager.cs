@@ -29,6 +29,7 @@ public class QuestionManager : MonoBehaviour
         public int points;
         public string hint;
         public string elaborateFeedback;
+        public bool hasTimer;
     }
 
     [System.Serializable]
@@ -84,6 +85,10 @@ public class QuestionManager : MonoBehaviour
 
     public string GetElaborateFeedback(){
         return questionList.questions[currentQuestionIdx].elaborateFeedback;
+    }
+
+    public bool HasTimer(){
+        return questionList.questions[currentQuestionIdx].hasTimer;
     }
 
 }

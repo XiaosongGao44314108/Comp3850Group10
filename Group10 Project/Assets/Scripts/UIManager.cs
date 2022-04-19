@@ -27,12 +27,13 @@ public class UIManager : MonoBehaviour
     public Button acceptReviewButton;
     public Button refuseReviewButton;
     public TextMeshProUGUI elaborateFeedback;
-    public GameObject Timer;
+    public GameObject timerGO;
 
     public string DialogueText;
     public string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
     private bool retry;
+    private Timer timer;
 
 
 
@@ -65,6 +66,9 @@ public class UIManager : MonoBehaviour
         if (Dialogue != null)
         {
             TurnPages();
+        }
+        if(!timer.IsActive()){
+            timerGO.SetActive(false);
         }
     }
 
@@ -101,8 +105,9 @@ public class UIManager : MonoBehaviour
         if(CorrectReviewPanel != null){
             CorrectReviewPanel.SetActive(false);
         }
-        if(Timer != null){
-            Timer.SetActive(false);
+        if(timerGO != null){
+            timerGO.SetActive(false);
+            timer = timerGO.GetComponent<Timer>();
         }
         
         
@@ -121,11 +126,8 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
         {
-            retry = false;
-            //what happen after pressing space
-            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-            AnswerPanel.SetActive(true);
-            QManager.SetQuestionText(retry);
+            Continue();
+
 
         }
     }
@@ -226,6 +228,7 @@ public class UIManager : MonoBehaviour
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
+        TimerStart();
         //GetFeedback();
     }
 
@@ -244,6 +247,7 @@ public class UIManager : MonoBehaviour
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
+        TimerStart();
     }
 
     public void CallNextQuestion()
@@ -263,16 +267,19 @@ public class UIManager : MonoBehaviour
     }
 
     //temporary method
-    public void Continue(){
+    public void Continue()
+    {
         retry = false;
         CorrectReviewPanel.SetActive(false);
             //what happen after pressing space
             //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
+        TimerStart();
     }
      
-    public void ContinueAfterFeedback(){
+    public void ContinueAfterFeedback()
+    {
         QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
         retry = false;
@@ -282,7 +289,8 @@ public class UIManager : MonoBehaviour
     }
 
     //ask player if they want to review question
-    public void ReviewQuestion(){
+    public void ReviewQuestion()
+    {
         CorrectReviewPanel.SetActive(true);
         feedbacking = true;
     }
@@ -290,5 +298,12 @@ public class UIManager : MonoBehaviour
     //review the question
     public void QuestionReview(){
 
+    }
+    public void TimerStart(){
+        if(QManager.HasTimer())
+        {
+            timerGO.SetActive(true);
+            timer.StartTimer();
+        }
     }
 }

@@ -192,6 +192,7 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
+        timer.EndTimer();
         QManager.AnswerQuestion(idx);
     }
 

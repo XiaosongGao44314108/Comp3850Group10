@@ -37,6 +37,11 @@ public class Timer : MonoBehaviour
         isActive = true;
     }
 
+    public void EndTimer(){
+        isActive = false;
+        timeLeft = timeLimit;
+    }
+
     public bool IsActive(){
         return isActive;
     }

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Button acceptReviewButton;
     public Button refuseReviewButton;
     public TextMeshProUGUI elaborateFeedback;
+    public GameObject Timer;
 
     public string DialogueText;
     public string QuestionText;
@@ -99,6 +100,9 @@ public class UIManager : MonoBehaviour
         }
         if(CorrectReviewPanel != null){
             CorrectReviewPanel.SetActive(false);
+        }
+        if(Timer != null){
+            Timer.SetActive(false);
         }
         
         

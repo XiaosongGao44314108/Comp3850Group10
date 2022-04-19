@@ -8,14 +8,17 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public GameObject MenuPanel;
+    public GameObject GoalPanel;
+    public GameObject LevelPanel;
     public GameObject AnswerPanel;
     public GameObject DialoguePanel;
     public GameObject ReviewOrNotPanel;
     public GameObject ReviewPanel;
     public GameObject FeedbackPanel;
-    public GameObject Dialogue;
+    public GameObject Dialogue;  //dialogue text
     public GameObject ElaborateFeedbackPanel;
     public GameObject CorrectReviewPanel;
+
     public QuestionManager QManager;
     public Button[] answers;
     public Button feedbackYes;
@@ -35,11 +38,22 @@ public class UIManager : MonoBehaviour
     private bool retry;
     private Timer timer;
     private Slider timerSlider;
+    private bool IsDiaActive;
+    private bool IsMainActive;//diaglogue should not be activated if Main menu panel is activated
+    private bool SelectedGoalOne;
+    private bool SelectedGoalTwo;
+    private bool SelectedGoalThree;
 
 
 
     void Start()
     {
+        IsDiaActive = false; //dialog is not activated at the beginning
+        IsMainActive = false;
+        SelectedGoalOne = false;
+        SelectedGoalTwo = false;
+        SelectedGoalThree = false;
+
         feedbacking = false;
         //Just for this version:
         DialogueText = "People talk";
@@ -51,14 +65,14 @@ public class UIManager : MonoBehaviour
             int closureIndex = i; //prevents closure problem
             answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
         }
-        feedbackYes.onClick.AddListener(() =>FeedbackYes());
-        feedbackNo.onClick.AddListener(() =>FeedbackNo());
-        finishReviewButton.onClick.AddListener(() =>CallSimilarQuestion());
-        goodButton.onClick.AddListener(() =>Continue());
-        badButton.onClick.AddListener(() =>Continue());
-        continueButton.onClick.AddListener(() =>ContinueAfterFeedback());
-        acceptReviewButton.onClick.AddListener(() =>CallReview());
-        refuseReviewButton.onClick.AddListener(() =>Continue());
+        feedbackYes.onClick.AddListener(() => FeedbackYes());
+        feedbackNo.onClick.AddListener(() => FeedbackNo());
+        finishReviewButton.onClick.AddListener(() => CallSimilarQuestion());
+        goodButton.onClick.AddListener(() => Continue());
+        badButton.onClick.AddListener(() => Continue());
+        continueButton.onClick.AddListener(() => ContinueAfterFeedback());
+        acceptReviewButton.onClick.AddListener(() => CallReview());
+        refuseReviewButton.onClick.AddListener(() => Continue());
 
     }
 
@@ -81,6 +95,15 @@ public class UIManager : MonoBehaviour
         if (MenuPanel != null)
         {
             MenuPanel.gameObject.SetActive(true);
+            IsMainActive = true;
+        }
+        if (GoalPanel != null)
+        {
+            GoalPanel.gameObject.SetActive(false);
+        }
+        if (LevelPanel != null)
+        {
+            LevelPanel.gameObject.SetActive(false);
         }
         if (AnswerPanel != null)
         {
@@ -88,7 +111,7 @@ public class UIManager : MonoBehaviour
         }
         if (DialoguePanel != null)
         {
-            DialoguePanel.gameObject.SetActive(true);
+            DialoguePanel.gameObject.SetActive(false);
         }
         if (ReviewOrNotPanel != null)
         {
@@ -102,10 +125,12 @@ public class UIManager : MonoBehaviour
         {
             FeedbackPanel.gameObject.SetActive(false);
         }
-        if(ElaborateFeedbackPanel != null){
-            ElaborateFeedbackPanel.SetActive(false); 
+        if (ElaborateFeedbackPanel != null)
+        {
+            ElaborateFeedbackPanel.SetActive(false);
         }
-        if(CorrectReviewPanel != null){
+        if (CorrectReviewPanel != null)
+        {
             CorrectReviewPanel.SetActive(false);
         }
         if(timerGO != null){
@@ -135,22 +160,99 @@ public class UIManager : MonoBehaviour
 
         }
     }
-    public void NextScene()
+    // public void NextScene()
+    // {
+    //     MenuPanel.gameObject.SetActive(false);
+
+    //     Scene scene = SceneManager.GetActiveScene();
+    //     int lastScene = SceneManager.sceneCountInBuildSettings - 1;
+    //     int next;
+    //     if (scene.buildIndex == lastScene)
+    //     {
+    //         next = 0;
+    //     }
+    //     else
+    //     {
+    //         next = scene.buildIndex + 1;
+    //     }
+    //     SceneManager.LoadScene(next);
+    // }
+    public void ChoosingGoal() // what happens after clicking play
     {
         MenuPanel.gameObject.SetActive(false);
+        GoalPanel.gameObject.SetActive(true);
+        IsMainActive = false;
+        DialoguePanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
+    }
+    public void ChoosingGoalOneLevel() // What happens after clicking GoalOne
+    {
+        SelectedGoalOne = true;
+        GoalPanel.gameObject.SetActive(false);
+        LevelPanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+    }
+    public void ChoosingGoalTwoLevel() // What happens after clicking GoalTwo
+    {
+        SelectedGoalTwo = true;
+        GoalPanel.gameObject.SetActive(false);
+        LevelPanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+    }
+    public void ChoosingGoalThreeLevel() // What happens after clicking GoalThree
+    {
+        SelectedGoalThree = true;
+        GoalPanel.gameObject.SetActive(false);
+        LevelPanel.gameObject.SetActive(true);
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+    }
 
-        Scene scene = SceneManager.GetActiveScene();
-        int lastScene = SceneManager.sceneCountInBuildSettings - 1;
-        int next;
-        if (scene.buildIndex == lastScene)
+    public void LoadingLevelOne() //What happens after clicking Level One
+    {
+        if (SelectedGoalOne)
         {
-            next = 0;
+            SceneManager.LoadScene(1);
         }
-        else
+        if (SelectedGoalTwo)
         {
-            next = scene.buildIndex + 1;
+            SceneManager.LoadScene(4);
         }
-        SceneManager.LoadScene(next);
+        if (SelectedGoalThree)
+        {
+            SceneManager.LoadScene(7);
+        }
+    }
+
+    public void LoadingLevelTwo() //What happens after clicking Level Two
+    {
+        if (SelectedGoalOne)
+        {
+            SceneManager.LoadScene(2);
+        }
+        if (SelectedGoalTwo)
+        {
+            SceneManager.LoadScene(5);
+        }
+        if (SelectedGoalThree)
+        {
+            SceneManager.LoadScene(8);
+        }
+    }
+
+    public void LoadingLevelThree() //What happens after clicking Level Three
+    {
+        if (SelectedGoalOne)
+        {
+            SceneManager.LoadScene(3);
+        }
+        if (SelectedGoalTwo)
+        {
+            SceneManager.LoadScene(6);
+        }
+        if (SelectedGoalThree)
+        {
+            SceneManager.LoadScene(9);
+        }
     }
 
     public void BackToMain()
@@ -168,24 +270,25 @@ public class UIManager : MonoBehaviour
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
-        else if(answer && retry)
+        else if (answer && retry)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             GetFeedback();
         }
-        else if(!answer && retry)
+        else if (!answer && retry)
         {
             ElaborateFeedback();
         }
         else
         {
             //player answers incorrectly.
-            retry  = true;
+            retry = true;
             ReviewOrNot();
         }
     }
 
-    public void ElaborateFeedback(){
+    public void ElaborateFeedback()
+    {
         ElaborateFeedbackPanel.SetActive(true);
         elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
     }
@@ -216,7 +319,7 @@ public class UIManager : MonoBehaviour
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
         ReviewOrNotPanel.gameObject.SetActive(false);
         ReviewPanel.gameObject.SetActive(true);
-       
+
     }
 
     public void CallSimilarQuestion()
@@ -244,11 +347,13 @@ public class UIManager : MonoBehaviour
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
     }
 
-    public void FeedbackYes(){
-       CallReview();
+    public void FeedbackYes()
+    {
+        CallReview();
     }
 
-    public void FeedbackNo(){
+    public void FeedbackNo()
+    {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
@@ -276,20 +381,19 @@ public class UIManager : MonoBehaviour
     {
         retry = false;
         CorrectReviewPanel.SetActive(false);
-            //what happen after pressing space
-            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        //what happen after pressing space
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
         TimerStart();
     }
-     
     public void ContinueAfterFeedback()
     {
         QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
         retry = false;
-            //what happen after pressing space
-            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        //what happen after pressing space
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         GetFeedback();
     }
 
@@ -301,7 +405,8 @@ public class UIManager : MonoBehaviour
     }
 
     //review the question
-    public void QuestionReview(){
+    public void QuestionReview()
+    {
 
     }
     public void TimerStart(){

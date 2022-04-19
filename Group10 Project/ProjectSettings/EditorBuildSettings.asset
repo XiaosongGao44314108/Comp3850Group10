@@ -6,9 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene-Xiaosong.unity
-    guid: 84bc3f7939856924dbbb3677b09cad1e
+    path: Assets/Scenes2.0/MainScene-Xiaosong.unity
+    guid: 4c4ba2b77a016924f8e62beb8b9df91b
   - enabled: 1
-    path: Assets/Scenes/Question1Scene-Xiaosong.unity
-    guid: 0a5751c1c2f5b13438ac4fcbe4ba7503
+    path: Assets/Scenes2.0/GoalOneLevelOne.unity
+    guid: 261c28e7b0f2cac4c84091d2a709cd91
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalOneLevelTwo.unity
+    guid: 38ae146c950376f4a866a82ef42fe21c
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalOneLevelThree.unity
+    guid: 597738dece164c14d900230ccaaa27fe
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalTwoLevelOne.unity
+    guid: cba06784b6ea91843b81671996095264
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalTwoLevelTwo.unity
+    guid: 8bbb281de3cf51741bbc3854e320c1da
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalTwoLevelThree.unity
+    guid: 35dcddb46504c9844b15bf23777057aa
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalThreeLevelOne.unity
+    guid: 0b20caf0034af9c4388b23b78956e23b
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalThreeLevelTwo.unity
+    guid: 6c95e2cfc0fd7734b856790322fa8b4e
+  - enabled: 1
+    path: Assets/Scenes2.0/GoalThreeLevelThree.unity
+    guid: 23a07fefde45c174182843ecb3b10616
   m_configObjects: {}

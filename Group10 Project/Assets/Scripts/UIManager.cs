@@ -155,11 +155,21 @@ public class UIManager : MonoBehaviour
 
     public void TurnPages()
     {
-        if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
+      if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
         {
-            Continue();
-
-
+            if (IsDiaActive == false)//if the dia is not activated yet
+            {
+                if (!IsMainActive)//if the main menu is not activated
+                {
+                    IsDiaActive = true;
+                    DialoguePanel.gameObject.SetActive(true);
+                }
+                //if the dia is not activated yet but the main menu is activated, do nothing
+            }
+            else //the dia is already activated
+            {
+                    Continue();
+            }
         }
     }
     // public void NextScene()

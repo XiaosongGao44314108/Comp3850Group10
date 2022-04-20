@@ -365,7 +365,7 @@ VideoPlayer:
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 31c54def7e16e944c874accaf362aee1, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
@@ -378,7 +378,8 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://www.youtube.com/watch?v=VpQVQv5DSe8&t=8s&ab_channel=statisticsfun
+  m_Url: file://C:/Users/jvisv/Documents/GitHub/Comp3850Group10/Group10 Project/Assets/Videos/Y2Mate.is
+    - How to calculate Mean and Standard Deviation-VpQVQv5DSe8-480p-1650420779870.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -1131,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101341866564, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101396174650, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1169,6 +1170,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 186150122}
+    - target: {fileID: 8015223101461904074, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101492885936, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101492885936, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101492885936, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101492885939, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 31c54def7e16e944c874accaf362aee1, type: 2}
     - target: {fileID: 8015223101520838462, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1187,7 +1208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101599838968, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461069, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1195,11 +1216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461069, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101750769779, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101881612256, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1239,7 +1260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223102369357798, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8015223102388008979, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

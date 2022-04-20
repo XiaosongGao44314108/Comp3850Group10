@@ -60,19 +60,6 @@ public class UIManager : MonoBehaviour
         QuestionText = "Question contents";
         SetPanels();
         SetDialogue();
-        for (int i = 0; i < answers.Length; i++)
-        {
-            int closureIndex = i; //prevents closure problem
-            answers[closureIndex].onClick.AddListener(() => TaskOnClick(closureIndex));
-        }
-        feedbackYes.onClick.AddListener(() => FeedbackYes());
-        feedbackNo.onClick.AddListener(() => FeedbackNo());
-        finishReviewButton.onClick.AddListener(() => CallSimilarQuestion());
-        goodButton.onClick.AddListener(() => Continue());
-        badButton.onClick.AddListener(() => Continue());
-        continueButton.onClick.AddListener(() => ContinueAfterFeedback());
-        acceptReviewButton.onClick.AddListener(() => CallReview());
-        refuseReviewButton.onClick.AddListener(() => Continue());
 
     }
 
@@ -336,7 +323,7 @@ public class UIManager : MonoBehaviour
 
     public void CallSimilarQuestion()
     {
-        ReviewPanel.gameObject.SetActive(false);
+        //ReviewPanel.gameObject.SetActive(false);
         //display different question of similar type at her
         //do not know how to implement yet
         //need to add more contents at here later
@@ -357,19 +344,6 @@ public class UIManager : MonoBehaviour
         //Get feedback from the player
         FeedbackPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
-    }
-
-    public void FeedbackYes()
-    {
-        CallReview();
-    }
-
-    public void FeedbackNo()
-    {
-        DialoguePanel.SetActive(true);
-        AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(retry);
-        TimerStart();
     }
 
     public void CallNextQuestion()
@@ -393,6 +367,10 @@ public class UIManager : MonoBehaviour
     {
         retry = false;
         CorrectReviewPanel.SetActive(false);
+        ReviewPanel.gameObject.SetActive(false);
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        FeedbackPanel.gameObject.SetActive(false);
+        feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);

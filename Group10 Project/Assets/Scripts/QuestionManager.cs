@@ -38,16 +38,25 @@ public class QuestionManager : MonoBehaviour
         public Question[] questions;
 	}
 
-    public QuestionList questionList = new QuestionList();
+    [System.Serializable]
+    public class QuestionPool
+    {
+        public QuestionList[] questionPool;
+    }
 
+    public QuestionPool questionPool = new QuestionPool();
+    public QuestionList questionList;
+    public Question question;
     void Start()
     {
-        questionList = JsonUtility.FromJson<QuestionList>(jsonFile.text);
+        questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
+        questionList = questionPool.questionPool[currentQuestionIdx];
     }
 
 	public void SetQuestionText(bool hint)
-	{
-        Question question = questionList.questions[currentQuestionIdx];
+	{        
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[0];
         if(hint){
             questionTextBox.SetText(question.question+" Hint:"+question.hint);
         }else{
@@ -62,7 +71,8 @@ public class QuestionManager : MonoBehaviour
 
     public void AnswerQuestion(int answerIdx)
     {
-        Question question = questionList.questions[currentQuestionIdx];
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[0];
 
         if (question.correctIdx == answerIdx)
         {
@@ -83,12 +93,18 @@ public class QuestionManager : MonoBehaviour
         SetQuestionText(false);
     }
 
-    public string GetElaborateFeedback(){
-        return questionList.questions[currentQuestionIdx].elaborateFeedback;
+    public string GetElaborateFeedback()
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[0];
+        return question.elaborateFeedback;
     }
 
-    public bool HasTimer(){
-        return questionList.questions[currentQuestionIdx].hasTimer;
+    public bool HasTimer()
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[0];
+        return question.hasTimer;
     }
 
 }

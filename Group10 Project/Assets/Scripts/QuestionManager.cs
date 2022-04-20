@@ -13,9 +13,9 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
-    private int currentQuestionIdx = 0;
-    private bool answer = true;
-
+    private int currentQuestionIdx;
+    private bool answer;
+    private int randomQuestion;
     [System.Serializable]
     public class Question
 	{
@@ -49,6 +49,8 @@ public class QuestionManager : MonoBehaviour
     public Question question;
     void Start()
     {
+        currentQuestionIdx = 0;
+        answer = true;
         questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
         questionList = questionPool.questionPool[currentQuestionIdx];
     }
@@ -56,7 +58,8 @@ public class QuestionManager : MonoBehaviour
 	public void SetQuestionText(bool hint)
 	{        
         questionList = questionPool.questionPool[currentQuestionIdx];
-        question = questionList.questions[0];
+        randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
+        question = questionList.questions[randomQuestion];
         if(hint){
             questionTextBox.SetText(question.question+" Hint:"+question.hint);
         }else{
@@ -72,7 +75,7 @@ public class QuestionManager : MonoBehaviour
     public void AnswerQuestion(int answerIdx)
     {
         questionList = questionPool.questionPool[currentQuestionIdx];
-        question = questionList.questions[0];
+        question = questionList.questions[randomQuestion];
 
         if (question.correctIdx == answerIdx)
         {
@@ -96,14 +99,14 @@ public class QuestionManager : MonoBehaviour
     public string GetElaborateFeedback()
     {
         questionList = questionPool.questionPool[currentQuestionIdx];
-        question = questionList.questions[0];
+        question = questionList.questions[randomQuestion];
         return question.elaborateFeedback;
     }
 
     public bool HasTimer()
     {
         questionList = questionPool.questionPool[currentQuestionIdx];
-        question = questionList.questions[0];
+        question = questionList.questions[randomQuestion];
         return question.hasTimer;
     }
 

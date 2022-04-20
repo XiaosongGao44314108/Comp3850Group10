@@ -20,20 +20,11 @@ public class UIManager : MonoBehaviour
     public GameObject CorrectReviewPanel;
 
     public QuestionManager QManager;
-    public Button[] answers;
-    public Button feedbackYes;
-    public Button feedbackNo;
-    public Button finishReviewButton;
-    public Button goodButton;
-    public Button badButton;
-    public Button continueButton;
-    public Button acceptReviewButton;
-    public Button refuseReviewButton;
     public TextMeshProUGUI elaborateFeedback;
     public GameObject timerGO;
 
-    public string DialogueText;
-    public string QuestionText;
+    private string DialogueText;
+    private string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
     private bool retry;
     private Timer timer;

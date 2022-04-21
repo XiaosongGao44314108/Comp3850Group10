@@ -13,9 +13,12 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
+    public float baseScoreIncrement;
     private int currentQuestionIdx;
     private bool answer;
     private int randomQuestion;
+    private int score;
+
     [System.Serializable]
     public class Question
 	{
@@ -76,23 +79,31 @@ public class QuestionManager : MonoBehaviour
     {
         questionList = questionPool.questionPool[currentQuestionIdx];
         question = questionList.questions[randomQuestion];
-
+        score = 0;
         if (question.correctIdx == answerIdx)
         {
-            //points += question.points
+            score = (int)baseScoreIncrement;
+            if(question.hasTimer){
+                score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
+            }
             answer = true;
             NextQuestion();
         }else{
             answer = false;
         }        
         
-        UIManager.CallContinue(answer);
+        UIManager.CallContinue(answer, score);
     }
     
 
     public void NextQuestion()
 	{
         currentQuestionIdx++;
+        if(currentQuestionIdx == questionPool.questionPool.Length){
+            UIManager.UpdateScore();
+            UIManager.BackToMain();
+            currentQuestionIdx = 0;
+        }
         SetQuestionText(false);
     }
 

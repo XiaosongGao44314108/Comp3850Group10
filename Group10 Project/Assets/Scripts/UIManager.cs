@@ -19,33 +19,46 @@ public class UIManager : MonoBehaviour
     public GameObject ElaborateFeedbackPanel;
     public GameObject CorrectReviewPanel;
 
+    private GameManager GManager;
     public QuestionManager QManager;
     public TextMeshProUGUI elaborateFeedback;
+    public TextMeshProUGUI scoreText;
     public GameObject timerGO;
 
     private string DialogueText;
     private string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
     private bool retry;
+    private bool answering;
     private Timer timer;
+    public Timer Timer
+    {
+        get{
+            return timer;
+        }
+    }
     private Slider timerSlider;
     private bool IsDiaActive;
     private bool IsMainActive;//diaglogue should not be activated if Main menu panel is activated
     private bool SelectedGoalOne;
     private bool SelectedGoalTwo;
     private bool SelectedGoalThree;
+    private int currentScore;
+
 
 
 
     void Start()
     {
+        GManager = (GameManager)FindObjectOfType(typeof(GameManager));
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
         SelectedGoalTwo = false;
         SelectedGoalThree = false;
-
         feedbacking = false;
+
+        currentScore = 0;
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
@@ -66,6 +79,9 @@ public class UIManager : MonoBehaviour
             }else{
                 timerSlider.value = timer.TimeLeft()/timer.timeLimit;
             }
+        }
+        if(scoreText != null){
+            scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         }
     }
 
@@ -251,10 +267,12 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void CallContinue(bool answer)
+    public void CallContinue(bool answer, int score)
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
+        currentScore += score;
+        scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         if (answer && !retry)
         {
             ReviewQuestion();
@@ -285,8 +303,10 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
-        timer.EndTimer();
+        answering = false;
         QManager.AnswerQuestion(idx);
+        timer.EndTimer();
+        
     }
 
     public void ReviewOrNot()
@@ -366,7 +386,10 @@ public class UIManager : MonoBehaviour
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
-        TimerStart();
+        if(!answering){
+            TimerStart();
+            answering = true;
+        }
     }
     public void ContinueAfterFeedback()
     {
@@ -396,5 +419,9 @@ public class UIManager : MonoBehaviour
             timerGO.SetActive(true);
             timer.StartTimer();
         }
+    }
+
+    public void UpdateScore(){
+        GManager.UpdateScore(currentScore);
     }
 }

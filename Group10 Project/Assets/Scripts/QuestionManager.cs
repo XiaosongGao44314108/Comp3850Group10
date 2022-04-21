@@ -87,6 +87,11 @@ public class QuestionManager : MonoBehaviour
                 score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
             }
             answer = true;
+            if(currentQuestionIdx == questionPool.questionPool.Length-1){
+            UIManager.UpdateScore(score);
+            UIManager.BackToMain();
+            currentQuestionIdx = 0;
+        }
             NextQuestion();
         }else{
             answer = false;
@@ -99,11 +104,6 @@ public class QuestionManager : MonoBehaviour
     public void NextQuestion()
 	{
         currentQuestionIdx++;
-        if(currentQuestionIdx == questionPool.questionPool.Length){
-            UIManager.UpdateScore();
-            UIManager.BackToMain();
-            currentQuestionIdx = 0;
-        }
         SetQuestionText(false);
     }
 

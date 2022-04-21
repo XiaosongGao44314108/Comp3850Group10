@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
     public int GetScore(int idx){
         return scores[idx];
     }
-    
+
     public void UpdateScore(int score){
-        int idx = SceneManager.GetActiveScene().buildIndex;
+        int idx = SceneManager.GetActiveScene().buildIndex-1;
         if(score > scores[idx]){
             scores[idx] = score;
         }

@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
     public QuestionManager QManager;
     public TextMeshProUGUI elaborateFeedback;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI Lvl1HighscoreText;
+    public TextMeshProUGUI Lvl2HighscoreText;
+    public TextMeshProUGUI Lvl3HighscoreText;
     public GameObject timerGO;
 
     private string DialogueText;
@@ -197,6 +200,9 @@ public class UIManager : MonoBehaviour
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(0) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(1) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(2) + "";
     }
     public void ChoosingGoalTwoLevel() // What happens after clicking GoalTwo
     {
@@ -204,6 +210,9 @@ public class UIManager : MonoBehaviour
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
     }
     public void ChoosingGoalThreeLevel() // What happens after clicking GoalThree
     {
@@ -211,6 +220,9 @@ public class UIManager : MonoBehaviour
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
     }
 
     public void LoadingLevelOne() //What happens after clicking Level One
@@ -421,7 +433,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateScore(){
-        GManager.UpdateScore(currentScore);
+    public void UpdateScore(int score){
+        GManager.UpdateScore(currentScore+score);
     }
 }

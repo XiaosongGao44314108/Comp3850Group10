@@ -6,9 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene-Xiaosong.unity
-    guid: 84bc3f7939856924dbbb3677b09cad1e
+    path: Assets/Scenes2.0/MainScene-Xiaosong.unity
+    guid: 4c4ba2b77a016924f8e62beb8b9df91b
   - enabled: 1
-    path: Assets/Scenes/Question1Scene-Xiaosong.unity
-    guid: 0a5751c1c2f5b13438ac4fcbe4ba7503
+    path: Assets/Scenes2.0/G1L1.unity
+    guid: f58160f9cfb0c05479731c12ea541e2b
+  - enabled: 1
+    path: Assets/Scenes2.0/G1L2.unity
+    guid: 87cc9608435a9e84f8ad31b213309996
+  - enabled: 1
+    path: Assets/Scenes2.0/G1L3.unity
+    guid: 7cd8c89446b52274284af6af689830cb
+  - enabled: 1
+    path: Assets/Scenes2.0/G2L1.unity
+    guid: b662937fc83b9234090f659cf3e11960
+  - enabled: 1
+    path: Assets/Scenes2.0/G2L2.unity
+    guid: 807e1b40279f2694daff9a7549010dda
+  - enabled: 1
+    path: Assets/Scenes2.0/G2L3.unity
+    guid: 4fa24c2966f42c64eb631434dd3daed1
+  - enabled: 1
+    path: Assets/Scenes2.0/G3L1.unity
+    guid: d6c31e024faf50c4b942b2dac933d994
+  - enabled: 1
+    path: Assets/Scenes2.0/G3L2.unity
+    guid: f0836af399a7624409ea12c3175446d7
+  - enabled: 1
+    path: Assets/Scenes2.0/G3L3.unity
+    guid: 68a4e4e1e5a7660418cf4a6053ef6c5a
   m_configObjects: {}

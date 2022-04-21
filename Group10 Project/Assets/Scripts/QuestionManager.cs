@@ -13,9 +13,9 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
-    private int currentQuestionIdx = 0;
-    private bool answer = true;
-
+    private int currentQuestionIdx;
+    private bool answer;
+    private int randomQuestion;
     [System.Serializable]
     public class Question
 	{
@@ -38,16 +38,28 @@ public class QuestionManager : MonoBehaviour
         public Question[] questions;
 	}
 
-    public QuestionList questionList = new QuestionList();
+    [System.Serializable]
+    public class QuestionPool
+    {
+        public QuestionList[] questionPool;
+    }
 
+    public QuestionPool questionPool = new QuestionPool();
+    public QuestionList questionList;
+    public Question question;
     void Start()
     {
-        questionList = JsonUtility.FromJson<QuestionList>(jsonFile.text);
+        currentQuestionIdx = 0;
+        answer = true;
+        questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
+        questionList = questionPool.questionPool[currentQuestionIdx];
     }
 
 	public void SetQuestionText(bool hint)
-	{
-        Question question = questionList.questions[currentQuestionIdx];
+	{        
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
+        question = questionList.questions[randomQuestion];
         if(hint){
             questionTextBox.SetText(question.question+" Hint:"+question.hint);
         }else{
@@ -62,7 +74,8 @@ public class QuestionManager : MonoBehaviour
 
     public void AnswerQuestion(int answerIdx)
     {
-        Question question = questionList.questions[currentQuestionIdx];
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[randomQuestion];
 
         if (question.correctIdx == answerIdx)
         {
@@ -83,12 +96,18 @@ public class QuestionManager : MonoBehaviour
         SetQuestionText(false);
     }
 
-    public string GetElaborateFeedback(){
-        return questionList.questions[currentQuestionIdx].elaborateFeedback;
+    public string GetElaborateFeedback()
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[randomQuestion];
+        return question.elaborateFeedback;
     }
 
-    public bool HasTimer(){
-        return questionList.questions[currentQuestionIdx].hasTimer;
+    public bool HasTimer()
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[randomQuestion];
+        return question.hasTimer;
     }
 
 }

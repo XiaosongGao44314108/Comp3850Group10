@@ -1029,6 +1029,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6508986272805862498, guid: 23e79064b615f5042a66f37aedc291e8, type: 3}
+      propertyPath: jsonFile
+      value: 
+      objectReference: {fileID: 4900000, guid: c998ea2e84ec8ef4cb67eccea8645820, type: 3}
+    - target: {fileID: 6508986272805862498, guid: 23e79064b615f5042a66f37aedc291e8, type: 3}
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 186150122}

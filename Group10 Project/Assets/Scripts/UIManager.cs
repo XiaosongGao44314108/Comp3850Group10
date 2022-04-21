@@ -190,16 +190,15 @@ public class UIManager : MonoBehaviour
     {
         MenuPanel.gameObject.SetActive(false);
         GoalPanel.gameObject.SetActive(true);
-        IsMainActive = false;
-        DialoguePanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
+        //DialoguePanel.gameObject.SetActive(true);
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
     }
     public void ChoosingGoalOneLevel() // What happens after clicking GoalOne
     {
         SelectedGoalOne = true;
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(0) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(1) + "";
         Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(2) + "";
@@ -209,7 +208,7 @@ public class UIManager : MonoBehaviour
         SelectedGoalTwo = true;
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
         Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
@@ -219,7 +218,7 @@ public class UIManager : MonoBehaviour
         SelectedGoalThree = true;
         GoalPanel.gameObject.SetActive(false);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
@@ -239,6 +238,8 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(7);
         }
+
+        IsMainActive = false;
     }
 
     public void LoadingLevelTwo() //What happens after clicking Level Two
@@ -255,6 +256,8 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(8);
         }
+
+        IsMainActive = false;
     }
 
     public void LoadingLevelThree() //What happens after clicking Level Three
@@ -271,6 +274,8 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(9);
         }
+
+        IsMainActive = false;
     }
 
     public void BackToMain()

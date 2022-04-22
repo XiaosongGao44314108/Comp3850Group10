@@ -13,26 +13,26 @@ EditorBuildSettings:
     guid: f58160f9cfb0c05479731c12ea541e2b
   - enabled: 1
     path: Assets/Scenes2.0/G1L2.unity
-    guid: 5c307d17576dbf640b406d6c67c8f66a
+    guid: 6333a1439ad530c4bb126c9ccbda944a
   - enabled: 1
     path: Assets/Scenes2.0/G1L3.unity
-    guid: 76c7efd6ceff0014b84f286d5593df41
+    guid: 54d1db5d91943cc4b99de1618481226a
   - enabled: 1
     path: Assets/Scenes2.0/G2L1.unity
-    guid: b7c1168943e990245b4a52ad6d040579
+    guid: 7430c6b687f783644815996527b5b9f7
   - enabled: 1
     path: Assets/Scenes2.0/G2L2.unity
-    guid: c6c87e19d771fa14f89129f770207e5c
+    guid: dde57b85c56ade64b9571d299fcbc4e6
   - enabled: 1
     path: Assets/Scenes2.0/G2L3.unity
-    guid: 239593d157d75334784f6bf3199cd4d7
+    guid: af42e595e2e9a884fbd87e8120cda88b
   - enabled: 1
     path: Assets/Scenes2.0/G3L1.unity
-    guid: 280b0290b6e437d47b1ddf8f2282db32
+    guid: c955c376db29e3343818239bae50cb19
   - enabled: 1
     path: Assets/Scenes2.0/G3L2.unity
-    guid: 17aeddfbf82fc6c40b4c1e91717cde70
+    guid: 2842a8cdc57bd81409430be4b8ce5301
   - enabled: 1
     path: Assets/Scenes2.0/G3L3.unity
-    guid: 92b94846a5720194aa4e3f9ccc68ee3d
+    guid: bcb7e57dc3d979f47acffe7e3a2dae98
   m_configObjects: {}

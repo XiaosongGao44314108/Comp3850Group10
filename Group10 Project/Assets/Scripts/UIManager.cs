@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI Lvl1HighscoreText;
     public TextMeshProUGUI Lvl2HighscoreText;
     public TextMeshProUGUI Lvl3HighscoreText;
+    public TextMeshProUGUI GoalLvlText;
     public GameObject timerGO;
 
     private string DialogueText;
@@ -212,6 +213,7 @@ public class UIManager : MonoBehaviour
         returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: No Poverty";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(0) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(1) + "";
         Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(2) + "";
@@ -223,6 +225,7 @@ public class UIManager : MonoBehaviour
         returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
         Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
@@ -234,6 +237,7 @@ public class UIManager : MonoBehaviour
         returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";

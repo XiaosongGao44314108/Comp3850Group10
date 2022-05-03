@@ -356,7 +356,7 @@ public class UIManager : MonoBehaviour
         feedbacking = true;
         //let player chooses whether to review videos/images about incorrect answer
         //Active ReviewOrNotPanel after answer incorrectly
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrectly?";
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrect?";
         ReviewOrNotPanel.gameObject.SetActive(true);
     }
 

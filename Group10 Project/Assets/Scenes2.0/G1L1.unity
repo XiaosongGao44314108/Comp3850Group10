@@ -443,7 +443,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 0
   m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -1430,8 +1430,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 186150122}
     - target: {fileID: 8015223101461904074, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101461904074, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101461904074, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101492885936, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1487,7 +1495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461058, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461069, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.x

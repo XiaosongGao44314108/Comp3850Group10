@@ -69,13 +69,13 @@ public class UIManager : MonoBehaviour
         DialogueText = "People talk";
         QuestionText = "Question contents";
         SetPanels();
-        SetDialogue();
+        //SetDialogue();
 
     }
 
     void Update()
     {
-        if (Dialogue != null)
+        if (Dialogue != null && !feedbacking)
         {
             TurnPages();
         }
@@ -154,18 +154,18 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SetDialogue()
-    {
-        if (DialoguePanel != null)
-        {
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = DialogueText;
-        }
+    // public void SetDialogue()
+    // {
+    //     if (DialoguePanel != null)
+    //     {
+    //         QManager.SetDialogueText();
+    //     }
 
-    }
+    // }
 
     public void TurnPages()
     {
-        if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
+        if (Input.GetButtonUp("TurnPages") || Input.GetMouseButtonUp(0) && feedbacking == false)
         {
             if (IsDiaActive == false)//if the dia is not activated yet
             {
@@ -178,7 +178,7 @@ public class UIManager : MonoBehaviour
             }
             else //the dia is already activated
             {
-                Continue();
+                DialogueContinue();
             }
         }
     }
@@ -319,6 +319,7 @@ public class UIManager : MonoBehaviour
         AnswerPanel.SetActive(false);
         currentScore += score;
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
+        feedbacking = true;
         if (answer && !retry)
         {
             ReviewQuestion();
@@ -399,6 +400,7 @@ public class UIManager : MonoBehaviour
     public void GetFeedback()
     {
         //Get feedback from the player
+        feedbacking = true;
         FeedbackPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
     }
@@ -438,6 +440,15 @@ public class UIManager : MonoBehaviour
             answering = true;
         }
     }
+
+    public void DialogueContinue(){
+        CorrectReviewPanel.SetActive(false);
+        ReviewPanel.gameObject.SetActive(false);
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        FeedbackPanel.gameObject.SetActive(false);
+        QManager.SetDialogueText();
+        feedbacking = false;
+    }
     public void ContinueAfterFeedback()
     {
         QManager.NextQuestion();
@@ -472,5 +483,9 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int score)
     {
         GManager.UpdateScore(currentScore + score);
+    }
+
+    public void SetFeedbacking(bool x){
+        feedbacking = x;
     }
 }

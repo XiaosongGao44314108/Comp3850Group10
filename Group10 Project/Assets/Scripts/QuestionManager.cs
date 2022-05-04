@@ -63,6 +63,7 @@ public class QuestionManager : MonoBehaviour
 
     void Start()
     {
+        currentDialogueIdx = 0;
         currentQuestionIdx = 0;
         answer = true;
         questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
@@ -72,10 +73,12 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
+        Debug.Log(currentDialogueIdx);
         if(currentDialogueIdx == dialogue.Length){
-            SetQuestionText(false);
+            UIManager.Continue();
         }else{
-            questionTextBox.SetText(dialogue.speech);
+            questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
+            NextDialogue();
         }
         
     }
@@ -83,6 +86,7 @@ public class QuestionManager : MonoBehaviour
 	public void SetQuestionText(bool hint)
 	{        
         questionList = questionPool.questionPool[currentQuestionIdx];
+        dialogue = questionList.dialogue;
         randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
         question = questionList.questions[randomQuestion];
         if(hint){
@@ -105,15 +109,17 @@ public class QuestionManager : MonoBehaviour
         if (question.correctIdx == answerIdx)
         {
             score = (int)baseScoreIncrement;
-            if(question.hasTimer){
+            if(question.hasTimer)
+            {
                 score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
             }
             answer = true;
-            if(currentQuestionIdx == questionPool.questionPool.Length-1){
+            if(currentQuestionIdx == questionPool.questionPool.Length-1)
+            {
             UIManager.UpdateScore(score);
             UIManager.BackToMain();
-            currentQuestionIdx = 0;
-        }
+            }
+            UIManager.SetFeedbacking(true);
             NextQuestion();
         }else{
             answer = false;
@@ -126,13 +132,15 @@ public class QuestionManager : MonoBehaviour
     public void NextQuestion()
 	{
         currentQuestionIdx++;
-        SetQuestionText(false);
+        currentDialogueIdx = 0;
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        dialogue = questionList.dialogue;
     }
 
     public void NextDialogue()
     {
         currentDialogueIdx++;
-        SetDialogueText();
+        //SetDialogueText();
     }
 
     public string GetElaborateFeedback()

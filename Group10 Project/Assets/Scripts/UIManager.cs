@@ -344,6 +344,7 @@ public class UIManager : MonoBehaviour
 
     public void ElaborateFeedback()
     {
+        feedbacking = true;
         ElaborateFeedbackPanel.SetActive(true);
         elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
     }
@@ -409,6 +410,7 @@ public class UIManager : MonoBehaviour
     {
         FeedbackPanel.gameObject.SetActive(false);
         feedbacking = false;
+        QManager.NextQuestion();
     }
 
 
@@ -429,6 +431,7 @@ public class UIManager : MonoBehaviour
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
         FeedbackPanel.gameObject.SetActive(false);
+        ElaborateFeedbackPanel.SetActive(false);
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
@@ -446,6 +449,7 @@ public class UIManager : MonoBehaviour
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
         FeedbackPanel.gameObject.SetActive(false);
+        ElaborateFeedbackPanel.SetActive(false);
         QManager.SetDialogueText();
         feedbacking = false;
     }

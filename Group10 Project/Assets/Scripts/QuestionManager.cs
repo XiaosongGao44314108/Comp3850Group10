@@ -15,6 +15,7 @@ public class QuestionManager : MonoBehaviour
 
     public float baseScoreIncrement;
     private int currentQuestionIdx;
+    private int currentDialogueIdx;
     private bool answer;
     private int randomQuestion;
     private int score;
@@ -36,8 +37,16 @@ public class QuestionManager : MonoBehaviour
     }
 
     [System.Serializable]
+    public class Dialogue
+	{
+        public int speaker;
+        public string speech;
+    }
+
+    [System.Serializable]
     public class QuestionList
 	{
+        public Dialogue[] dialogue;
         public Question[] questions;
 	}
 
@@ -47,15 +56,28 @@ public class QuestionManager : MonoBehaviour
         public QuestionList[] questionPool;
     }
 
-    public QuestionPool questionPool = new QuestionPool();
-    public QuestionList questionList;
-    public Question question;
+    private QuestionPool questionPool = new QuestionPool();
+    private QuestionList questionList;
+    private Question question;
+    private Dialogue[] dialogue;
+
     void Start()
     {
         currentQuestionIdx = 0;
         answer = true;
         questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
         questionList = questionPool.questionPool[currentQuestionIdx];
+        dialogue = questionList.dialogue;
+    }
+
+    public void SetDialogueText()
+    {
+        if(currentDialogueIdx == dialogue.Length){
+            SetQuestionText(false);
+        }else{
+            questionTextBox.SetText(dialogue.speech);
+        }
+        
     }
 
 	public void SetQuestionText(bool hint)
@@ -105,6 +127,12 @@ public class QuestionManager : MonoBehaviour
 	{
         currentQuestionIdx++;
         SetQuestionText(false);
+    }
+
+    public void NextDialogue()
+    {
+        currentDialogueIdx++;
+        SetDialogueText();
     }
 
     public string GetElaborateFeedback()

@@ -74,12 +74,17 @@ public class QuestionManager : MonoBehaviour
     public void SetDialogueText()
     {
         Debug.Log(currentDialogueIdx);
-        if(currentDialogueIdx == dialogue.Length){
-            UIManager.Continue();
+        if(currentQuestionIdx == questionPool.questionPool.Length){
+            UIManager.BackToMain();
         }else{
-            questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
-            NextDialogue();
+            if(currentDialogueIdx == dialogue.Length){
+                UIManager.Continue();
+            }else{
+                questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
+                NextDialogue();
+            }
         }
+        
         
     }
 
@@ -117,7 +122,7 @@ public class QuestionManager : MonoBehaviour
             if(currentQuestionIdx == questionPool.questionPool.Length-1)
             {
             UIManager.UpdateScore(score);
-            UIManager.BackToMain();
+            //UIManager.BackToMain();
             }
             UIManager.SetFeedbacking(true);
             NextQuestion();
@@ -133,8 +138,12 @@ public class QuestionManager : MonoBehaviour
 	{
         currentQuestionIdx++;
         currentDialogueIdx = 0;
-        questionList = questionPool.questionPool[currentQuestionIdx];
-        dialogue = questionList.dialogue;
+        if(currentQuestionIdx<questionPool.questionPool.Length)
+        {
+            questionList = questionPool.questionPool[currentQuestionIdx];
+            dialogue = questionList.dialogue;  
+        }
+        
     }
 
     public void NextDialogue()

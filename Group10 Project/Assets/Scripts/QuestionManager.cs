@@ -127,7 +127,7 @@ public class QuestionManager : MonoBehaviour
             //UIManager.BackToMain();
             }
             UIManager.SetFeedbacking(true);
-            NextQuestion();
+            //NextQuestion();
         }else{
             answer = false;
         }        

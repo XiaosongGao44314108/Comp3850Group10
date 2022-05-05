@@ -91,6 +91,7 @@ public class QuestionManager : MonoBehaviour
 
 	public void SetQuestionText(int retry)
 	{        
+        UIManager.SetSpeaker(0);//set avatar to the professor
         questionList = questionPool.questionPool[currentQuestionIdx];
         dialogue = questionList.dialogue;
         randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);

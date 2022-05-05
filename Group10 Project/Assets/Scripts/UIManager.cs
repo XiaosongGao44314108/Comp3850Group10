@@ -71,6 +71,9 @@ public class UIManager : MonoBehaviour
         DialogueText = "People talk";
         QuestionText = "Question contents";
         SetPanels();
+        if(Dialogue != null){
+            DialogueContinue();
+        }
         //SetDialogue();
     }
 

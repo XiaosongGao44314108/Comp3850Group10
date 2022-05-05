@@ -145,6 +145,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &113605227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8015223101596747603, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+  m_PrefabInstance: {fileID: 8015223100529769781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &186150122 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
@@ -924,6 +935,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: numNPC
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: timerGO
       value: 
       objectReference: {fileID: 2092745747}
@@ -939,6 +954,10 @@ PrefabInstance:
       propertyPath: badButton
       value: 
       objectReference: {fileID: 1168482507}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: kidAvatar
+      value: 
+      objectReference: {fileID: 21300000, guid: 53e6c05615983be4086cd72613f62ea9, type: 3}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: scoreText
       value: 
@@ -972,9 +991,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1924014803}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: speakerAvatar
+      value: 
+      objectReference: {fileID: 113605227}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: continueButton
       value: 
       objectReference: {fileID: 256542090}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: professorAvatar
+      value: 
+      objectReference: {fileID: 21300000, guid: 610c00c2b3405c54599a70036837fce2, type: 3}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: ReviewOrNotPanel
       value: 
@@ -991,6 +1018,10 @@ PrefabInstance:
       propertyPath: acceptReviewButton
       value: 
       objectReference: {fileID: 1371310805}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: avatars.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: finishReviewButton
       value: 
@@ -1015,6 +1046,14 @@ PrefabInstance:
       propertyPath: answers.Array.data[3]
       value: 
       objectReference: {fileID: 606567129}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: avatars.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: 610c00c2b3405c54599a70036837fce2, type: 3}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: avatars.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 53e6c05615983be4086cd72613f62ea9, type: 3}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: ElaborateFeedbackPanel
       value: 
@@ -1119,7 +1158,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3155140667599900768, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3155140667599900768, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1148,6 +1187,10 @@ PrefabInstance:
     - target: {fileID: 3155140667599900768, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364000498560099523, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7152371034512931610, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_RootOrder
@@ -1321,6 +1364,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8015223101011597730, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8015223101090983358, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_fontSize
       value: 16
@@ -1481,9 +1528,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetFeedbacking
       objectReference: {fileID: 0}
+    - target: {fileID: 8015223101596747600, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101596747603, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 610c00c2b3405c54599a70036837fce2, type: 3}
     - target: {fileID: 8015223101599838968, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015223101605755929, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_text
+      value: Dialogue
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101605755929, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_fontSize
@@ -1501,9 +1560,13 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8015223101605755934, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461058, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101700461069, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1535,7 +1598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101881612256, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CallReview
+      value: ElaborateFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101881612256, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

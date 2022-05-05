@@ -81,6 +81,7 @@ public class QuestionManager : MonoBehaviour
                 UIManager.Continue();
             }else{
                 questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
+                UIManager.SetSpeaker(dialogue[currentDialogueIdx].speaker);
                 NextDialogue();
             }
         }
@@ -88,13 +89,13 @@ public class QuestionManager : MonoBehaviour
         
     }
 
-	public void SetQuestionText(bool hint)
+	public void SetQuestionText(int retry)
 	{        
         questionList = questionPool.questionPool[currentQuestionIdx];
         dialogue = questionList.dialogue;
         randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
         question = questionList.questions[randomQuestion];
-        if(hint){
+        if(retry > 0){
             questionTextBox.SetText(question.question+" Hint:"+question.hint);
         }else{
             questionTextBox.SetText(question.question);

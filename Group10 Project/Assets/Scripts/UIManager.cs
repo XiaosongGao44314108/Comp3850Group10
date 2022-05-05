@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     public GameObject ElaborateFeedbackPanel;
     public GameObject CorrectReviewPanel;
     public Button returnButton;
+    public Texture [] avatars;
+    public RawImage speakerAvatar;
 
     private GameManager GManager;
     public QuestionManager QManager;
@@ -33,7 +35,7 @@ public class UIManager : MonoBehaviour
     private string DialogueText;
     private string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
-    private bool retry;
+    private int retry;
     private bool answering;
     private Timer timer;
     public Timer Timer
@@ -70,7 +72,6 @@ public class UIManager : MonoBehaviour
         QuestionText = "Question contents";
         SetPanels();
         //SetDialogue();
-
     }
 
     void Update()
@@ -320,30 +321,33 @@ public class UIManager : MonoBehaviour
         currentScore += score;
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         feedbacking = true;
-        if (answer && !retry)
+        Debug.Log(retry);
+        if (answer && retry == 0)
         {
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
-        else if (answer && retry)
+        else if (answer && retry <3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             GetFeedback();
         }
-        else if (!answer && retry)
+        else if (!answer && retry==2)
         {
+            retry = 0;
             ElaborateFeedback();
         }
         else
         {
             //player answers incorrectly.
-            retry = true;
+            retry ++;
             ReviewOrNot();
         }
     }
 
     public void ElaborateFeedback()
     {
+        CorrectReviewPanel.SetActive(false);
         feedbacking = true;
         ElaborateFeedbackPanel.SetActive(true);
         elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
@@ -377,7 +381,6 @@ public class UIManager : MonoBehaviour
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
         ReviewOrNotPanel.gameObject.SetActive(false);
         ReviewPanel.gameObject.SetActive(true);
-
     }
 
     public void CallSimilarQuestion()
@@ -426,7 +429,7 @@ public class UIManager : MonoBehaviour
     //temporary method
     public void Continue()
     {
-        retry = false;
+        retry = 0;
         CorrectReviewPanel.SetActive(false);
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
@@ -457,7 +460,7 @@ public class UIManager : MonoBehaviour
     {
         QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
-        retry = false;
+        retry = 0;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         GetFeedback();
@@ -491,5 +494,9 @@ public class UIManager : MonoBehaviour
 
     public void SetFeedbacking(bool x){
         feedbacking = x;
+    }
+
+    public void SetSpeaker(int speaker){
+        speakerAvatar.texture = avatars[speaker];
     }
 }

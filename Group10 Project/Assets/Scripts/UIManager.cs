@@ -18,63 +18,85 @@ public class UIManager : MonoBehaviour
     public GameObject Dialogue;  //dialogue text
     public GameObject ElaborateFeedbackPanel;
     public GameObject CorrectReviewPanel;
+    public Button returnButton;
+    public Texture [] avatars;
+    public RawImage speakerAvatar;
 
+    private GameManager GManager;
     public QuestionManager QManager;
-    public Button[] answers;
-    public Button feedbackYes;
-    public Button feedbackNo;
-    public Button finishReviewButton;
-    public Button goodButton;
-    public Button badButton;
-    public Button continueButton;
-    public Button acceptReviewButton;
-    public Button refuseReviewButton;
     public TextMeshProUGUI elaborateFeedback;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI Lvl1HighscoreText;
+    public TextMeshProUGUI Lvl2HighscoreText;
+    public TextMeshProUGUI Lvl3HighscoreText;
+    public TextMeshProUGUI GoalLvlText;
     public GameObject timerGO;
 
-    public string DialogueText;
-    public string QuestionText;
+    private string DialogueText;
+    private string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
-    private bool retry;
+    private int retry;
+    private bool answering;
     private Timer timer;
+    public Timer Timer
+    {
+        get
+        {
+            return timer;
+        }
+    }
     private Slider timerSlider;
     private bool IsDiaActive;
     private bool IsMainActive;//diaglogue should not be activated if Main menu panel is activated
     private bool SelectedGoalOne;
     private bool SelectedGoalTwo;
     private bool SelectedGoalThree;
+    private int currentScore;
+
 
 
 
     void Start()
     {
+        GManager = (GameManager)FindObjectOfType(typeof(GameManager));
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
         SelectedGoalTwo = false;
         SelectedGoalThree = false;
-
         feedbacking = false;
+
+        currentScore = 0;
         //Just for this version:
         DialogueText = "People talk";
         QuestionText = "Question contents";
         SetPanels();
-        SetDialogue();
-
+        if(Dialogue != null){
+            DialogueContinue();
+        }
+        //SetDialogue();
     }
 
     void Update()
     {
-        if (Dialogue != null)
+        if (Dialogue != null && !feedbacking)
         {
             TurnPages();
         }
-        if(timerGO != null){
-            if(!timer.IsActive()){
+        if (timerGO != null)
+        {
+            if (!timer.IsActive())
+            {
                 timerGO.SetActive(false);
-            }else{
-                timerSlider.value = timer.TimeLeft()/timer.timeLimit;
             }
+            else
+            {
+                timerSlider.value = timer.TimeLeft() / timer.timeLimit;
+            }
+        }
+        if (scoreText != null)
+        {
+            scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         }
     }
 
@@ -122,27 +144,32 @@ public class UIManager : MonoBehaviour
         {
             CorrectReviewPanel.SetActive(false);
         }
-        if(timerGO != null){
+        if (returnButton != null)
+        {
+            returnButton.gameObject.SetActive(false);
+        }
+        if (timerGO != null)
+        {
             timerGO.SetActive(false);
             timer = timerGO.GetComponent<Timer>();
             timerSlider = timerGO.GetComponent<Slider>();
         }
-        
-        
-    }
 
-    public void SetDialogue()
-    {
-        if (DialoguePanel != null)
-        {
-            Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = DialogueText;
-        }
 
     }
+
+    // public void SetDialogue()
+    // {
+    //     if (DialoguePanel != null)
+    //     {
+    //         QManager.SetDialogueText();
+    //     }
+
+    // }
 
     public void TurnPages()
     {
-      if (Input.GetButton("TurnPages") || Input.GetMouseButtonDown(0) && feedbacking == false)
+        if (Input.GetButtonUp("TurnPages") || Input.GetMouseButtonUp(0) && feedbacking == false)
         {
             if (IsDiaActive == false)//if the dia is not activated yet
             {
@@ -155,7 +182,7 @@ public class UIManager : MonoBehaviour
             }
             else //the dia is already activated
             {
-                    Continue();
+                DialogueContinue();
             }
         }
     }
@@ -180,30 +207,44 @@ public class UIManager : MonoBehaviour
     {
         MenuPanel.gameObject.SetActive(false);
         GoalPanel.gameObject.SetActive(true);
-        IsMainActive = false;
-        DialoguePanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
+        //DialoguePanel.gameObject.SetActive(true);
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
     }
     public void ChoosingGoalOneLevel() // What happens after clicking GoalOne
     {
         SelectedGoalOne = true;
         GoalPanel.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: No Poverty";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(0) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(1) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(2) + "";
     }
     public void ChoosingGoalTwoLevel() // What happens after clicking GoalTwo
     {
         SelectedGoalTwo = true;
         GoalPanel.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
     }
     public void ChoosingGoalThreeLevel() // What happens after clicking GoalThree
     {
         SelectedGoalThree = true;
         GoalPanel.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
     }
 
     public void LoadingLevelOne() //What happens after clicking Level One
@@ -220,6 +261,8 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(7);
         }
+
+        IsMainActive = false;
     }
 
     public void LoadingLevelTwo() //What happens after clicking Level Two
@@ -236,6 +279,8 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(8);
         }
+
+        IsMainActive = false;
     }
 
     public void LoadingLevelThree() //What happens after clicking Level Three
@@ -252,6 +297,18 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(9);
         }
+
+        IsMainActive = false;
+    }
+
+    public void ReturnToGoal() //click button and return to goal panel while selecting level
+    {
+        SelectedGoalOne = false;
+        SelectedGoalTwo = false;
+        SelectedGoalThree = false;
+        GoalPanel.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(false);
+        LevelPanel.gameObject.SetActive(false);
     }
 
     public void BackToMain()
@@ -260,42 +317,51 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void CallContinue(bool answer)
+    public void CallContinue(bool answer, int score)
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
-        if (answer && !retry)
+        currentScore += score;
+        scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
+        feedbacking = true;
+        Debug.Log(retry);
+        if (answer && retry == 0)
         {
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
-        else if (answer && retry)
+        else if (answer && retry <3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             GetFeedback();
         }
-        else if (!answer && retry)
+        else if (!answer && retry==2)
         {
+            retry = 0;
             ElaborateFeedback();
         }
         else
         {
             //player answers incorrectly.
-            retry = true;
+            retry ++;
             ReviewOrNot();
         }
     }
 
     public void ElaborateFeedback()
     {
+        CorrectReviewPanel.SetActive(false);
+        feedbacking = true;
         ElaborateFeedbackPanel.SetActive(true);
         elaborateFeedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetElaborateFeedback();
     }
 
     public void TaskOnClick(int idx)
     {
-        timer.EndTimer();
+        answering = false;
         QManager.AnswerQuestion(idx);
+        timer.EndTimer();
+
     }
 
     public void ReviewOrNot()
@@ -303,7 +369,7 @@ public class UIManager : MonoBehaviour
         feedbacking = true;
         //let player chooses whether to review videos/images about incorrect answer
         //Active ReviewOrNotPanel after answer incorrectly
-        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrectly?";
+        Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Not Quite, do you want to know more about why your answer is incorrect?";
         ReviewOrNotPanel.gameObject.SetActive(true);
     }
 
@@ -318,7 +384,6 @@ public class UIManager : MonoBehaviour
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
         ReviewOrNotPanel.gameObject.SetActive(false);
         ReviewPanel.gameObject.SetActive(true);
-
     }
 
     public void CallSimilarQuestion()
@@ -342,6 +407,7 @@ public class UIManager : MonoBehaviour
     public void GetFeedback()
     {
         //Get feedback from the player
+        feedbacking = true;
         FeedbackPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
     }
@@ -350,6 +416,7 @@ public class UIManager : MonoBehaviour
     {
         FeedbackPanel.gameObject.SetActive(false);
         feedbacking = false;
+        QManager.NextQuestion();
     }
 
 
@@ -365,23 +432,38 @@ public class UIManager : MonoBehaviour
     //temporary method
     public void Continue()
     {
-        retry = false;
+        retry = 0;
         CorrectReviewPanel.SetActive(false);
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
         FeedbackPanel.gameObject.SetActive(false);
+        ElaborateFeedbackPanel.SetActive(false);
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         AnswerPanel.SetActive(true);
         QManager.SetQuestionText(retry);
-        TimerStart();
+        if (!answering)
+        {
+            TimerStart();
+            answering = true;
+        }
+    }
+
+    public void DialogueContinue(){
+        CorrectReviewPanel.SetActive(false);
+        ReviewPanel.gameObject.SetActive(false);
+        ReviewOrNotPanel.gameObject.SetActive(false);
+        FeedbackPanel.gameObject.SetActive(false);
+        ElaborateFeedbackPanel.SetActive(false);
+        QManager.SetDialogueText();
+        feedbacking = false;
     }
     public void ContinueAfterFeedback()
     {
         QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
-        retry = false;
+        retry = 0;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         GetFeedback();
@@ -399,11 +481,25 @@ public class UIManager : MonoBehaviour
     {
 
     }
-    public void TimerStart(){
-        if(QManager.HasTimer())
+    public void TimerStart()
+    {
+        if (QManager.HasTimer())
         {
             timerGO.SetActive(true);
             timer.StartTimer();
         }
+    }
+
+    public void UpdateScore(int score)
+    {
+        GManager.UpdateScore(currentScore + score);
+    }
+
+    public void SetFeedbacking(bool x){
+        feedbacking = x;
+    }
+
+    public void SetSpeaker(int speaker){
+        speakerAvatar.texture = avatars[speaker];
     }
 }

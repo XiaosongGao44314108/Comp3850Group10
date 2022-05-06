@@ -27,7 +27,6 @@ public class Timer : MonoBehaviour
         timeLeft -= Time.deltaTime;
         }
         if(timeLeft<=0){
-            timeLeft = timeLimit;
             isActive = false;
         }
 
@@ -35,6 +34,7 @@ public class Timer : MonoBehaviour
 
     public void StartTimer(){
         isActive = true;
+        timeLeft = timeLimit;
     }
 
     public void EndTimer(){
@@ -44,5 +44,9 @@ public class Timer : MonoBehaviour
 
     public bool IsActive(){
         return isActive;
+    }
+
+    public float timeRatio(){
+        return timeLeft/timeLimit;
     }
 }

@@ -13,9 +13,13 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
+    public float baseScoreIncrement;
     private int currentQuestionIdx;
+    private int currentDialogueIdx;
     private bool answer;
     private int randomQuestion;
+    private int score;
+
     [System.Serializable]
     public class Question
 	{
@@ -33,8 +37,16 @@ public class QuestionManager : MonoBehaviour
     }
 
     [System.Serializable]
+    public class Dialogue
+	{
+        public int speaker;
+        public string speech;
+    }
+
+    [System.Serializable]
     public class QuestionList
 	{
+        public Dialogue[] dialogue;
         public Question[] questions;
 	}
 
@@ -44,23 +56,47 @@ public class QuestionManager : MonoBehaviour
         public QuestionList[] questionPool;
     }
 
-    public QuestionPool questionPool = new QuestionPool();
-    public QuestionList questionList;
-    public Question question;
+    private QuestionPool questionPool = new QuestionPool();
+    private QuestionList questionList;
+    private Question question;
+    private Dialogue[] dialogue;
+
     void Start()
     {
+        currentDialogueIdx = 0;
         currentQuestionIdx = 0;
         answer = true;
         questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
         questionList = questionPool.questionPool[currentQuestionIdx];
+        dialogue = questionList.dialogue;
     }
 
-	public void SetQuestionText(bool hint)
+    public void SetDialogueText()
+    {
+        Debug.Log(currentDialogueIdx);
+        if(currentQuestionIdx == questionPool.questionPool.Length){
+            UIManager.BackToMain();
+        }else{
+            if(currentDialogueIdx == dialogue.Length){
+                UIManager.Continue();
+            }else{
+                questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
+                UIManager.SetSpeaker(dialogue[currentDialogueIdx].speaker);
+                NextDialogue();
+            }
+        }
+        
+        
+    }
+
+	public void SetQuestionText(int retry)
 	{        
+        UIManager.SetSpeaker(0);//set avatar to the professor
         questionList = questionPool.questionPool[currentQuestionIdx];
+        dialogue = questionList.dialogue;
         randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
         question = questionList.questions[randomQuestion];
-        if(hint){
+        if(retry > 0){
             questionTextBox.SetText(question.question+" Hint:"+question.hint);
         }else{
             questionTextBox.SetText(question.question);
@@ -76,24 +112,46 @@ public class QuestionManager : MonoBehaviour
     {
         questionList = questionPool.questionPool[currentQuestionIdx];
         question = questionList.questions[randomQuestion];
-
+        score = 0;
         if (question.correctIdx == answerIdx)
         {
-            //points += question.points
+            score = (int)baseScoreIncrement;
+            if(question.hasTimer)
+            {
+                score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
+            }
             answer = true;
-            NextQuestion();
+            if(currentQuestionIdx == questionPool.questionPool.Length-1)
+            {
+            UIManager.UpdateScore(score);
+            //UIManager.BackToMain();
+            }
+            UIManager.SetFeedbacking(true);
+            //NextQuestion();
         }else{
             answer = false;
         }        
         
-        UIManager.CallContinue(answer);
+        UIManager.CallContinue(answer, score);
     }
     
 
     public void NextQuestion()
 	{
         currentQuestionIdx++;
-        SetQuestionText(false);
+        currentDialogueIdx = 0;
+        if(currentQuestionIdx<questionPool.questionPool.Length)
+        {
+            questionList = questionPool.questionPool[currentQuestionIdx];
+            dialogue = questionList.dialogue;  
+        }
+        
+    }
+
+    public void NextDialogue()
+    {
+        currentDialogueIdx++;
+        //SetDialogueText();
     }
 
     public string GetElaborateFeedback()

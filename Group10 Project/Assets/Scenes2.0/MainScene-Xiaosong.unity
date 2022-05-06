@@ -4141,6 +4141,8 @@ MonoBehaviour:
   ElaborateFeedbackPanel: {fileID: 0}
   CorrectReviewPanel: {fileID: 0}
   returnButton: {fileID: 937907491}
+  avatars: []
+  speakerAvatar: {fileID: 0}
   QManager: {fileID: 0}
   elaborateFeedback: {fileID: 0}
   scoreText: {fileID: 0}

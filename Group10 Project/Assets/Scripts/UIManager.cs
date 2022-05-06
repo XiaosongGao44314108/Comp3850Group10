@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     public Button returnButton;
     public Texture [] avatars;
     public RawImage speakerAvatar;
+    
 
     private GameManager GManager;
     public QuestionManager QManager;
@@ -255,11 +257,11 @@ public class UIManager : MonoBehaviour
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(1);
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(7);
+            SceneManager.LoadScene(1);
         }
 
         IsMainActive = false;
@@ -269,15 +271,15 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(1);
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(8);
+            SceneManager.LoadScene(1);
         }
 
         IsMainActive = false;
@@ -287,15 +289,15 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(1);
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(6);
+            SceneManager.LoadScene(1);
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(9);
+            SceneManager.LoadScene(1);
         }
 
         IsMainActive = false;
@@ -501,5 +503,10 @@ public class UIManager : MonoBehaviour
 
     public void SetSpeaker(int speaker){
         speakerAvatar.texture = avatars[speaker];
+    }
+
+    public void OpenWindow(){
+        Application.OpenURL("https://www.youtube.com/watch?v=VpQVQv5DSe8");
+        CallReview();
     }
 }

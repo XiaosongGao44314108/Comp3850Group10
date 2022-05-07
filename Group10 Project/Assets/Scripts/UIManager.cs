@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     public GameObject DialoguePanel;
     public GameObject ReviewOrNotPanel;
     public GameObject ReviewPanel;
+    public GameObject ReviewTextPanel;
+    public GameObject ReviewButtons;
+    public GameObject FinishReviewButton;
     public GameObject FeedbackPanel;
     public GameObject Dialogue;  //dialogue text
     public GameObject ElaborateFeedbackPanel;
@@ -388,6 +391,31 @@ public class UIManager : MonoBehaviour
         ReviewPanel.gameObject.SetActive(true);
     }
 
+    public void CallTextReview()
+    {
+        ReviewTextPanel.gameObject.SetActive(true);
+        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(1000,400);
+        ReviewButtons.SetActive(false);
+        FinishReviewButton.SetActive(true);
+        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0,-170);
+    }
+
+    public void CallVideoReview()
+    {
+        ReviewButtons.SetActive(false);
+        FinishReviewButton.SetActive(true);
+        OpenWindow();
+    }
+
+    public void ResetReviewPanel()
+    {
+        ReviewTextPanel.gameObject.SetActive(false);
+        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(600,100);
+        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0,0);
+        ReviewButtons.SetActive(true);
+        FinishReviewButton.SetActive(false);
+       
+    }
     public void CallSimilarQuestion()
     {
         //ReviewPanel.gameObject.SetActive(false);
@@ -396,6 +424,7 @@ public class UIManager : MonoBehaviour
         //need to add more contents at here later
 
         //ReviewOrNot Panel may not be actived yet if player chooses not to review related images
+        ResetReviewPanel();
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
         //setup question

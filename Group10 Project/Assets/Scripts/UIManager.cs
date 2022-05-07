@@ -272,8 +272,8 @@ public class UIManager : MonoBehaviour
             if (g1L1) //only happens if g1L1 is unlocked
             {
                 SceneManager.LoadScene(1);
+                SLocker.SetG1L2(true);//unlock g1l2
             }
-            SLocker.SetG1L2(true);//unlock g1l2
         }
         if (SelectedGoalTwo)
         {
@@ -281,8 +281,8 @@ public class UIManager : MonoBehaviour
             if (g2L1)//only happens if g2L1 is unlocked
             {
                 SceneManager.LoadScene(4);
+                SLocker.SetG2L2(true);//unlock g2L2
             }
-            SLocker.SetG2L2(true);//unlock g2L2
         }
         if (SelectedGoalThree)
         {
@@ -290,8 +290,8 @@ public class UIManager : MonoBehaviour
             if (g3L1)//only happens if g3L1 is unlocked
             {
                 SceneManager.LoadScene(7);
+                SLocker.SetG3L2(true);//unlock g3L2
             }
-            SLocker.SetG3L2(true);//unlock g3L2
         }
 
         IsMainActive = false;
@@ -305,8 +305,8 @@ public class UIManager : MonoBehaviour
             if (g1L2)//only happens if g1L2 is unlocked
             {
                 SceneManager.LoadScene(2);
+                SLocker.SetG1L3(true);//unlock g1l3
             }
-            SLocker.SetG1L3(true);//unlock g1l3
         }
         if (SelectedGoalTwo)
         {
@@ -314,8 +314,8 @@ public class UIManager : MonoBehaviour
             if (g2L2)//only happens if g2L2 is unlocked
             {
                 SceneManager.LoadScene(5);
+                SLocker.SetG2L3(true);//unlock g2L3
             }
-            SLocker.SetG2L3(true);//unlock g2L3
         }
         if (SelectedGoalThree)
         {
@@ -323,8 +323,8 @@ public class UIManager : MonoBehaviour
             if (g3L2)//only happens if g3l2 is unlocked
             {
                 SceneManager.LoadScene(8);
+                SLocker.SetG3L3(true);//unlock g3l3
             }
-            SLocker.SetG3L3(true);//unlock g3l3
         }
 
         IsMainActive = false;
@@ -338,8 +338,8 @@ public class UIManager : MonoBehaviour
             if (g1L3)//only happens if g1l3 is unlocked
             {
                 SceneManager.LoadScene(3);
+                SLocker.SetG2L1(true);//unlock g2l1
             }
-            SLocker.SetG2L1(true);//unlock g2l1
         }
         if (SelectedGoalTwo)
         {
@@ -347,8 +347,8 @@ public class UIManager : MonoBehaviour
             if (g2L3)//only happens if g2l3 is unlocked
             {
                 SceneManager.LoadScene(6);
+                SLocker.SetG3L1(true);//unlock g3l1
             }
-            SLocker.SetG3L1(true);//unlock g3l1
         }
         if (SelectedGoalThree)
         {

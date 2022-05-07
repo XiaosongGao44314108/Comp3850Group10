@@ -23,11 +23,12 @@ public class UIManager : MonoBehaviour
     public GameObject ElaborateFeedbackPanel;
     public GameObject CorrectReviewPanel;
     public Button returnButton;
-    public Texture [] avatars;
+    public Texture[] avatars;
     public RawImage speakerAvatar;
-    
+
 
     private GameManager GManager;
+    private ScenesLocker SLocker;
     public QuestionManager QManager;
     public TextMeshProUGUI elaborateFeedback;
     public TextMeshProUGUI scoreText;
@@ -64,6 +65,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         GManager = (GameManager)FindObjectOfType(typeof(GameManager));
+        SLocker = (ScenesLocker)FindObjectOfType(typeof(ScenesLocker));
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
@@ -76,7 +78,8 @@ public class UIManager : MonoBehaviour
         DialogueText = "People talk";
         QuestionText = "Question contents";
         SetPanels();
-        if(Dialogue != null){
+        if (Dialogue != null)
+        {
             DialogueContinue();
         }
         //SetDialogue();
@@ -229,42 +232,66 @@ public class UIManager : MonoBehaviour
     }
     public void ChoosingGoalTwoLevel() // What happens after clicking GoalTwo
     {
-        SelectedGoalTwo = true;
-        GoalPanel.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(true);
-        LevelPanel.gameObject.SetActive(true);
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
-        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
-        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
-        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
+        bool g2L1 = SLocker.GetG2L1();
+        if (g2L1)//only happens if G2L1 is unlocked
+        {
+            SelectedGoalTwo = true;
+            GoalPanel.gameObject.SetActive(false);
+            returnButton.gameObject.SetActive(true);
+            LevelPanel.gameObject.SetActive(true);
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+            GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
+            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
+            Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
+            Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
+        }
+
     }
     public void ChoosingGoalThreeLevel() // What happens after clicking GoalThree
     {
-        SelectedGoalThree = true;
-        GoalPanel.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(true);
-        LevelPanel.gameObject.SetActive(true);
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
-        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
+        bool g3L1 = SLocker.GetG3L1();
+        if (g3L1)//only happens if G3L1 is unlocked
+        {
+            SelectedGoalThree = true;
+            GoalPanel.gameObject.SetActive(false);
+            returnButton.gameObject.SetActive(true);
+            LevelPanel.gameObject.SetActive(true);
+            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+            GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
+            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
+            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
+            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
+        }
     }
 
     public void LoadingLevelOne() //What happens after clicking Level One
     {
         if (SelectedGoalOne)
         {
-            SceneManager.LoadScene(1);
+            bool g1L1 = SLocker.GetG1L1();
+            if (g1L1) //only happens if g1L1 is unlocked
+            {
+                SceneManager.LoadScene(1);
+            }
+            SLocker.SetG1L2(true);//unlock g1l2
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(1);
+            bool g2L1 = SLocker.GetG2L1();
+            if (g2L1)//only happens if g2L1 is unlocked
+            {
+                SceneManager.LoadScene(4);
+            }
+            SLocker.SetG2L2(true);//unlock g2L2
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(1);
+            bool g3L1 = SLocker.GetG3L1();
+            if (g3L1)//only happens if g3L1 is unlocked
+            {
+                SceneManager.LoadScene(7);
+            }
+            SLocker.SetG3L2(true);//unlock g3L2
         }
 
         IsMainActive = false;
@@ -274,15 +301,30 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            SceneManager.LoadScene(1);
+            bool g1L2 = SLocker.GetG1L2();
+            if (g1L2)//only happens if g1L2 is unlocked
+            {
+                SceneManager.LoadScene(2);
+            }
+            SLocker.SetG1L3(true);//unlock g1l3
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(1);
+            bool g2L2 = SLocker.GetG2L2();
+            if (g2L2)//only happens if g2L2 is unlocked
+            {
+                SceneManager.LoadScene(5);
+            }
+            SLocker.SetG2L3(true);//unlock g2L3
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(1);
+            bool g3L2 = SLocker.GetG3L2();
+            if (g3L2)//only happens if g3l2 is unlocked
+            {
+                SceneManager.LoadScene(8);
+            }
+            SLocker.SetG3L3(true);//unlock g3l3
         }
 
         IsMainActive = false;
@@ -292,15 +334,29 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            SceneManager.LoadScene(1);
+            bool g1L3 = SLocker.GetG1L3();
+            if (g1L3)//only happens if g1l3 is unlocked
+            {
+                SceneManager.LoadScene(3);
+            }
+            SLocker.SetG2L1(true);//unlock g2l1
         }
         if (SelectedGoalTwo)
         {
-            SceneManager.LoadScene(1);
+            bool g2L3 = SLocker.GetG2L3();
+            if (g2L3)//only happens if g2l3 is unlocked
+            {
+                SceneManager.LoadScene(6);
+            }
+            SLocker.SetG3L1(true);//unlock g3l1
         }
         if (SelectedGoalThree)
         {
-            SceneManager.LoadScene(1);
+            bool g3L3 = SLocker.GetG3L3();
+            if (g3L3)//only happens if g3l3 is unlocked
+            {
+                SceneManager.LoadScene(9);
+            }
         }
 
         IsMainActive = false;
@@ -335,12 +391,12 @@ public class UIManager : MonoBehaviour
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
-        else if (answer && retry <3)
+        else if (answer && retry < 3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             GetFeedback();
         }
-        else if (!answer && retry==2)
+        else if (!answer && retry == 2)
         {
             retry = 0;
             ElaborateFeedback();
@@ -348,7 +404,7 @@ public class UIManager : MonoBehaviour
         else
         {
             //player answers incorrectly.
-            retry ++;
+            retry++;
             ReviewOrNot();
         }
     }
@@ -394,10 +450,10 @@ public class UIManager : MonoBehaviour
     public void CallTextReview()
     {
         ReviewTextPanel.gameObject.SetActive(true);
-        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(1000,400);
+        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, 400);
         ReviewButtons.SetActive(false);
         FinishReviewButton.SetActive(true);
-        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0,-170);
+        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -170);
     }
 
     public void CallVideoReview()
@@ -410,11 +466,11 @@ public class UIManager : MonoBehaviour
     public void ResetReviewPanel()
     {
         ReviewTextPanel.gameObject.SetActive(false);
-        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(600,100);
-        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0,0);
+        ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 100);
+        FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
         ReviewButtons.SetActive(true);
         FinishReviewButton.SetActive(false);
-       
+
     }
     public void CallSimilarQuestion()
     {
@@ -481,7 +537,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DialogueContinue(){
+    public void DialogueContinue()
+    {
         CorrectReviewPanel.SetActive(false);
         ReviewPanel.gameObject.SetActive(false);
         ReviewOrNotPanel.gameObject.SetActive(false);
@@ -526,15 +583,18 @@ public class UIManager : MonoBehaviour
         GManager.UpdateScore(currentScore + score);
     }
 
-    public void SetFeedbacking(bool x){
+    public void SetFeedbacking(bool x)
+    {
         feedbacking = x;
     }
 
-    public void SetSpeaker(int speaker){
+    public void SetSpeaker(int speaker)
+    {
         speakerAvatar.texture = avatars[speaker];
     }
 
-    public void OpenWindow(){
+    public void OpenWindow()
+    {
         Application.OpenURL("https://www.youtube.com/watch?v=VpQVQv5DSe8");
         CallReview();
     }

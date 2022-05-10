@@ -25,10 +25,15 @@ public class UIManager : MonoBehaviour
     public Button returnButton;
     public Texture[] avatars;
     public RawImage speakerAvatar;
+    public Button goalOneButton;
+    public Button goalTwoButton;
+    public Button goalThreeButton;
+    public Button levelOneButton;
+    public Button levelTwoButton;
+    public Button levelThreeButton;
 
 
     private GameManager GManager;
-    private ScenesLocker SLocker;
     public QuestionManager QManager;
     public TextMeshProUGUI elaborateFeedback;
     public TextMeshProUGUI scoreText;
@@ -62,10 +67,11 @@ public class UIManager : MonoBehaviour
 
 
 
+
+
     void Start()
     {
         GManager = (GameManager)FindObjectOfType(typeof(GameManager));
-        SLocker = (ScenesLocker)FindObjectOfType(typeof(ScenesLocker));
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
@@ -217,6 +223,33 @@ public class UIManager : MonoBehaviour
         GoalPanel.gameObject.SetActive(true);
         //DialoguePanel.gameObject.SetActive(true);
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
+
+        //lock/unlock goal buttons:
+        if (GManager.GetLockState(0))
+        {
+            goalOneButton.interactable = true;
+        }
+        else
+        {
+            goalOneButton.interactable = false;
+        }
+        if (GManager.GetLockState(3))
+        {
+            goalTwoButton.interactable = true;
+        }
+        else
+        {
+            goalTwoButton.interactable = false;
+        }
+
+        if (GManager.GetLockState(6))
+        {
+            goalThreeButton.interactable = true;
+        }
+        else
+        {
+            goalThreeButton.interactable = false;
+        }
     }
     public void ChoosingGoalOneLevel() // What happens after clicking GoalOne
     {
@@ -229,38 +262,108 @@ public class UIManager : MonoBehaviour
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(0) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(1) + "";
         Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(2) + "";
+
+        //lock/unlock level buttons in goal one:
+        if (GManager.GetLockState(0))
+        {
+            levelOneButton.interactable = true;
+        }
+        else
+        {
+            levelOneButton.interactable = false;
+        }
+        if (GManager.GetLockState(1))
+        {
+            levelTwoButton.interactable = true;
+        }
+        else
+        {
+            levelTwoButton.interactable = false;
+        }
+        if (GManager.GetLockState(2))
+        {
+            levelThreeButton.interactable = true;
+        }
+        else
+        {
+            levelThreeButton.interactable = false;
+        }
     }
     public void ChoosingGoalTwoLevel() // What happens after clicking GoalTwo
     {
-        bool g2L1 = SLocker.GetG2L1();
-        if (g2L1)//only happens if G2L1 is unlocked
-        {
-            SelectedGoalTwo = true;
-            GoalPanel.gameObject.SetActive(false);
-            returnButton.gameObject.SetActive(true);
-            LevelPanel.gameObject.SetActive(true);
-            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
-            GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
-            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
-            Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
-            Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
-        }
+        SelectedGoalTwo = true;
+        GoalPanel.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(true);
+        LevelPanel.gameObject.SetActive(true);
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(5) + "";
 
+        //lock/unlock level buttons in goal two:
+        if (GManager.GetLockState(3))
+        {
+            levelOneButton.interactable = true;
+        }
+        else
+        {
+            levelOneButton.interactable = false;
+        }
+        if (GManager.GetLockState(4))
+        {
+            levelTwoButton.interactable = true;
+        }
+        else
+        {
+            levelTwoButton.interactable = false;
+        }
+        if (GManager.GetLockState(5))
+        {
+            levelThreeButton.interactable = true;
+        }
+        else
+        {
+            levelThreeButton.interactable = false;
+        }
     }
     public void ChoosingGoalThreeLevel() // What happens after clicking GoalThree
     {
-        bool g3L1 = SLocker.GetG3L1();
-        if (g3L1)//only happens if G3L1 is unlocked
+
+        SelectedGoalThree = true;
+        GoalPanel.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(true);
+        LevelPanel.gameObject.SetActive(true);
+        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
+        GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
+        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
+
+        //lock/unlock level buttons in goal three:
+        if (GManager.GetLockState(6))
         {
-            SelectedGoalThree = true;
-            GoalPanel.gameObject.SetActive(false);
-            returnButton.gameObject.SetActive(true);
-            LevelPanel.gameObject.SetActive(true);
-            //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
-            GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
-            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
-            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
-            Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
+            levelOneButton.interactable = true;
+        }
+        else
+        {
+            levelOneButton.interactable = false;
+        }
+        if (GManager.GetLockState(7))
+        {
+            levelTwoButton.interactable = true;
+        }
+        else
+        {
+            levelTwoButton.interactable = false;
+        }
+        if (GManager.GetLockState(8))
+        {
+            levelThreeButton.interactable = true;
+        }
+        else
+        {
+            levelThreeButton.interactable = false;
         }
     }
 
@@ -268,30 +371,18 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            bool g1L1 = SLocker.GetG1L1();
-            if (g1L1) //only happens if g1L1 is unlocked
-            {
-                SceneManager.LoadScene(1);
-                SLocker.SetG1L2(true);//unlock g1l2
-            }
+            SceneManager.LoadScene(1);
+            // GManager.SetLockState(1, true);//unlock g1l2
         }
         if (SelectedGoalTwo)
         {
-            bool g2L1 = SLocker.GetG2L1();
-            if (g2L1)//only happens if g2L1 is unlocked
-            {
-                SceneManager.LoadScene(4);
-                SLocker.SetG2L2(true);//unlock g2L2
-            }
+            SceneManager.LoadScene(4);
+            // GManager.SetLockState(4, true);//unlock g2L2
         }
         if (SelectedGoalThree)
         {
-            bool g3L1 = SLocker.GetG3L1();
-            if (g3L1)//only happens if g3L1 is unlocked
-            {
-                SceneManager.LoadScene(7);
-                SLocker.SetG3L2(true);//unlock g3L2
-            }
+            SceneManager.LoadScene(7);
+            // GManager.SetLockState(7, true);//unlock g3L2
         }
 
         IsMainActive = false;
@@ -301,30 +392,18 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            bool g1L2 = SLocker.GetG1L2();
-            if (g1L2)//only happens if g1L2 is unlocked
-            {
-                SceneManager.LoadScene(2);
-                SLocker.SetG1L3(true);//unlock g1l3
-            }
+            SceneManager.LoadScene(2);
+            // GManager.SetLockState(2, true);//unlock g1l3
         }
         if (SelectedGoalTwo)
         {
-            bool g2L2 = SLocker.GetG2L2();
-            if (g2L2)//only happens if g2L2 is unlocked
-            {
-                SceneManager.LoadScene(5);
-                SLocker.SetG2L3(true);//unlock g2L3
-            }
+            SceneManager.LoadScene(5);
+            // GManager.SetLockState(5, true);//unlock g2L3
         }
         if (SelectedGoalThree)
         {
-            bool g3L2 = SLocker.GetG3L2();
-            if (g3L2)//only happens if g3l2 is unlocked
-            {
-                SceneManager.LoadScene(8);
-                SLocker.SetG3L3(true);//unlock g3l3
-            }
+            SceneManager.LoadScene(8);
+            // GManager.SetLockState(8, true);//unlock g3l3
         }
 
         IsMainActive = false;
@@ -334,29 +413,17 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedGoalOne)
         {
-            bool g1L3 = SLocker.GetG1L3();
-            if (g1L3)//only happens if g1l3 is unlocked
-            {
-                SceneManager.LoadScene(3);
-                SLocker.SetG2L1(true);//unlock g2l1
-            }
+            SceneManager.LoadScene(3);
+            // GManager.SetLockState(3, true);//unlock g2l1
         }
         if (SelectedGoalTwo)
         {
-            bool g2L3 = SLocker.GetG2L3();
-            if (g2L3)//only happens if g2l3 is unlocked
-            {
-                SceneManager.LoadScene(6);
-                SLocker.SetG3L1(true);//unlock g3l1
-            }
+            SceneManager.LoadScene(6);
+            // GManager.SetLockState(6, true);//unlock g3l1
         }
         if (SelectedGoalThree)
         {
-            bool g3L3 = SLocker.GetG3L3();
-            if (g3L3)//only happens if g3l3 is unlocked
-            {
-                SceneManager.LoadScene(9);
-            }
+            SceneManager.LoadScene(9);
         }
 
         IsMainActive = false;

@@ -4190,6 +4190,12 @@ MonoBehaviour:
   returnButton: {fileID: 937907491}
   avatars: []
   speakerAvatar: {fileID: 0}
+  goalOneButton: {fileID: 1044798897}
+  goalTwoButton: {fileID: 1305497134}
+  goalThreeButton: {fileID: 1345821989}
+  levelOneButton: {fileID: 195646616}
+  levelTwoButton: {fileID: 1970362072}
+  levelThreeButton: {fileID: 496530478}
   QManager: {fileID: 0}
   elaborateFeedback: {fileID: 0}
   scoreText: {fileID: 0}

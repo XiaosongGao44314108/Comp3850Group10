@@ -337,8 +337,8 @@ public class UIManager : MonoBehaviour
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
         GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Good Health and Well-Being";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(6) + "";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
-        Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
+        Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(7) + "";
+        Lvl3HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(8) + "";
 
         //lock/unlock level buttons in goal three:
         if (GManager.GetLockState(6))

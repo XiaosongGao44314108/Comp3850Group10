@@ -4136,6 +4136,9 @@ MonoBehaviour:
   DialoguePanel: {fileID: 63056093}
   ReviewOrNotPanel: {fileID: 0}
   ReviewPanel: {fileID: 0}
+  ReviewTextPanel: {fileID: 0}
+  ReviewButtons: {fileID: 0}
+  FinishReviewButton: {fileID: 0}
   FeedbackPanel: {fileID: 0}
   Dialogue: {fileID: 787729680}
   ElaborateFeedbackPanel: {fileID: 0}
@@ -4143,6 +4146,12 @@ MonoBehaviour:
   returnButton: {fileID: 937907491}
   avatars: []
   speakerAvatar: {fileID: 0}
+  goalOneButton: {fileID: 1044798897}
+  goalTwoButton: {fileID: 1305497134}
+  goalThreeButton: {fileID: 1345821989}
+  levelOneButton: {fileID: 195646616}
+  levelTwoButton: {fileID: 1970362072}
+  levelThreeButton: {fileID: 496530478}
   QManager: {fileID: 0}
   elaborateFeedback: {fileID: 0}
   scoreText: {fileID: 0}

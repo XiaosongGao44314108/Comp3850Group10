@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     private bool[] levelsLockstates;
 
+    public CSVWriter CSVWriter;
+
     private static GameManager instance;
 
     public static GameManager Instance
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         }
 
         CallUnlockNextLevel(idx);
+        CSVWriter.WriteCSV();
     }
 
 

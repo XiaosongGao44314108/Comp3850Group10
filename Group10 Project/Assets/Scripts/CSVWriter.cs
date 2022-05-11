@@ -38,7 +38,7 @@ public class CSVWriter : MonoBehaviour
         if(myPlayerList.players.Length > 0)
         {
             TextWriter tw = new StreamWriter(filename, false);
-            tw.WriteLine("ID", "Progress");
+            tw.WriteLine("ID, Progress");
             tw.Close();
 
             tw = new StreamWriter(filename, true);

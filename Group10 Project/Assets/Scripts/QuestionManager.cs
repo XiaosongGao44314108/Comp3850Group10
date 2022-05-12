@@ -24,10 +24,12 @@ public class QuestionManager : MonoBehaviour
     public class Question
 	{
         public string question;
+        public bool numericQuestion;
         public string ans0;
         public string ans1;
         public string ans2;
         public string ans3;
+        public int numericAnswer;
         public int correctIdx;
         public int timeLimit;
         public int points;
@@ -89,7 +91,7 @@ public class QuestionManager : MonoBehaviour
         
     }
 
-	public void SetQuestionText(int retry)
+	public bool SetQuestionText(int retry)
 	{        
         UIManager.SetSpeaker(0);//set avatar to the professor
         questionList = questionPool.questionPool[currentQuestionIdx];
@@ -101,11 +103,15 @@ public class QuestionManager : MonoBehaviour
         }else{
             questionTextBox.SetText(question.question);
         }
-        ans0TextBox.SetText(question.ans0);
-        ans1TextBox.SetText(question.ans1);
-        ans2TextBox.SetText(question.ans2);
-        ans3TextBox.SetText(question.ans3);
-        
+
+		if (!question.numericQuestion)
+        {
+            ans0TextBox.SetText(question.ans0);
+            ans1TextBox.SetText(question.ans1);
+            ans2TextBox.SetText(question.ans2);
+            ans3TextBox.SetText(question.ans3);
+        }
+        return question.numericQuestion;
     }
 
     public void AnswerQuestion(int answerIdx)
@@ -134,7 +140,37 @@ public class QuestionManager : MonoBehaviour
         
         UIManager.CallContinue(answer, score);
     }
-    
+
+    public void AnswerNumericQuestion(int numAnswer)
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[randomQuestion];
+        score = 0;
+        print("ans:" + question.numericAnswer + "   given ans: " + numAnswer);
+        if (question.numericAnswer == numAnswer)
+        {
+            score = (int)baseScoreIncrement;
+            if (question.hasTimer)
+            {
+                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
+            }
+            answer = true;
+            if (currentQuestionIdx == questionPool.questionPool.Length - 1)
+            {
+                UIManager.UpdateScore(score);
+                //UIManager.BackToMain();
+            }
+            UIManager.SetFeedbacking(true);
+            //NextQuestion();
+        }
+        else
+        {
+            answer = false;
+        }
+
+        UIManager.CallContinue(answer, score);
+    }
+
 
     public void NextQuestion()
 	{

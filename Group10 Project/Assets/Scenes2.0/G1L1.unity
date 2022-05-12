@@ -1015,6 +1015,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1238304070}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: NumericAnswerPanel
+      value: 
+      objectReference: {fileID: 8015223100529769783}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: acceptReviewButton
       value: 
       objectReference: {fileID: 1371310805}
@@ -1026,6 +1030,10 @@ PrefabInstance:
       propertyPath: finishReviewButton
       value: 
       objectReference: {fileID: 951109632}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: numericAnswerField
+      value: 
+      objectReference: {fileID: 8015223100529769782}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: refuseReviewButton
       value: 
@@ -1156,6 +1164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 289434169994987573, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 186150122}
     - target: {fileID: 3155140667599900768, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1834,3 +1846,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+--- !u!114 &8015223100529769782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5326523178996149132, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+  m_PrefabInstance: {fileID: 8015223100529769781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8015223100529769783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7170784353983970275, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+  m_PrefabInstance: {fileID: 8015223100529769781}
+  m_PrefabAsset: {fileID: 0}

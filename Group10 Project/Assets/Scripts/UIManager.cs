@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject GoalPanel;
     public GameObject LevelPanel;
     public GameObject AnswerPanel;
+    public GameObject NumericAnswerPanel;
     public GameObject DialoguePanel;
     public GameObject ReviewOrNotPanel;
     public GameObject ReviewPanel;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI Lvl3HighscoreText;
     public TextMeshProUGUI GoalLvlText;
     public GameObject timerGO;
+    public TMP_InputField numericAnswerField;
 
     private string DialogueText;
     private string QuestionText;
@@ -119,6 +121,10 @@ public class UIManager : MonoBehaviour
         if (AnswerPanel != null)
         {
             AnswerPanel.gameObject.SetActive(false);
+        }
+        if (NumericAnswerPanel != null)
+        {
+            NumericAnswerPanel.gameObject.SetActive(false);
         }
         if (DialoguePanel != null)
         {
@@ -321,6 +327,7 @@ public class UIManager : MonoBehaviour
     {
         DialoguePanel.SetActive(true);
         AnswerPanel.SetActive(false);
+        NumericAnswerPanel.SetActive(false);
         currentScore += score;
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         feedbacking = true;
@@ -364,6 +371,13 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void SubmitNumericAnswer()
+    {
+        answering = false;
+        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));
+        timer.EndTimer();
+    }
+
     public void ReviewOrNot()
     {
         feedbacking = true;
@@ -380,6 +394,7 @@ public class UIManager : MonoBehaviour
         //Active Review Panel
         //Clear contents in dialogue box
         AnswerPanel.gameObject.SetActive(false);
+        NumericAnswerPanel.gameObject.SetActive(false);
         CorrectReviewPanel.gameObject.SetActive(false);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
         ReviewOrNotPanel.gameObject.SetActive(false);
@@ -398,8 +413,10 @@ public class UIManager : MonoBehaviour
         ReviewOrNotPanel.gameObject.SetActive(false);
         //setup question
         DialoguePanel.SetActive(true);
-        AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(retry);
+        if (QManager.SetQuestionText(retry))
+            NumericAnswerPanel.SetActive(true);
+        else
+            AnswerPanel.SetActive(true);
         TimerStart();
         //GetFeedback();
     }
@@ -441,8 +458,11 @@ public class UIManager : MonoBehaviour
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        AnswerPanel.SetActive(true);
-        QManager.SetQuestionText(retry);
+        if(QManager.SetQuestionText(retry))
+            NumericAnswerPanel.SetActive(true);
+        else
+            AnswerPanel.SetActive(true);
+
         if (!answering)
         {
             TimerStart();

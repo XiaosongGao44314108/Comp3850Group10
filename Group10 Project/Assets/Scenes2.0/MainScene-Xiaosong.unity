@@ -4531,6 +4531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2116465747}
   - component: {fileID: 2116465746}
+  - component: {fileID: 2116465748}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4550,6 +4551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2baa2a82e4b19e4b9fd49f9720a9c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CSVWriter: {fileID: 2116465748}
 --- !u!4 &2116465747
 Transform:
   m_ObjectHideFlags: 0
@@ -4565,6 +4567,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116465748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116465745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4428b554c354345982f5ac27c3f1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPlayerList:
+    players:
+    - id: 356
+      progress: 3
+    - id: 245
+      progress: 6
 --- !u!1 &2131368964
 GameObject:
   m_ObjectHideFlags: 0

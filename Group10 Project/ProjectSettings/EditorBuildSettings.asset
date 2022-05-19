@@ -11,28 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes2.0/G1L1.unity
     guid: f58160f9cfb0c05479731c12ea541e2b
-  - enabled: 1
-    path: Assets/Scenes2.0/G1L2.unity
-    guid: b2daa7fbe3005fc47935ff1bf0ba8c62
-  - enabled: 1
-    path: Assets/Scenes2.0/G1L3.unity
-    guid: 49f1b2198d64d8a498c3b7ca09a49ba0
-  - enabled: 1
-    path: Assets/Scenes2.0/G2L1.unity
-    guid: c955f17aefa8c2f40b317d8efba11b86
-  - enabled: 1
-    path: Assets/Scenes2.0/G2L2.unity
-    guid: ee11e9e5e354ed5499219563af94ccca
-  - enabled: 1
-    path: Assets/Scenes2.0/G2L3.unity
-    guid: cb446d3380a83b241b0d32d5b7ca8a8d
-  - enabled: 1
-    path: Assets/Scenes2.0/G3L1.unity
-    guid: 6e34863d7af83734cbd5c6af4dad7936
-  - enabled: 1
-    path: Assets/Scenes2.0/G3L2.unity
-    guid: 64195d8ad4ce28b44838757c22a7ca9d
-  - enabled: 1
-    path: Assets/Scenes2.0/G3L3.unity
-    guid: 8c5d960c90833f641a94b2380e91b49c
   m_configObjects: {}

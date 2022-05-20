@@ -1214,6 +1214,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7449360409509562949, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 186150122}
+    - target: {fileID: 7449360409509562949, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SubmitNumericAnswer
+      objectReference: {fileID: 0}
     - target: {fileID: 7981974008099677886, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_fontSize
       value: 24

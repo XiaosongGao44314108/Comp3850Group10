@@ -459,9 +459,9 @@ public class UIManager : MonoBehaviour
         currentScore += score;
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + currentScore;
         feedbacking = true;
-        Debug.Log(retry);
         if (answer && retry == 0)
         {
+            
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }

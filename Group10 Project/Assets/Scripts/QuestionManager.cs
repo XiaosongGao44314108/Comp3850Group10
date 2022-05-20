@@ -75,7 +75,6 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        Debug.Log(currentDialogueIdx);
         if(currentQuestionIdx == questionPool.questionPool.Length){
             UIManager.BackToMain();
         }else{

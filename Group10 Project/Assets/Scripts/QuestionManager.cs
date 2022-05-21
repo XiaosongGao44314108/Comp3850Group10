@@ -75,10 +75,10 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        if(currentQuestionIdx == questionPool.questionPool.Length){
+        if(currentQuestionIdx >= questionPool.questionPool.Length){
             UIManager.BackToMain();
         }else{
-            if(currentDialogueIdx == dialogue.Length){
+            if(currentDialogueIdx >= dialogue.Length){
                 UIManager.Continue();
             }else{
                 questionTextBox.SetText(dialogue[currentDialogueIdx].speech);

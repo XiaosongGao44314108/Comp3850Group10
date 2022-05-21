@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        GManager = (GameManager)FindObjectOfType(typeof(GameManager));
+        GManager = GameManager.Instance;
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
@@ -636,11 +636,11 @@ public class UIManager : MonoBehaviour
     }
     public void ContinueAfterFeedback()
     {
-        QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
         retry = 0;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        CallNextQuestion();
         GetFeedback();
     }
 

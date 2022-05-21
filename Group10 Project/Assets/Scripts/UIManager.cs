@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     public GameObject GoalPanel;
     public GameObject LevelPanel;
     public GameObject AnswerPanel;
+    public GameObject FourChoicesPanel;
+    public GameObject ThreeChoicesPanel;
+    public GameObject TwoChoicesPanel;
+
     public GameObject NumericAnswerPanel;
     public GameObject DialoguePanel;
     public GameObject ReviewOrNotPanel;
@@ -135,6 +139,18 @@ public class UIManager : MonoBehaviour
         if (AnswerPanel != null)
         {
             AnswerPanel.gameObject.SetActive(false);
+        }
+        if (FourChoicesPanel != null)
+        {
+            FourChoicesPanel.gameObject.SetActive(false);
+        }
+        if (ThreeChoicesPanel != null)
+        {
+            ThreeChoicesPanel.gameObject.SetActive(false);
+        }
+        if (TwoChoicesPanel != null)
+        {
+            TwoChoicesPanel.gameObject.SetActive(false);
         }
         if (NumericAnswerPanel != null)
         {
@@ -461,7 +477,7 @@ public class UIManager : MonoBehaviour
         feedbacking = true;
         if (answer && retry == 0)
         {
-            
+
             ReviewQuestion();
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
         }
@@ -570,7 +586,10 @@ public class UIManager : MonoBehaviour
         if (QManager.SetQuestionText(retry))
             NumericAnswerPanel.SetActive(true);
         else
+        {
             AnswerPanel.SetActive(true);
+            SetAnswerPanels();
+        }
         TimerStart();
         //GetFeedback();
     }
@@ -612,15 +631,40 @@ public class UIManager : MonoBehaviour
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        if(QManager.SetQuestionText(retry))
+        if (QManager.SetQuestionText(retry))
             NumericAnswerPanel.SetActive(true);
         else
+        {
             AnswerPanel.SetActive(true);
-
+            SetAnswerPanels();
+        }
         if (!answering)
         {
             TimerStart();
             answering = true;
+        }
+    }
+
+    public void SetAnswerPanels()
+    {
+        int numOfChoice = QManager.NumberOfAnswers();
+        if (numOfChoice == 4)//if number of Choices is 4
+        {
+            FourChoicesPanel.SetActive(true);
+            ThreeChoicesPanel.SetActive(false);
+            TwoChoicesPanel.SetActive(false);
+        }
+        else if (numOfChoice == 3)
+        {
+            FourChoicesPanel.SetActive(false);
+            ThreeChoicesPanel.SetActive(true);
+            TwoChoicesPanel.SetActive(false);
+        }
+        else
+        {
+            FourChoicesPanel.SetActive(false);
+            ThreeChoicesPanel.SetActive(false);
+            TwoChoicesPanel.SetActive(true);
         }
     }
 

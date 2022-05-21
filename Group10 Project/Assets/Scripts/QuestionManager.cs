@@ -7,10 +7,22 @@ public class QuestionManager : MonoBehaviour
 {
     public TextAsset jsonFile;
     public TextMeshProUGUI questionTextBox;
-    public TextMeshProUGUI ans0TextBox;
-    public TextMeshProUGUI ans1TextBox;
-    public TextMeshProUGUI ans2TextBox;
-    public TextMeshProUGUI ans3TextBox;
+    public TextMeshProUGUI fourAns0TextBox;
+    public TextMeshProUGUI fourAns1TextBox;
+    public TextMeshProUGUI fourAns2TextBox;
+    public TextMeshProUGUI fourAns3TextBox;
+
+    public TextMeshProUGUI threeAns0TextBox;
+    public TextMeshProUGUI threeAns1TextBox;
+    public TextMeshProUGUI threeAns2TextBox;
+
+    public TextMeshProUGUI twoAns0TextBox;
+    public TextMeshProUGUI twoAns1TextBox;
+
+    // public TextMeshProUGUI ans0TextBox;
+    // public TextMeshProUGUI ans1TextBox;
+    // public TextMeshProUGUI ans2TextBox;
+    // public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
     public float baseScoreIncrement;
@@ -115,11 +127,6 @@ public class QuestionManager : MonoBehaviour
 
         if (!question.numericQuestion)
         {
-            ans0TextBox.SetText(question.ans0);
-            ans1TextBox.SetText(question.ans1);
-            ans2TextBox.SetText(question.ans2);
-            ans3TextBox.SetText(question.ans3);
-
             //get the number of answers the current multi-question has:
             int numberOfAnswers = 4;
             if (question.ans0 == "")
@@ -139,6 +146,24 @@ public class QuestionManager : MonoBehaviour
                 numberOfAnswers--;
             }
             currentNumberOfAnswers = numberOfAnswers;
+            if (currentNumberOfAnswers == 4)
+            {
+                fourAns0TextBox.SetText(question.ans0);
+                fourAns1TextBox.SetText(question.ans1);
+                fourAns2TextBox.SetText(question.ans2);
+                fourAns3TextBox.SetText(question.ans3);
+            }
+            else if (currentNumberOfAnswers == 3)
+            {
+                threeAns0TextBox.SetText(question.ans0);
+                threeAns1TextBox.SetText(question.ans1);
+                threeAns2TextBox.SetText(question.ans2);
+            }
+            else //it will not support multi-question with 2, 3 or 4 answers
+            {
+                twoAns0TextBox.SetText(question.ans0);
+                twoAns1TextBox.SetText(question.ans1);
+            }
         }
         return question.numericQuestion;
     }

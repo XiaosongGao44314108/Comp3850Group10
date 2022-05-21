@@ -159,7 +159,7 @@ public class QuestionManager : MonoBehaviour
                 threeAns1TextBox.SetText(question.ans1);
                 threeAns2TextBox.SetText(question.ans2);
             }
-            else //it will not support multi-question with 2, 3 or 4 answers
+            else //it will only support multi-question with 2, 3 or 4 answers
             {
                 twoAns0TextBox.SetText(question.ans0);
                 twoAns1TextBox.SetText(question.ans1);

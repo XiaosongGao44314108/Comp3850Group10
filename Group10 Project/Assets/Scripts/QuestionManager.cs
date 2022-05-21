@@ -19,10 +19,11 @@ public class QuestionManager : MonoBehaviour
     private bool answer;
     private int randomQuestion;
     private int score;
+    private int currentNumberOfAnswers;//number of answers a question has
 
     [System.Serializable]
     public class Question
-	{
+    {
         public string question;
         public bool numericQuestion;
         public string ans0;
@@ -40,17 +41,17 @@ public class QuestionManager : MonoBehaviour
 
     [System.Serializable]
     public class Dialogue
-	{
+    {
         public int speaker;
         public string speech;
     }
 
     [System.Serializable]
     public class QuestionList
-	{
+    {
         public Dialogue[] dialogue;
         public Question[] questions;
-	}
+    }
 
     [System.Serializable]
     public class QuestionPool
@@ -75,40 +76,69 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        if(currentQuestionIdx == questionPool.questionPool.Length){
+        if (currentQuestionIdx == questionPool.questionPool.Length)
+        {
             UIManager.BackToMain();
-        }else{
-            if(currentDialogueIdx == dialogue.Length){
+        }
+        else
+        {
+            if (currentDialogueIdx == dialogue.Length)
+            {
                 UIManager.Continue();
-            }else{
+            }
+            else
+            {
                 questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
                 UIManager.SetSpeaker(dialogue[currentDialogueIdx].speaker);
                 NextDialogue();
             }
         }
-        
-        
+
+
     }
 
-	public bool SetQuestionText(int retry)
-	{        
+    public bool SetQuestionText(int retry)
+    {
         UIManager.SetSpeaker(0);//set avatar to the professor
         questionList = questionPool.questionPool[currentQuestionIdx];
         dialogue = questionList.dialogue;
-        randomQuestion = (int)Random.Range(0,questionList.questions.Length-1);
+        randomQuestion = (int)Random.Range(0, questionList.questions.Length - 1);
         question = questionList.questions[randomQuestion];
-        if(retry > 0){
-            questionTextBox.SetText(question.question+" Hint:"+question.hint);
-        }else{
+        if (retry > 0)
+        {
+            questionTextBox.SetText(question.question + " Hint:" + question.hint);
+        }
+        else
+        {
             questionTextBox.SetText(question.question);
         }
 
-		if (!question.numericQuestion)
+        if (!question.numericQuestion)
         {
             ans0TextBox.SetText(question.ans0);
             ans1TextBox.SetText(question.ans1);
             ans2TextBox.SetText(question.ans2);
             ans3TextBox.SetText(question.ans3);
+
+            //get the number of answers the current multi-question has:
+            int numberOfAnswers = 4;
+            if (question.ans0 == "")
+            {
+                numberOfAnswers--;
+            }
+            if (question.ans1 == "")
+            {
+                numberOfAnswers--;
+            }
+            if (question.ans2 == "")
+            {
+                numberOfAnswers--;
+            }
+            if (question.ans3 == "")
+            {
+                numberOfAnswers--;
+            }
+            currentNumberOfAnswers = numberOfAnswers;
         }
         return question.numericQuestion;
     }
@@ -121,22 +151,24 @@ public class QuestionManager : MonoBehaviour
         if (question.correctIdx == answerIdx)
         {
             score = (int)baseScoreIncrement;
-            if(question.hasTimer)
+            if (question.hasTimer)
             {
-                score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
+                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
             }
             answer = true;
-            if(currentQuestionIdx == questionPool.questionPool.Length-1)
+            if (currentQuestionIdx == questionPool.questionPool.Length - 1)
             {
-            UIManager.UpdateScore(score);
-            //UIManager.BackToMain();
+                UIManager.UpdateScore(score);
+                //UIManager.BackToMain();
             }
             UIManager.SetFeedbacking(true);
             //NextQuestion();
-        }else{
+        }
+        else
+        {
             answer = false;
-        }        
-        
+        }
+
         UIManager.CallContinue(answer, score);
     }
 
@@ -170,17 +202,22 @@ public class QuestionManager : MonoBehaviour
         UIManager.CallContinue(answer, score);
     }
 
+    public int NumberOfAnswers()//How many answers a question has
+    {
+        return currentNumberOfAnswers;
+    }
+
 
     public void NextQuestion()
-	{
+    {
         currentQuestionIdx++;
         currentDialogueIdx = 0;
-        if(currentQuestionIdx<questionPool.questionPool.Length)
+        if (currentQuestionIdx < questionPool.questionPool.Length)
         {
             questionList = questionPool.questionPool[currentQuestionIdx];
-            dialogue = questionList.dialogue;  
+            dialogue = questionList.dialogue;
         }
-        
+
     }
 
     public void NextDialogue()

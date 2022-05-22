@@ -71,10 +71,6 @@ public class UIManager : MonoBehaviour
     private int currentScore;
 
 
-
-
-
-
     void Start()
     {
         GManager = GameManager.Instance;
@@ -703,6 +699,7 @@ public class UIManager : MonoBehaviour
     {
 
     }
+    
     public void TimerStart()
     {
         Debug.Log("timer has started");

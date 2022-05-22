@@ -101,8 +101,6 @@ public class QuestionManager : MonoBehaviour
                 NextDialogue();
             }
         }
-
-
     }
 
     public bool SetQuestionText(int retry)
@@ -142,6 +140,7 @@ public class QuestionManager : MonoBehaviour
                 numberOfAnswers--;
             }
             currentNumberOfAnswers = numberOfAnswers;
+            UIManager.SetAnswerPanels();
             if (currentNumberOfAnswers == 4)
             {
                 fourAns0TextBox.SetText(question.ans0);

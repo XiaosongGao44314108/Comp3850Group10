@@ -495,17 +495,14 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
-        answering = false;
-        QManager.AnswerQuestion(idx);
-        timer.EndTimer();
-
+        answering = false;        
+        QManager.AnswerQuestion(idx);       
     }
 
     public void SubmitNumericAnswer()
     {
-        answering = false;
-        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));
-        timer.EndTimer();
+        answering = false;       
+        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));        
     }
 
     public void ReviewOrNot()
@@ -674,9 +671,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateScore(int score)
+    public void UpdateScore()
     {
-        GameManager.Instance.UpdateScore(currentScore + score);
+        GameManager.Instance.UpdateScore(currentScore);
     }
 
     public void SetFeedbacking(bool x)

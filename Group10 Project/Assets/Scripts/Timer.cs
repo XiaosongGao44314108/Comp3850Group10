@@ -14,15 +14,17 @@ public class Timer : MonoBehaviour
     private bool isActive;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         timeLeft = timeLimit;
         isActive = false;
+        Debug.Log(timeLeft);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(timeLeft);
         if(isActive){
         timeLeft -= Time.deltaTime;
         }

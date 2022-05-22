@@ -75,7 +75,7 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        if(currentQuestionIdx >= questionPool.questionPool.Length){
+        if(currentQuestionIdx > questionPool.questionPool.Length-1){
             UIManager.BackToMain();
         }else{
             if(currentDialogueIdx >= dialogue.Length){
@@ -126,12 +126,13 @@ public class QuestionManager : MonoBehaviour
                 score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
             }
             answer = true;
+            UIManager.SetFeedbacking(true);
             if(currentQuestionIdx == questionPool.questionPool.Length-1)
             {
             UIManager.UpdateScore(score);
             //UIManager.BackToMain();
             }
-            UIManager.SetFeedbacking(true);
+           
             //NextQuestion();
         }else{
             answer = false;

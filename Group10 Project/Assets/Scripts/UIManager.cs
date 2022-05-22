@@ -613,15 +613,22 @@ public class UIManager : MonoBehaviour
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         if(QManager.SetQuestionText(retry))
-            NumericAnswerPanel.SetActive(true);
-        else
-            AnswerPanel.SetActive(true);
-
-        if (!answering)
         {
-            TimerStart();
-            answering = true;
-        }
+            NumericAnswerPanel.SetActive(true);
+            if (!answering)
+            {
+                TimerStart();
+                answering = true;
+            } 
+        }else 
+        {
+            AnswerPanel.SetActive(true);
+            if (!answering)
+            {
+                TimerStart();
+                answering = true;
+            }
+        }    
     }
 
     public void DialogueContinue()
@@ -658,6 +665,7 @@ public class UIManager : MonoBehaviour
     }
     public void TimerStart()
     {
+        Debug.Log("timer has started");
         if (QManager.HasTimer())
         {
             timerGO.SetActive(true);

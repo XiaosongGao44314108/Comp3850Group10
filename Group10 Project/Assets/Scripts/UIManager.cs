@@ -468,7 +468,9 @@ public class UIManager : MonoBehaviour
         else if (answer && retry < 3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+            CallNextQuestion();
             GetFeedback();
+            
         }
         else if (!answer && retry == 2)
         {
@@ -572,7 +574,6 @@ public class UIManager : MonoBehaviour
         else
             AnswerPanel.SetActive(true);
         TimerStart();
-        //GetFeedback();
     }
 
     public void GetFeedback()
@@ -675,7 +676,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        GManager.UpdateScore(currentScore + score);
+        GameManager.Instance.UpdateScore(currentScore + score);
     }
 
     public void SetFeedbacking(bool x)

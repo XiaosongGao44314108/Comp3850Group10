@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 Debug.Log("There's no game manager");
+                //instance = this;
             }
             return instance;
         }

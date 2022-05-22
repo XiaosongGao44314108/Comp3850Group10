@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 Debug.Log("There's no game manager");
+                //instance = this;
             }
             return instance;
         }
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
     }
     // Start is called before the first frame update

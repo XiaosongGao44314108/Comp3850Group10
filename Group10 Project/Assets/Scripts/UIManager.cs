@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        GManager = (GameManager)FindObjectOfType(typeof(GameManager));
+        GManager = GameManager.Instance;
         IsDiaActive = false; //dialog is not activated at the beginning
         IsMainActive = false;
         SelectedGoalOne = false;
@@ -484,7 +484,9 @@ public class UIManager : MonoBehaviour
         else if (answer && retry < 3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
+            CallNextQuestion();
             GetFeedback();
+            
         }
         else if (!answer && retry == 2)
         {
@@ -509,17 +511,14 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
-        answering = false;
-        QManager.AnswerQuestion(idx);
-        timer.EndTimer();
-
+        answering = false;        
+        QManager.AnswerQuestion(idx);       
     }
 
     public void SubmitNumericAnswer()
     {
-        answering = false;
-        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));
-        timer.EndTimer();
+        answering = false;       
+        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));        
     }
 
     public void ReviewOrNot()
@@ -591,7 +590,6 @@ public class UIManager : MonoBehaviour
             SetAnswerPanels();
         }
         TimerStart();
-        //GetFeedback();
     }
 
     public void GetFeedback()
@@ -631,18 +629,23 @@ public class UIManager : MonoBehaviour
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        if (QManager.SetQuestionText(retry))
+        if(QManager.SetQuestionText(retry))
+        {
             NumericAnswerPanel.SetActive(true);
-        else
+            if (!answering)
+            {
+                TimerStart();
+                answering = true;
+            } 
+        }else 
         {
             AnswerPanel.SetActive(true);
-            SetAnswerPanels();
-        }
-        if (!answering)
-        {
-            TimerStart();
-            answering = true;
-        }
+            if (!answering)
+            {
+                TimerStart();
+                answering = true;
+            }
+        }    
     }
 
     public void SetAnswerPanels()
@@ -680,11 +683,11 @@ public class UIManager : MonoBehaviour
     }
     public void ContinueAfterFeedback()
     {
-        QManager.NextQuestion();
         ElaborateFeedbackPanel.SetActive(false);
         retry = 0;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
+        CallNextQuestion();
         GetFeedback();
     }
 
@@ -702,6 +705,7 @@ public class UIManager : MonoBehaviour
     }
     public void TimerStart()
     {
+        Debug.Log("timer has started");
         if (QManager.HasTimer())
         {
             timerGO.SetActive(true);
@@ -709,9 +713,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateScore(int score)
+    public void UpdateScore()
     {
-        GManager.UpdateScore(currentScore + score);
+        GameManager.Instance.UpdateScore(currentScore);
     }
 
     public void SetFeedbacking(bool x)

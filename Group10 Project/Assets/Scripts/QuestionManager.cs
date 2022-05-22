@@ -88,14 +88,10 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        if (currentQuestionIdx == questionPool.questionPool.Length)
-        {
+        if(currentQuestionIdx > questionPool.questionPool.Length-1){
             UIManager.BackToMain();
-        }
-        else
-        {
-            if (currentDialogueIdx == dialogue.Length)
-            {
+        }else{
+            if(currentDialogueIdx >= dialogue.Length){
                 UIManager.Continue();
             }
             else
@@ -178,15 +174,12 @@ public class QuestionManager : MonoBehaviour
             score = (int)baseScoreIncrement;
             if (question.hasTimer)
             {
-                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
+                score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
+                UIManager.Timer.EndTimer();
             }
             answer = true;
-            if (currentQuestionIdx == questionPool.questionPool.Length - 1)
-            {
-                UIManager.UpdateScore(score);
-                //UIManager.BackToMain();
-            }
             UIManager.SetFeedbacking(true);
+           
             //NextQuestion();
         }
         else
@@ -195,6 +188,11 @@ public class QuestionManager : MonoBehaviour
         }
 
         UIManager.CallContinue(answer, score);
+        if(currentQuestionIdx == questionPool.questionPool.Length-1)
+            {
+            UIManager.UpdateScore();
+            //UIManager.BackToMain();
+            }
     }
 
     public void AnswerNumericQuestion(int numAnswer)
@@ -209,13 +207,9 @@ public class QuestionManager : MonoBehaviour
             if (question.hasTimer)
             {
                 score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
+                UIManager.Timer.EndTimer();
             }
             answer = true;
-            if (currentQuestionIdx == questionPool.questionPool.Length - 1)
-            {
-                UIManager.UpdateScore(score);
-                //UIManager.BackToMain();
-            }
             UIManager.SetFeedbacking(true);
             //NextQuestion();
         }
@@ -225,6 +219,11 @@ public class QuestionManager : MonoBehaviour
         }
 
         UIManager.CallContinue(answer, score);
+        if (currentQuestionIdx == questionPool.questionPool.Length - 1)
+            {
+                UIManager.UpdateScore();
+                //UIManager.BackToMain();
+            }
     }
 
     public int NumberOfAnswers()//How many answers a question has

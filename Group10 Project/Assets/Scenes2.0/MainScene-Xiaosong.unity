@@ -2158,6 +2158,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119778601}
   m_CullTransparentMesh: 1
+--- !u!1 &1298480224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1298480226}
+  - component: {fileID: 1298480225}
+  m_Layer: 0
+  m_Name: ServerTalker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1298480225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298480224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea808c88b2289947b88eca2fa7390c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1298480226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298480224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 935.3612, y: 875.1471, z: -12.200932}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305497132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3846,6 +3890,9 @@ MonoBehaviour:
   GoalPanel: {fileID: 1923131668}
   LevelPanel: {fileID: 159333928}
   AnswerPanel: {fileID: 0}
+  FourChoicesPanel: {fileID: 0}
+  ThreeChoicesPanel: {fileID: 0}
+  TwoChoicesPanel: {fileID: 0}
   NumericAnswerPanel: {fileID: 0}
   DialoguePanel: {fileID: 0}
   ReviewOrNotPanel: {fileID: 0}

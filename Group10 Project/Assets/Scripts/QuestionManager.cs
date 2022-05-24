@@ -88,10 +88,14 @@ public class QuestionManager : MonoBehaviour
 
     public void SetDialogueText()
     {
-        if(currentQuestionIdx > questionPool.questionPool.Length-1){
+        if (currentQuestionIdx > questionPool.questionPool.Length - 1)
+        {
             UIManager.BackToMain();
-        }else{
-            if(currentDialogueIdx >= dialogue.Length){
+        }
+        else
+        {
+            if (currentDialogueIdx >= dialogue.Length)
+            {
                 UIManager.Continue();
             }
             else
@@ -173,12 +177,12 @@ public class QuestionManager : MonoBehaviour
             score = (int)baseScoreIncrement;
             if (question.hasTimer)
             {
-                score += (int)(baseScoreIncrement*UIManager.Timer.timeRatio());
+                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
                 UIManager.Timer.EndTimer();
             }
             answer = true;
             UIManager.SetFeedbacking(true);
-           
+
             //NextQuestion();
         }
         else
@@ -187,11 +191,11 @@ public class QuestionManager : MonoBehaviour
         }
 
         UIManager.CallContinue(answer, score);
-        if(currentQuestionIdx == questionPool.questionPool.Length-1)
-            {
+        if (currentQuestionIdx == questionPool.questionPool.Length - 1)
+        {
             UIManager.UpdateScore();
             //UIManager.BackToMain();
-            }
+        }
     }
 
     public void AnswerNumericQuestion(int numAnswer)
@@ -219,15 +223,25 @@ public class QuestionManager : MonoBehaviour
 
         UIManager.CallContinue(answer, score);
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
-            {
-                UIManager.UpdateScore();
-                //UIManager.BackToMain();
-            }
+        {
+            UIManager.UpdateScore();
+            //UIManager.BackToMain();
+        }
     }
 
     public int NumberOfAnswers()//How many answers a question has
     {
         return currentNumberOfAnswers;
+    }
+
+    public bool ContainImage()//the method returns if a question contains an image
+    {
+        return true;//needs to be upadted 
+    }
+
+    public Texture ImageInQuestion()//return the texture of image in the question
+    {
+        return null;//needs to be updated
     }
 
 

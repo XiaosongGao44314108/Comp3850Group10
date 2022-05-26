@@ -13,11 +13,14 @@ public class UIManager : MonoBehaviour
     public GameObject LevelPanel;
     public GameObject AnswerPanel;
     public GameObject FourChoicesPanel;
+    public GameObject ImaFourChoicesPanel;
     public GameObject ThreeChoicesPanel;
+    public GameObject ImaThreeChoicesPanel;
     public GameObject TwoChoicesPanel;
-    private Vector3 ImaFourChoicesPos; //if question contains an image, the "child objects" of answer panel will move to these positions
-    private Vector3 ImaThreeChoicesPos;
-    private Vector3 ImaTwoChoicesPos;
+    public GameObject ImaTwoChoicesPanel;
+    // private Vector3 ImaFourChoicesPos; //if question contains an image, the "child objects" of answer panel will move to these positions
+    // private Vector3 ImaThreeChoicesPos;
+    // private Vector3 ImaTwoChoicesPos;
     public RawImage ChoicesIma;//image in multi-choices question
     private Vector3 ChoicesImaPos;
 
@@ -86,9 +89,9 @@ public class UIManager : MonoBehaviour
         SelectedGoalThree = false;
         feedbacking = false;
 
-        ImaFourChoicesPos = new Vector3(250, 0, 0);
-        ImaThreeChoicesPos = new Vector3(0, -80, 0);
-        ImaTwoChoicesPos = new Vector3(250, 0, 0);
+        // ImaFourChoicesPos = new Vector3(0, -220, 0);
+        // ImaThreeChoicesPos = new Vector3(0, -80, 0);
+        // ImaTwoChoicesPos = new Vector3(0, -220, 0);
 
         currentScore = 0;
         //Just for this version:
@@ -149,13 +152,25 @@ public class UIManager : MonoBehaviour
         {
             FourChoicesPanel.gameObject.SetActive(false);
         }
+        if (ImaFourChoicesPanel != null)
+        {
+            ImaFourChoicesPanel.gameObject.SetActive(false);
+        }
         if (ThreeChoicesPanel != null)
         {
             ThreeChoicesPanel.gameObject.SetActive(false);
         }
+        if (ImaThreeChoicesPanel != null)
+        {
+            ImaThreeChoicesPanel.gameObject.SetActive(false);
+        }
         if (TwoChoicesPanel != null)
         {
             TwoChoicesPanel.gameObject.SetActive(false);
+        }
+        if (ImaTwoChoicesPanel != null)
+        {
+            ImaTwoChoicesPanel.gameObject.SetActive(false);
         }
         if (ChoicesIma != null)
         {
@@ -665,68 +680,76 @@ public class UIManager : MonoBehaviour
 
         if (numOfChoice == 4)//if number of Choices is 4
         {
-            FourChoicesPanel.SetActive(true);
+            ImaThreeChoicesPanel.SetActive(false);
             ThreeChoicesPanel.SetActive(false);
+            ImaTwoChoicesPanel.SetActive(false);
             TwoChoicesPanel.SetActive(false);
+
             if (hasAnimage)
             {
-                FourChoicesPanel.transform.localPosition = ImaFourChoicesPos;
+                FourChoicesPanel.SetActive(false);
+                ImaFourChoicesPanel.SetActive(true);
+                // FourChoicesPanel.transform.localPosition = ImaFourChoicesPos;
                 ChoicesIma.gameObject.SetActive(true);
-                ChoicesImaPos = new Vector3(-350, 0, 0);
-                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                // ChoicesImaPos = new Vector3(-350, 0, 0);
+                // ChoicesIma.transform.localPosition = ChoicesImaPos;
                 ChoicesIma.texture = QManager.ImageInQuestion();
             }
             else
             {
-                FourChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                FourChoicesPanel.SetActive(true);
+                ImaFourChoicesPanel.SetActive(false);
+                // FourChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
         }
         else if (numOfChoice == 3)
         {
+            ImaFourChoicesPanel.SetActive(false);
             FourChoicesPanel.SetActive(false);
-            ThreeChoicesPanel.SetActive(true);
+            ImaTwoChoicesPanel.SetActive(false);
             TwoChoicesPanel.SetActive(false);
             if (hasAnimage)
             {
-                ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
+                ThreeChoicesPanel.SetActive(false);
+                ImaThreeChoicesPanel.SetActive(true);
+                // ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
                 ChoicesIma.gameObject.SetActive(true);
-                ChoicesImaPos = new Vector3(-515, 0, 0);
-                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                // ChoicesImaPos = new Vector3(-515, 0, 0);
+                // ChoicesIma.transform.localPosition = ChoicesImaPos;
                 ChoicesIma.texture = QManager.ImageInQuestion();
             }
             else
             {
-                ThreeChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                ThreeChoicesPanel.SetActive(true);
+                ImaThreeChoicesPanel.SetActive(false);
+                // ThreeChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
         }
         else
         {
+            ImaFourChoicesPanel.SetActive(false);
             FourChoicesPanel.SetActive(false);
+            ImaThreeChoicesPanel.SetActive(false);
             ThreeChoicesPanel.SetActive(false);
-            TwoChoicesPanel.SetActive(true);
             if (hasAnimage)
             {
-                TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
+                TwoChoicesPanel.SetActive(false);
+                ImaTwoChoicesPanel.SetActive(true);
+                // TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
                 ChoicesIma.gameObject.SetActive(true);
-                ChoicesImaPos = new Vector3(-350, 0, 0);
-                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                // ChoicesImaPos = new Vector3(-350, 0, 0);
+                // ChoicesIma.transform.localPosition = ChoicesImaPos;
                 ChoicesIma.texture = QManager.ImageInQuestion();
             }
             else
             {
-                TwoChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                TwoChoicesPanel.SetActive(true);
+                ImaTwoChoicesPanel.SetActive(false);
+                // TwoChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
-        }
-
-
-        if (hasAnimage)
-        {
-
-            ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
-            TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
         }
     }
 

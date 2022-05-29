@@ -608,7 +608,7 @@ public class UIManager : MonoBehaviour
         //setup question
         DialoguePanel.SetActive(true);
         if (QManager.SetQuestionText(retry))
-            NumericAnswerPanel.SetActive(true);
+            SetNumericAnswerPanel();
         else
         {
             AnswerPanel.SetActive(true);
@@ -656,7 +656,7 @@ public class UIManager : MonoBehaviour
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         if (QManager.SetQuestionText(retry))
         {
-            NumericAnswerPanel.SetActive(true);
+            SetNumericAnswerPanel();
             if (!answering)
             {
                 TimerStart();
@@ -810,6 +810,21 @@ public class UIManager : MonoBehaviour
     public void SetSpeaker(int speaker)
     {
         speakerAvatar.texture = avatars[speaker];
+    }
+
+    public void SetNumericAnswerPanel()
+    {
+        NumericAnswerPanel.SetActive(true);
+        if(QManager.ContainImage())
+        {
+            ChoicesIma.gameObject.SetActive(true);
+            ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
+            NumericAnswerPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, -100, 0);
+        }
+        else
+        {
+            NumericAnswerPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        }
     }
 
     public void OpenWindow()

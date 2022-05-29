@@ -125,7 +125,6 @@ public class QuestionManager : MonoBehaviour
         questionList = questionPool.questionPool[currentQuestionIdx];
         dialogue = questionList.dialogue;
         randomQuestion = Random.Range(0, questionList.questions.Length);
-        Debug.Log(randomQuestion);
         question = questionList.questions[randomQuestion];
         if (retry > 0)
         {

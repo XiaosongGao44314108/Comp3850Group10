@@ -536,12 +536,14 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
+        ChoicesIma.gameObject.SetActive(false);
         answering = false;
         QManager.AnswerQuestion(idx);
     }
 
     public void SubmitNumericAnswer()
     {
+        ChoicesIma.gameObject.SetActive(false);
         answering = false;
         QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));
     }
@@ -656,6 +658,7 @@ public class UIManager : MonoBehaviour
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         if (QManager.SetQuestionText(retry))
         {
+            ChoicesIma.gameObject.SetActive(true);
             SetNumericAnswerPanel();
             if (!answering)
             {

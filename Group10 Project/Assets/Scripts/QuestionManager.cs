@@ -224,7 +224,6 @@ public class QuestionManager : MonoBehaviour
         questionList = questionPool.questionPool[currentQuestionIdx];
         question = questionList.questions[randomQuestion];
         score = 0;
-        print("ans:" + question.numericAnswer + "   given ans: " + numAnswer);
         if (question.numericAnswer == numAnswer)
         {
             score = (int)baseScoreIncrement;
@@ -260,7 +259,7 @@ public class QuestionManager : MonoBehaviour
         return question.hasImage;//needs to be upadted 
     }
 
-    public int ImageInQuestion()//return the texture of image in the question
+    public int ImageInQuestion()//return the index of image in the question
     {
         return question.imageIdx;//needs to be updated
     }

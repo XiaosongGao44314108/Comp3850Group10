@@ -15,6 +15,11 @@ public class UIManager : MonoBehaviour
     public GameObject FourChoicesPanel;
     public GameObject ThreeChoicesPanel;
     public GameObject TwoChoicesPanel;
+    private Vector3 ImaFourChoicesPos; //if question contains an image, the "child objects" of answer panel will move to these positions
+    private Vector3 ImaThreeChoicesPos;
+    private Vector3 ImaTwoChoicesPos;
+    public RawImage ChoicesIma;//image in multi-choices question
+    private Vector3 ChoicesImaPos;
 
     public GameObject NumericAnswerPanel;
     public GameObject DialoguePanel;
@@ -80,6 +85,10 @@ public class UIManager : MonoBehaviour
         SelectedGoalTwo = false;
         SelectedGoalThree = false;
         feedbacking = false;
+
+        ImaFourChoicesPos = new Vector3(250, 0, 0);
+        ImaThreeChoicesPos = new Vector3(0, -80, 0);
+        ImaTwoChoicesPos = new Vector3(250, 0, 0);
 
         currentScore = 0;
         //Just for this version:
@@ -147,6 +156,10 @@ public class UIManager : MonoBehaviour
         if (TwoChoicesPanel != null)
         {
             TwoChoicesPanel.gameObject.SetActive(false);
+        }
+        if (ChoicesIma != null)
+        {
+            ChoicesIma.gameObject.SetActive(false);
         }
         if (NumericAnswerPanel != null)
         {
@@ -482,7 +495,7 @@ public class UIManager : MonoBehaviour
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
             CallNextQuestion();
             GetFeedback();
-            
+
         }
         else if (!answer && retry == 2)
         {
@@ -507,14 +520,14 @@ public class UIManager : MonoBehaviour
 
     public void TaskOnClick(int idx)
     {
-        answering = false;        
-        QManager.AnswerQuestion(idx);       
+        answering = false;
+        QManager.AnswerQuestion(idx);
     }
 
     public void SubmitNumericAnswer()
     {
-        answering = false;       
-        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));        
+        answering = false;
+        QManager.AnswerNumericQuestion(int.Parse(numericAnswerField.text));
     }
 
     public void ReviewOrNot()
@@ -625,15 +638,16 @@ public class UIManager : MonoBehaviour
         feedbacking = false;
         //what happen after pressing space
         //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        if(QManager.SetQuestionText(retry))
+        if (QManager.SetQuestionText(retry))
         {
             NumericAnswerPanel.SetActive(true);
             if (!answering)
             {
                 TimerStart();
                 answering = true;
-            } 
-        }else 
+            }
+        }
+        else
         {
             AnswerPanel.SetActive(true);
             if (!answering)
@@ -641,29 +655,78 @@ public class UIManager : MonoBehaviour
                 TimerStart();
                 answering = true;
             }
-        }    
+        }
     }
 
     public void SetAnswerPanels()
     {
         int numOfChoice = QManager.NumberOfAnswers();
+        bool hasAnimage = QManager.ContainImage();
+
         if (numOfChoice == 4)//if number of Choices is 4
         {
             FourChoicesPanel.SetActive(true);
             ThreeChoicesPanel.SetActive(false);
             TwoChoicesPanel.SetActive(false);
+            if (hasAnimage)
+            {
+                FourChoicesPanel.transform.localPosition = ImaFourChoicesPos;
+                ChoicesIma.gameObject.SetActive(true);
+                ChoicesImaPos = new Vector3(-350, 0, 0);
+                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                ChoicesIma.texture = QManager.ImageInQuestion();
+            }
+            else
+            {
+                FourChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                ChoicesIma.gameObject.SetActive(false);
+            }
         }
         else if (numOfChoice == 3)
         {
             FourChoicesPanel.SetActive(false);
             ThreeChoicesPanel.SetActive(true);
             TwoChoicesPanel.SetActive(false);
+            if (hasAnimage)
+            {
+                ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
+                ChoicesIma.gameObject.SetActive(true);
+                ChoicesImaPos = new Vector3(-515, 0, 0);
+                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                ChoicesIma.texture = QManager.ImageInQuestion();
+            }
+            else
+            {
+                ThreeChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                ChoicesIma.gameObject.SetActive(false);
+            }
         }
         else
         {
             FourChoicesPanel.SetActive(false);
             ThreeChoicesPanel.SetActive(false);
             TwoChoicesPanel.SetActive(true);
+            if (hasAnimage)
+            {
+                TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
+                ChoicesIma.gameObject.SetActive(true);
+                ChoicesImaPos = new Vector3(-350, 0, 0);
+                ChoicesIma.transform.localPosition = ChoicesImaPos;
+                ChoicesIma.texture = QManager.ImageInQuestion();
+            }
+            else
+            {
+                TwoChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
+                ChoicesIma.gameObject.SetActive(false);
+            }
+        }
+
+
+        if (hasAnimage)
+        {
+
+            ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
+            TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
         }
     }
 
@@ -699,7 +762,7 @@ public class UIManager : MonoBehaviour
     {
 
     }
-    
+
     public void TimerStart()
     {
         Debug.Log("timer has started");

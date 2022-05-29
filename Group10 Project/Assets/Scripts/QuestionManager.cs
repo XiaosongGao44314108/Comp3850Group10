@@ -48,6 +48,8 @@ public class QuestionManager : MonoBehaviour
     {
         public string question;
         public bool numericQuestion;
+        public bool hasImage;
+        public int imageIdx;
         public string ans0;
         public string ans1;
         public string ans2;
@@ -122,7 +124,8 @@ public class QuestionManager : MonoBehaviour
         UIManager.SetSpeaker(0);//set avatar to the professor
         questionList = questionPool.questionPool[currentQuestionIdx];
         dialogue = questionList.dialogue;
-        randomQuestion = (int)Random.Range(0, questionList.questions.Length - 1);
+        randomQuestion = Random.Range(0, questionList.questions.Length);
+        Debug.Log(randomQuestion);
         question = questionList.questions[randomQuestion];
         if (retry > 0)
         {
@@ -255,12 +258,12 @@ public class QuestionManager : MonoBehaviour
 
     public bool ContainImage()//the method returns if a question contains an image
     {
-        return false;//needs to be upadted 
+        return question.hasImage;//needs to be upadted 
     }
 
-    public Texture ImageInQuestion()//return the texture of image in the question
+    public int ImageInQuestion()//return the texture of image in the question
     {
-        return null;//needs to be updated
+        return question.imageIdx;//needs to be updated
     }
 
 

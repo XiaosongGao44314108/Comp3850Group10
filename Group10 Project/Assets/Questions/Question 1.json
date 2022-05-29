@@ -15,6 +15,8 @@
 				{
 					"question": "The pleasure is mine, now let's look together at what it means to be in poverty. What do you think will be some indicators of poverty?",
 					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
 					"ans0": "A lack of money",
 					"ans1": "Hunger and unclean water",
 					"ans2": "Inadequate shelter",
@@ -26,6 +28,23 @@
 					"hint": "It's all of them",
 					"elaborateFeedback": "The correct answer is D. However, income is the best numerical indicator for poverty as most definitions of poverty are mostly based on income.",
 					"hasTimer": true
+				},
+				{
+					"question": "What's 44 % 10?",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 1,
+					"ans0": "4",
+					"ans1": "2",
+					"ans2": "1",
+					"ans3": "3",
+					"numericAnswer": 0,
+					"correctIdx": 0,
+					"timeLimit": 30,
+					"points": 50,
+					"hint": "It's 4",
+					"elaborateFeedback": "Divide the 1st number by the 2nd and the remainder is your answer",
+					"hasTimer": false
 				}
 			]
 		},
@@ -40,6 +59,8 @@
 				{
 					"question": "Can you please find out the mean for the data below?\n1, 1, 3, 6, 15, 22",
 					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": -1,
 					"ans0": "Mean: 1",
 					"ans1": "Mean: 6",
 					"ans2": "Mean: 8",
@@ -66,6 +87,8 @@
 				{
 					"question": "Can you please find out the medium for the data below?\n1, 1, 3, 6, 15, 22",
 					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
 					"ans0": "Median: 6",
 					"ans1": "Median: 3",
 					"ans2": "Median: 4",
@@ -92,6 +115,8 @@
 				{
 					"question": "Now if you are trying to carry out a study on the poverty rate in Australia with the data of everyone's income, which measurement should we look at? The mean or the median?",
 					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 2,
 					"ans0": "Mean",
 					"ans1": "Median",
 					"ans2": "",
@@ -118,6 +143,8 @@
 				{
 					"question": "What's 1 + 1?",
 					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 2,
 					"ans0": "1",
 					"ans1": "2",
 					"ans2": "11",
@@ -142,34 +169,10 @@
 			],
 			"questions": [
 				{
-					"question": "What's 44 % 10?",
-					"numericQuestion": false,
-					"ans0": "4",
-					"ans1": "2",
-					"ans2": "1",
-					"ans3": "3",
-					"numericAnswer": 0,
-					"correctIdx": 0,
-					"timeLimit": 30,
-					"points": 50,
-					"hint": "It's 4",
-					"elaborateFeedback": "Divide the 1st number by the 2nd and the remainder is your answer",
-					"hasTimer": false
-				}
-			]
-		},
-		{
-			"dialogue": [
-				{
-					"speaker": 0,
-					"speech": "Context Dialogues",
-					"isAfterQuesion": false
-				}
-			],
-			"questions": [
-				{
 					"question": "What's 7 * 8?",
 					"numericQuestion": true,
+					"hasImage": false,
+					"imageIdx": -1,
 					"ans0": "56",
 					"ans1": "15",
 					"ans2": "64",
@@ -196,6 +199,8 @@
 				{
 					"question": "What's 30-5?",
 					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
 					"ans0": "35",
 					"ans1": "20",
 					"ans2": "25",

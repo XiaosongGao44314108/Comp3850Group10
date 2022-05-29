@@ -18,13 +18,11 @@ public class Timer : MonoBehaviour
     {
         timeLeft = timeLimit;
         isActive = false;
-        Debug.Log(timeLeft);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(timeLeft);
         if(isActive){
         timeLeft -= Time.deltaTime;
         }

@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     // private Vector3 ImaThreeChoicesPos;
     // private Vector3 ImaTwoChoicesPos;
     public RawImage ChoicesIma;//image in multi-choices question
+    public Texture[] QuestionImgs;
     private Vector3 ChoicesImaPos;
 
     public GameObject NumericAnswerPanel;
@@ -693,7 +694,7 @@ public class UIManager : MonoBehaviour
                 ChoicesIma.gameObject.SetActive(true);
                 // ChoicesImaPos = new Vector3(-350, 0, 0);
                 // ChoicesIma.transform.localPosition = ChoicesImaPos;
-                ChoicesIma.texture = QManager.ImageInQuestion();
+                ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
             }
             else
             {
@@ -717,7 +718,7 @@ public class UIManager : MonoBehaviour
                 ChoicesIma.gameObject.SetActive(true);
                 // ChoicesImaPos = new Vector3(-515, 0, 0);
                 // ChoicesIma.transform.localPosition = ChoicesImaPos;
-                ChoicesIma.texture = QManager.ImageInQuestion();
+                ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
             }
             else
             {
@@ -741,7 +742,7 @@ public class UIManager : MonoBehaviour
                 ChoicesIma.gameObject.SetActive(true);
                 // ChoicesImaPos = new Vector3(-350, 0, 0);
                 // ChoicesIma.transform.localPosition = ChoicesImaPos;
-                ChoicesIma.texture = QManager.ImageInQuestion();
+                ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
             }
             else
             {

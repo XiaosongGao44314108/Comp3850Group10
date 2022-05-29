@@ -11,13 +11,23 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI fourAns1TextBox;
     public TextMeshProUGUI fourAns2TextBox;
     public TextMeshProUGUI fourAns3TextBox;
+    public TextMeshProUGUI imaFourAns0TextBox;
+    public TextMeshProUGUI imaFourAns1TextBox;
+    public TextMeshProUGUI imaFourAns2TextBox;
+    public TextMeshProUGUI imaFourAns3TextBox;
+
 
     public TextMeshProUGUI threeAns0TextBox;
     public TextMeshProUGUI threeAns1TextBox;
     public TextMeshProUGUI threeAns2TextBox;
+    public TextMeshProUGUI imaThreeAns0TextBox;
+    public TextMeshProUGUI imaThreeAns1TextBox;
+    public TextMeshProUGUI imaThreeAns2TextBox;
 
     public TextMeshProUGUI twoAns0TextBox;
     public TextMeshProUGUI twoAns1TextBox;
+    public TextMeshProUGUI imaTwoAns0TextBox;
+    public TextMeshProUGUI imaTwoAns1TextBox;
 
     // public TextMeshProUGUI ans0TextBox;
     // public TextMeshProUGUI ans1TextBox;
@@ -151,17 +161,26 @@ public class QuestionManager : MonoBehaviour
                 fourAns1TextBox.SetText(question.ans1);
                 fourAns2TextBox.SetText(question.ans2);
                 fourAns3TextBox.SetText(question.ans3);
+                imaFourAns0TextBox.SetText(question.ans0);
+                imaFourAns1TextBox.SetText(question.ans1);
+                imaFourAns2TextBox.SetText(question.ans2);
+                imaFourAns3TextBox.SetText(question.ans3);
             }
             else if (currentNumberOfAnswers == 3)
             {
                 threeAns0TextBox.SetText(question.ans0);
                 threeAns1TextBox.SetText(question.ans1);
                 threeAns2TextBox.SetText(question.ans2);
+                imaThreeAns0TextBox.SetText(question.ans0);
+                imaThreeAns1TextBox.SetText(question.ans1);
+                imaThreeAns2TextBox.SetText(question.ans2);
             }
             else //it will only support multi-question with 2, 3 or 4 answers
             {
                 twoAns0TextBox.SetText(question.ans0);
                 twoAns1TextBox.SetText(question.ans1);
+                imaTwoAns0TextBox.SetText(question.ans0);
+                imaTwoAns1TextBox.SetText(question.ans1);
             }
         }
         return question.numericQuestion;
@@ -236,7 +255,7 @@ public class QuestionManager : MonoBehaviour
 
     public bool ContainImage()//the method returns if a question contains an image
     {
-        return true;//needs to be upadted 
+        return false;//needs to be upadted 
     }
 
     public Texture ImageInQuestion()//return the texture of image in the question

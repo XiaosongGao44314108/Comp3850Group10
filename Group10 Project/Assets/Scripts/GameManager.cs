@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int[] scores;
+    private float[] times;
+    private int[] attempts;
 
     private bool[] levelsLockstates;
 
@@ -20,7 +22,6 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 Debug.Log("There's no game manager");
-                //instance = this;
             }
             return instance;
         }
@@ -67,7 +68,39 @@ public class GameManager : MonoBehaviour
         }
 
         CallUnlockNextLevel(idx);
-        CSVWriter.WriteCSV();
+    }
+
+    public float GetTime(int idx)
+    {
+        return times[idx];
+    }
+
+    public void UpdateTime(float seconds)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        times[idx] += seconds;
+    }
+
+    public float GetTotalTime()
+    {
+        float totalTime = 0;
+        foreach(float t in times)
+        {
+            totalTime += t;
+        }
+
+        return totalTime;
+    }
+
+    public int GetAttempts(int idx)
+    {
+        return attempts[idx];
+    }
+
+    public void UpdateAttempts()
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        attempts[idx]++;
     }
 
 
@@ -95,6 +128,8 @@ public class GameManager : MonoBehaviour
         if (idx < levelsLockstates.Length - 1)//goal 3 level 3 does not need to unlock next level, so levelsLockstates[8] do nothing
         {
             SetLockState(idx + 1, true);
+        }else{
+            ServerTalker.Instance.SendData();
         }
     }
 

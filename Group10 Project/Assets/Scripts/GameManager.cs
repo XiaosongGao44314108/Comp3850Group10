@@ -6,12 +6,39 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int[] scores;
+    public int[] Scores{
+        get
+        {
+            return scores;
+        }
+    }
     private float[] times;
+    public float[] Times
+    {
+        get
+        {
+            return times;
+        }
+    }
     private int[] attempts;
+    public int[] Attempts
+    {
+        get
+        {
+            return attempts;
+        }
+    }
 
     private bool[] levelsLockstates;
+    public bool[] LevelsLockstates
+    {
+        get
+        {
+            return levelsLockstates;
+        }
+    }
 
-    public CSVWriter CSVWriter;
+    private PlayerData playerData;
 
     private static GameManager instance;
 
@@ -38,14 +65,29 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        playerData = SaveSystem.LoadData();
     }
     // Start is called before the first frame update
     void Start()
     {
-        scores = new int[9];
-
-        levelsLockstates = new bool[9];
-        InitScenesLocker();
+        if(playerData == null)
+        {
+            scores = new int[9];
+            times = new float[9];
+            attempts = new int[9];
+            levelsLockstates = new bool[9];
+            InitScenesLocker();
+        }
+        else
+        {
+            scores = playerData.scores;
+            times = playerData.times;
+            attempts = playerData.attempts;
+            levelsLockstates = playerData.levelsLockstates;
+            playerData = new PlayerData(this);
+        }
+        
     }
 
     // Update is called once per frame
@@ -66,8 +108,6 @@ public class GameManager : MonoBehaviour
         {
             scores[idx] = score;
         }
-
-        CallUnlockNextLevel(idx);
     }
 
     public float GetTime(int idx)
@@ -75,10 +115,11 @@ public class GameManager : MonoBehaviour
         return times[idx];
     }
 
-    public void UpdateTime(float seconds)
+    public void UpdateTime()
     {
+        Debug.Log(Time.timeSinceLevelLoad);
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
-        times[idx] += seconds;
+        times[idx] += (float)Time.timeSinceLevelLoad;
     }
 
     public float GetTotalTime()
@@ -101,6 +142,7 @@ public class GameManager : MonoBehaviour
     {
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
         attempts[idx]++;
+        CallUnlockNextLevel(idx);
     }
 
 
@@ -131,6 +173,7 @@ public class GameManager : MonoBehaviour
         }else{
             ServerTalker.Instance.SendData();
         }
+        SaveSystem.SaveData();
     }
 
 }

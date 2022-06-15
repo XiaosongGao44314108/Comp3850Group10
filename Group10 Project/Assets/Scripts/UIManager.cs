@@ -792,7 +792,6 @@ public class UIManager : MonoBehaviour
 
     public void TimerStart()
     {
-        Debug.Log("timer has started");
         if (QManager.HasTimer())
         {
             timerGO.SetActive(true);

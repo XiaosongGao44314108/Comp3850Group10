@@ -6,10 +6,39 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int[] scores;
+    public int[] Scores{
+        get
+        {
+            return scores;
+        }
+    }
+    private float[] times;
+    public float[] Times
+    {
+        get
+        {
+            return times;
+        }
+    }
+    private int[] attempts;
+    public int[] Attempts
+    {
+        get
+        {
+            return attempts;
+        }
+    }
 
     private bool[] levelsLockstates;
+    public bool[] LevelsLockstates
+    {
+        get
+        {
+            return levelsLockstates;
+        }
+    }
 
-    public CSVWriter CSVWriter;
+    private PlayerData playerData;
 
     private static GameManager instance;
 
@@ -20,7 +49,6 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 Debug.Log("There's no game manager");
-                //instance = this;
             }
             return instance;
         }
@@ -37,14 +65,29 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        playerData = SaveSystem.LoadData();
     }
     // Start is called before the first frame update
     void Start()
     {
-        scores = new int[9];
-
-        levelsLockstates = new bool[9];
-        InitScenesLocker();
+        if(playerData == null)
+        {
+            scores = new int[9];
+            times = new float[9];
+            attempts = new int[9];
+            levelsLockstates = new bool[9];
+            InitScenesLocker();
+        }
+        else
+        {
+            scores = playerData.scores;
+            times = playerData.times;
+            attempts = playerData.attempts;
+            levelsLockstates = playerData.levelsLockstates;
+            playerData = new PlayerData(this);
+        }
+        
     }
 
     // Update is called once per frame
@@ -65,9 +108,41 @@ public class GameManager : MonoBehaviour
         {
             scores[idx] = score;
         }
+    }
 
+    public float GetTime(int idx)
+    {
+        return times[idx];
+    }
+
+    public void UpdateTime()
+    {
+        Debug.Log(Time.timeSinceLevelLoad);
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        times[idx] += (float)Time.timeSinceLevelLoad;
+    }
+
+    public float GetTotalTime()
+    {
+        float totalTime = 0;
+        foreach(float t in times)
+        {
+            totalTime += t;
+        }
+
+        return totalTime;
+    }
+
+    public int GetAttempts(int idx)
+    {
+        return attempts[idx];
+    }
+
+    public void UpdateAttempts()
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        attempts[idx]++;
         CallUnlockNextLevel(idx);
-        CSVWriter.WriteCSV();
     }
 
 
@@ -95,7 +170,10 @@ public class GameManager : MonoBehaviour
         if (idx < levelsLockstates.Length - 1)//goal 3 level 3 does not need to unlock next level, so levelsLockstates[8] do nothing
         {
             SetLockState(idx + 1, true);
+        }else{
+            ServerTalker.Instance.SendData();
         }
+        SaveSystem.SaveData();
     }
 
 }

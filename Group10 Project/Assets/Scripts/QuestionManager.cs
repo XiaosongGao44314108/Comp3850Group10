@@ -102,6 +102,8 @@ public class QuestionManager : MonoBehaviour
     {
         if (currentQuestionIdx > questionPool.questionPool.Length - 1)
         {
+            GameManager.Instance.UpdateTime();
+            GameManager.Instance.UpdateAttempts();
             UIManager.BackToMain();
         }
         else
@@ -203,8 +205,6 @@ public class QuestionManager : MonoBehaviour
             }
             answer = true;
             UIManager.SetFeedbacking(true);
-
-            //NextQuestion();
         }
         else
         {
@@ -215,7 +215,6 @@ public class QuestionManager : MonoBehaviour
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
         {
             UIManager.UpdateScore();
-            //UIManager.BackToMain();
         }
     }
 
@@ -244,8 +243,7 @@ public class QuestionManager : MonoBehaviour
         UIManager.CallContinue(answer, score);
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
         {
-            UIManager.UpdateScore();
-            //UIManager.BackToMain();
+            UIManager.UpdateScore();           
         }
     }
 
@@ -280,7 +278,6 @@ public class QuestionManager : MonoBehaviour
     public void NextDialogue()
     {
         currentDialogueIdx++;
-        //SetDialogueText();
     }
 
     public string GetElaborateFeedback()

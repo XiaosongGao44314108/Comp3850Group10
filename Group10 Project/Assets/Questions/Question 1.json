@@ -59,7 +59,7 @@
 				{
 					"question": "What's 7 * 8?",
 					"numericQuestion": true,
-					"hasImage": true,
+					"hasImage": false,
 					"imageIdx": 0,
 					"ans0": "",
 					"ans1": "",

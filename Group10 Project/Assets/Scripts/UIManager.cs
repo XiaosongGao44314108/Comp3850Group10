@@ -58,8 +58,6 @@ public class UIManager : MonoBehaviour
     public GameObject timerGO;
     public TMP_InputField numericAnswerField;
 
-    private string DialogueText;
-    private string QuestionText;
     private bool feedbacking; //stop calling next question if providing feedback
     private int retry;
     private bool answering;
@@ -95,9 +93,6 @@ public class UIManager : MonoBehaviour
         // ImaTwoChoicesPos = new Vector3(0, -220, 0);
 
         currentScore = 0;
-        //Just for this version:
-        DialogueText = "People talk";
-        QuestionText = "Question contents";
         SetPanels();
         if (Dialogue != null)
         {
@@ -218,15 +213,6 @@ public class UIManager : MonoBehaviour
 
 
     }
-
-    // public void SetDialogue()
-    // {
-    //     if (DialoguePanel != null)
-    //     {
-    //         QManager.SetDialogueText();
-    //     }
-
-    // }
 
     public void TurnPages()
     {
@@ -638,13 +624,12 @@ public class UIManager : MonoBehaviour
     public void ExitGame()
     {
         //quit editting mode in unity, also quit game
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
         Application.Quit();
     }
 
-    //temporary method
     public void Continue()
     {
         retry = 0;
@@ -655,26 +640,21 @@ public class UIManager : MonoBehaviour
         ElaborateFeedbackPanel.SetActive(false);
         feedbacking = false;
         //what happen after pressing space
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
-        if (QManager.SetQuestionText(retry))
+        if(!answering)
         {
-            ChoicesIma.gameObject.SetActive(true);
-            SetNumericAnswerPanel();
-            if (!answering)
+            if (QManager.SetQuestionText(retry))
             {
-                TimerStart();
-                answering = true;
+                ChoicesIma.gameObject.SetActive(QManager.ContainImage());
+                SetNumericAnswerPanel();
             }
-        }
-        else
-        {
-            AnswerPanel.SetActive(true);
-            if (!answering)
+            else
             {
-                TimerStart();
-                answering = true;
+                AnswerPanel.SetActive(true);
             }
+            TimerStart();
+                    answering = true;
         }
+       
     }
 
     public void SetAnswerPanels()

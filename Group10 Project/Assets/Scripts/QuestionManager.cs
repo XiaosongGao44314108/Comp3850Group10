@@ -29,13 +29,10 @@ public class QuestionManager : MonoBehaviour
     public TextMeshProUGUI imaTwoAns0TextBox;
     public TextMeshProUGUI imaTwoAns1TextBox;
 
-    // public TextMeshProUGUI ans0TextBox;
-    // public TextMeshProUGUI ans1TextBox;
-    // public TextMeshProUGUI ans2TextBox;
-    // public TextMeshProUGUI ans3TextBox;
     public UIManager UIManager;
 
     public float baseScoreIncrement;
+
     private int currentQuestionIdx;
     private int currentDialogueIdx;
     private bool answer;
@@ -86,6 +83,7 @@ public class QuestionManager : MonoBehaviour
     private QuestionPool questionPool = new QuestionPool();
     private QuestionList questionList;
     private Question question;
+
     private Dialogue[] dialogue;
 
     void Start()
@@ -116,7 +114,7 @@ public class QuestionManager : MonoBehaviour
             {
                 questionTextBox.SetText(dialogue[currentDialogueIdx].speech);
                 UIManager.SetSpeaker(dialogue[currentDialogueIdx].speaker);
-                NextDialogue();
+                NextDialogue();                
             }
         }
     }

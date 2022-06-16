@@ -216,6 +216,27 @@ public class GameManager : MonoBehaviour
         CallUnlockNextLevel(idx);
     }
 
+    public int GetCorrectAnswers(int idx)
+    {
+        return correctAnswers[idx];
+    }
+
+    public void UpdateCorrectAnswers(int answers)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        correctAnswers[idx] = answers;
+    }
+
+    public int GetWrongAnswers(int idx)
+    {
+        return wrongAnswers[idx];
+    }
+
+    public void UpdateWrongAnswers(int answers)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        correctAnswers[idx] = answers;
+    }
 
     private void InitScenesLocker()
     {

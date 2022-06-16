@@ -92,6 +92,8 @@ public class QuestionManager : MonoBehaviour
     {
         currentDialogueIdx = 0;
         currentQuestionIdx = 0;
+        numCorrectAnswers = 0;
+        numWrongAnswers = 0;
         answer = true;
         questionPool = JsonUtility.FromJson<QuestionPool>(jsonFile.text);
         questionList = questionPool.questionPool[currentQuestionIdx];
@@ -103,7 +105,10 @@ public class QuestionManager : MonoBehaviour
         if (currentQuestionIdx > questionPool.questionPool.Length - 1)
         {
             GameManager.Instance.UpdateTime();
+            GameManager.Instance.UpdateCorrectAnswers(numCorrectAnswers);
+            GameManager.Instance.UpdateWrongAnswers(numCorrectAnswers);
             GameManager.Instance.UpdateAttempts();
+            
             UIManager.BackToMain();
         }
         else
@@ -197,6 +202,7 @@ public class QuestionManager : MonoBehaviour
         score = 0;
         if (question.correctIdx == answerIdx)
         {
+            numCorrectAnswers++;
             score = (int)baseScoreIncrement;
             if (question.hasTimer)
             {
@@ -208,6 +214,7 @@ public class QuestionManager : MonoBehaviour
         }
         else
         {
+            numWrongAnswers++;
             answer = false;
         }
 

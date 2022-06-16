@@ -9,6 +9,13 @@ public class PlayerData
     public float[] times;
     public int[] attempts;
     public bool[] levelsLockstates;
+    public int[] correctAnswers;
+    public int[] wrongAnswers;
+    public int[] optFeedback;
+    public int[] videoFeedback;
+    public int[] textFeedback;
+    public int[] goodFeedback;
+    public int[] badFeedback;
 
     public PlayerData(GameManager gameManager)
     {

@@ -77,6 +77,14 @@ public class UIManager : MonoBehaviour
     private bool SelectedGoalThree;
     private int currentScore;
 
+    //data collection fields
+    private int numOptFeedback;
+    private int numGoodFeedback;
+    private int numBadFeedback;
+    private int numTextFeedback;
+    private int numVideoFeedback;
+
+
 
     void Start()
     {
@@ -88,17 +96,12 @@ public class UIManager : MonoBehaviour
         SelectedGoalThree = false;
         feedbacking = false;
 
-        // ImaFourChoicesPos = new Vector3(0, -220, 0);
-        // ImaThreeChoicesPos = new Vector3(0, -80, 0);
-        // ImaTwoChoicesPos = new Vector3(0, -220, 0);
-
         currentScore = 0;
         SetPanels();
         if (Dialogue != null)
         {
             DialogueContinue();
         }
-        //SetDialogue();
     }
 
     void Update()
@@ -328,7 +331,6 @@ public class UIManager : MonoBehaviour
         GoalPanel.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(true);
         LevelPanel.gameObject.SetActive(true);
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one level";
         GoalLvlText.GetComponent<TMPro.TextMeshProUGUI>().text = "Goal: Quality Education";
         Lvl1HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(3) + "";
         Lvl2HighscoreText.GetComponent<TMPro.TextMeshProUGUI>().text = GManager.GetScore(4) + "";
@@ -812,6 +814,5 @@ public class UIManager : MonoBehaviour
     public void OpenWindow()
     {
         Application.OpenURL("https://www.youtube.com/watch?v=VpQVQv5DSe8");
-        CallReview();
     }
 }

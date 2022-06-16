@@ -39,6 +39,8 @@ public class QuestionManager : MonoBehaviour
     private int randomQuestion;
     private int score;
     private int currentNumberOfAnswers;//number of answers a question has
+    private int numCorrectAnswers;
+    private int numWrongAnswers;
 
     [System.Serializable]
     public class Question

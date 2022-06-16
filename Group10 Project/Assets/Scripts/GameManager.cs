@@ -12,6 +12,62 @@ public class GameManager : MonoBehaviour
             return scores;
         }
     }
+    private int[] correctAnswers;
+    public int[] CorrectAnswers
+    {
+        get
+        {
+            return correctAnswers;
+        }
+    }
+    private int[] wrongAnswers;
+    public int[] WrongAnswers
+    {
+        get
+        {
+            return wrongAnswers;
+        }
+    }
+    private int[] optFeedback;
+    public int[] OptFeedback
+    {
+        get
+        {
+            return optFeedback;
+        }
+    }
+    private int[] goodFeedback;
+    public int[] GoodFeedback
+    {
+        get
+        {
+            return goodFeedback;
+        }
+    }
+    private int[] badFeedback;
+    public int[] BadFeedback
+    {
+        get
+        {
+            return badFeedback;
+        }
+    }
+    private int[] videoFeedback;
+    public int[] VideoFeedback
+    {
+        get
+        {
+            return videoFeedback;
+        }
+    }
+    private int[] textFeedback;
+    public int[] TextFeedback
+    {
+        get
+        {
+            return textFeedback;
+        }
+    }
     private float[] times;
     public float[] Times
     {
@@ -77,7 +133,15 @@ public class GameManager : MonoBehaviour
             times = new float[9];
             attempts = new int[9];
             levelsLockstates = new bool[9];
+            correctAnswers = new int[9];
+            wrongAnswers = new int[9];
+            optFeedback = new int[9];
+            videoFeedback = new int[9];
+            textFeedback = new int [9];
+            goodFeedback = new int[9];
+            badFeedback = new int[9];
             InitScenesLocker();
+            
         }
         else
         {
@@ -85,6 +149,13 @@ public class GameManager : MonoBehaviour
             times = playerData.times;
             attempts = playerData.attempts;
             levelsLockstates = playerData.levelsLockstates;
+            correctAnswers = playerData.correctAnswers;
+            wrongAnswers = playerData.wrongAnswers;
+            optFeedback = playerData.optFeedback;
+            videoFeedback = playerData.videoFeedback;
+            textFeedback = playerData.textFeedback;
+            goodFeedback = playerData.goodFeedback;
+            badFeedback = playerData.badFeedback;
             playerData = new PlayerData(this);
         }
         

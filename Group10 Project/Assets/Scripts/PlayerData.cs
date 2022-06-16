@@ -16,5 +16,12 @@ public class PlayerData
         times = gameManager.Times;
         attempts = gameManager.Attempts;
         levelsLockstates = gameManager.LevelsLockstates;
+        correctAnswers = gameManager.CorrectAnswers;
+        wrongAnswers = gameManager.WrongAnswers;
+        optFeedback = gameManager.OptFeedback;
+        videoFeedback = gameManager.VideoFeedback;
+        textFeedback = gameManager.TextFeedback;
+        goodFeedback = gameManager.GoodFeedback;
+        badFeedback = gameManager.BadFeedback;
     }
 }

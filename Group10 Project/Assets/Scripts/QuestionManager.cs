@@ -208,7 +208,6 @@ public class QuestionManager : MonoBehaviour
             if (question.hasTimer)
             {
                 score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
-                UIManager.Timer.EndTimer();
             }
             answer = true;
             UIManager.SetFeedbacking(true);
@@ -219,7 +218,9 @@ public class QuestionManager : MonoBehaviour
             answer = false;
         }
 
+        UIManager.Timer.EndTimer();
         UIManager.CallContinue(answer, score);
+
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
         {
             UIManager.UpdateScore();
@@ -233,11 +234,11 @@ public class QuestionManager : MonoBehaviour
         score = 0;
         if (question.numericAnswer == numAnswer)
         {
+            numCorrectAnswers++;
             score = (int)baseScoreIncrement;
             if (question.hasTimer)
             {
                 score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
-                UIManager.Timer.EndTimer();
             }
             answer = true;
             UIManager.SetFeedbacking(true);
@@ -245,10 +246,13 @@ public class QuestionManager : MonoBehaviour
         }
         else
         {
+            numWrongAnswers++;
             answer = false;
         }
 
+        UIManager.Timer.EndTimer();
         UIManager.CallContinue(answer, score);
+        
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
         {
             UIManager.UpdateScore();           
@@ -273,6 +277,7 @@ public class QuestionManager : MonoBehaviour
 
     public void NextQuestion()
     {
+        Debug.Log("Bang");
         currentQuestionIdx++;
         currentDialogueIdx = 0;
         if (currentQuestionIdx < questionPool.questionPool.Length)

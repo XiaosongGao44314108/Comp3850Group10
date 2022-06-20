@@ -18,9 +18,6 @@ public class UIManager : MonoBehaviour
     public GameObject ImaThreeChoicesPanel;
     public GameObject TwoChoicesPanel;
     public GameObject ImaTwoChoicesPanel;
-    // private Vector3 ImaFourChoicesPos; //if question contains an image, the "child objects" of answer panel will move to these positions
-    // private Vector3 ImaThreeChoicesPos;
-    // private Vector3 ImaTwoChoicesPos;
     public RawImage ChoicesIma;//image in multi-choices question
     public Texture[] QuestionImgs;
     private Vector3 ChoicesImaPos;
@@ -479,7 +476,6 @@ public class UIManager : MonoBehaviour
         else if (answer && retry < 3)
         {
             Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Well Done!!!";
-            CallNextQuestion();
             GetFeedback();
 
         }
@@ -746,7 +742,6 @@ public class UIManager : MonoBehaviour
         ElaborateFeedbackPanel.SetActive(false);
         retry = 0;
         //what happen after pressing space
-        CallNextQuestion();
         GetFeedback();
     }
 

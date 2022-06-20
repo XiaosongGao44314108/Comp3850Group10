@@ -32,6 +32,7 @@ public class QuestionManager : MonoBehaviour
     public UIManager UIManager;
 
     public float baseScoreIncrement;
+    private float currentScoreDecrement;
 
     private int currentQuestionIdx;
     private int currentDialogueIdx;
@@ -193,6 +194,7 @@ public class QuestionManager : MonoBehaviour
                 imaTwoAns1TextBox.SetText(question.ans1);
             }
         }
+        currentScoreDecrement = retry*100;
         return question.numericQuestion;
     }
 
@@ -204,10 +206,13 @@ public class QuestionManager : MonoBehaviour
         if (question.correctIdx == answerIdx)
         {
             numCorrectAnswers++;
-            score = (int)baseScoreIncrement;
+            score = (int)(baseScoreIncrement-currentScoreDecrement);
             if (question.hasTimer)
             {
-                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
+                if(UIManager.Timer.timeRatio()>=1)
+                {
+                    score += (int)((baseScoreIncrement-currentScoreDecrement) * UIManager.Timer.timeRatio());
+                }                
             }
             answer = true;
             UIManager.SetFeedbacking(true);
@@ -235,10 +240,10 @@ public class QuestionManager : MonoBehaviour
         if (question.numericAnswer == numAnswer)
         {
             numCorrectAnswers++;
-            score = (int)baseScoreIncrement;
+            score = (int)(baseScoreIncrement-currentScoreDecrement);
             if (question.hasTimer)
             {
-                score += (int)(baseScoreIncrement * UIManager.Timer.timeRatio());
+                score += (int)((baseScoreIncrement-currentScoreDecrement) * UIManager.Timer.timeRatio());
             }
             answer = true;
             UIManager.SetFeedbacking(true);
@@ -252,7 +257,7 @@ public class QuestionManager : MonoBehaviour
 
         UIManager.Timer.EndTimer();
         UIManager.CallContinue(answer, score);
-        
+
         if (currentQuestionIdx == questionPool.questionPool.Length - 1)
         {
             UIManager.UpdateScore();           
@@ -277,7 +282,6 @@ public class QuestionManager : MonoBehaviour
 
     public void NextQuestion()
     {
-        Debug.Log("Bang");
         currentQuestionIdx++;
         currentDialogueIdx = 0;
         if (currentQuestionIdx < questionPool.questionPool.Length)

@@ -129,28 +129,15 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
+        //LoadData
         playerData = SaveSystem.LoadData();
     }
     // Start is called before the first frame update
     void Start()
     {
-        if(playerData == null)
+        if(playerData == null || playerData.numOfFields<12)
         {
-            id = "" + System.Guid.NewGuid();
-            scores = new int[9];
-            times = new float[9];
-            attempts = new int[9];
-            levelsLockstates = new bool[9];
-            correctAnswers = new int[9];
-            wrongAnswers = new int[9];
-            optFeedback = new int[9];
-            videoFeedback = new int[9];
-            textFeedback = new int [9];
-            goodFeedback = new int[9];
-            badFeedback = new int[9];
-            InitScenesLocker();
-            
+            SetPlayerData();
         }
         else
         {
@@ -166,9 +153,26 @@ public class GameManager : MonoBehaviour
             textFeedback = playerData.textFeedback;
             goodFeedback = playerData.goodFeedback;
             badFeedback = playerData.badFeedback;
-            playerData = new PlayerData(this);
         }
         
+    }
+
+    public void SetPlayerData()
+    {
+        id = "" + System.Guid.NewGuid();
+        scores = new int[9];
+        times = new float[9];
+        attempts = new int[9];
+        levelsLockstates = new bool[9];
+        correctAnswers = new int[9];
+        wrongAnswers = new int[9];
+        optFeedback = new int[9];
+        videoFeedback = new int[9];
+        textFeedback = new int [9];
+        goodFeedback = new int[9];
+        badFeedback = new int[9];
+        InitScenesLocker();  
+        playerData = new PlayerData(this);    
     }
 
     public int GetScore(int idx)

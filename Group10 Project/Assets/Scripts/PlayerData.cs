@@ -17,6 +17,8 @@ public class PlayerData
     public int[] textFeedback;
     public int[] goodFeedback;
     public int[] badFeedback;
+    
+    public int numOfFields = 12;
 
     public PlayerData(GameManager gameManager)
     {

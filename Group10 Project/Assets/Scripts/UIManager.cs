@@ -236,29 +236,11 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    // public void NextScene()
-    // {
-    //     MenuPanel.gameObject.SetActive(false);
 
-    //     Scene scene = SceneManager.GetActiveScene();
-    //     int lastScene = SceneManager.sceneCountInBuildSettings - 1;
-    //     int next;
-    //     if (scene.buildIndex == lastScene)
-    //     {
-    //         next = 0;
-    //     }
-    //     else
-    //     {
-    //         next = scene.buildIndex + 1;
-    //     }
-    //     SceneManager.LoadScene(next);
-    // }
     public void ChoosingGoal() // what happens after clicking play
     {
         MenuPanel.gameObject.SetActive(false);
         GoalPanel.gameObject.SetActive(true);
-        //DialoguePanel.gameObject.SetActive(true);
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose one goal";
 
         //lock/unlock goal buttons:
         if (GManager.GetLockState(0))
@@ -561,6 +543,8 @@ public class UIManager : MonoBehaviour
 
     public void CallTextReview()
     {
+        GameManager.Instance.UpdateTextFeedback();
+        numTextFeedback++;
         ReviewTextPanel.gameObject.SetActive(true);
         ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, 400);
         ReviewButtons.SetActive(false);
@@ -570,6 +554,8 @@ public class UIManager : MonoBehaviour
 
     public void CallVideoReview()
     {
+        GameManager.Instance.UpdateVideoFeedback();
+        numVideoFeedback++;
         ReviewButtons.SetActive(false);
         FinishReviewButton.SetActive(true);
         OpenWindow();
@@ -685,7 +671,6 @@ public class UIManager : MonoBehaviour
             {
                 FourChoicesPanel.SetActive(true);
                 ImaFourChoicesPanel.SetActive(false);
-                // FourChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
         }
@@ -699,17 +684,13 @@ public class UIManager : MonoBehaviour
             {
                 ThreeChoicesPanel.SetActive(false);
                 ImaThreeChoicesPanel.SetActive(true);
-                // ThreeChoicesPanel.transform.localPosition = ImaThreeChoicesPos;
                 ChoicesIma.gameObject.SetActive(true);
-                // ChoicesImaPos = new Vector3(-515, 0, 0);
-                // ChoicesIma.transform.localPosition = ChoicesImaPos;
                 ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
             }
             else
             {
                 ThreeChoicesPanel.SetActive(true);
                 ImaThreeChoicesPanel.SetActive(false);
-                // ThreeChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
         }
@@ -723,17 +704,13 @@ public class UIManager : MonoBehaviour
             {
                 TwoChoicesPanel.SetActive(false);
                 ImaTwoChoicesPanel.SetActive(true);
-                // TwoChoicesPanel.transform.localPosition = ImaTwoChoicesPos;
                 ChoicesIma.gameObject.SetActive(true);
-                // ChoicesImaPos = new Vector3(-350, 0, 0);
-                // ChoicesIma.transform.localPosition = ChoicesImaPos;
                 ChoicesIma.texture = QuestionImgs[QManager.ImageInQuestion()];
             }
             else
             {
                 TwoChoicesPanel.SetActive(true);
                 ImaTwoChoicesPanel.SetActive(false);
-                // TwoChoicesPanel.transform.localPosition = new Vector3(0, 0, 0);
                 ChoicesIma.gameObject.SetActive(false);
             }
         }
@@ -754,7 +731,6 @@ public class UIManager : MonoBehaviour
         ElaborateFeedbackPanel.SetActive(false);
         retry = 0;
         //what happen after pressing space
-        //Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = QuestionText;
         CallNextQuestion();
         GetFeedback();
     }
@@ -764,12 +740,6 @@ public class UIManager : MonoBehaviour
     {
         CorrectReviewPanel.SetActive(true);
         feedbacking = true;
-    }
-
-    //review the question
-    public void QuestionReview()
-    {
-
     }
 
     public void TimerStart()

@@ -161,12 +161,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public int GetScore(int idx)
     {
         return scores[idx];
@@ -188,7 +182,6 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTime()
     {
-        Debug.Log(Time.timeSinceLevelLoad);
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
         times[idx] += (float)Time.timeSinceLevelLoad;
     }
@@ -236,6 +229,27 @@ public class GameManager : MonoBehaviour
     {
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
         correctAnswers[idx] = answers;
+    }
+
+    public int GetTextFeedback(int idx)
+    {
+        return textFeedback[idx];
+    }
+
+    public void UpdateTextFeedback()
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        videoFeedback[idx]++;
+    }
+    public int GetVideoFeedback(int idx)
+    {
+        return videoFeedback[idx];
+    }
+
+    public void UpdateVideoFeedback()
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        videoFeedback[idx]++;
     }
 
     private void InitScenesLocker()

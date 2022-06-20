@@ -1521,7 +1521,7 @@ PrefabInstance:
       objectReference: {fileID: 3488714190776243775}
     - target: {fileID: 8015223101520838462, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CallNextQuestion
+      value: GoodFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101546651134, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1533,7 +1533,7 @@ PrefabInstance:
       objectReference: {fileID: 3488714190776243775}
     - target: {fileID: 8015223101546651134, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CallNextQuestion
+      value: BadFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 8015223101599838968, guid: f83db3e2e0fe3a74d999d4c5b325efbd, type: 3}
       propertyPath: m_IsActive

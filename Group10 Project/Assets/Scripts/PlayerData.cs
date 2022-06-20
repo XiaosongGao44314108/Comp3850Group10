@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    public string id;
     public int[] scores;
     public float[] times;
     public int[] attempts;
@@ -19,6 +20,7 @@ public class PlayerData
 
     public PlayerData(GameManager gameManager)
     {
+        id = gameManager.ID;
         scores = gameManager.Scores;
         times = gameManager.Times;
         attempts = gameManager.Attempts;

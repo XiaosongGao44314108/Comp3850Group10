@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private string id;
+    public string ID
+    {
+        get
+        {
+            return id;
+        }
+    }
     private int[] scores;
     public int[] Scores{
         get
@@ -129,6 +137,7 @@ public class GameManager : MonoBehaviour
     {
         if(playerData == null)
         {
+            id = "" + System.Guid.NewGuid();
             scores = new int[9];
             times = new float[9];
             attempts = new int[9];
@@ -145,6 +154,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            id = playerData.id;
             scores = playerData.scores;
             times = playerData.times;
             attempts = playerData.attempts;
@@ -228,7 +238,18 @@ public class GameManager : MonoBehaviour
     public void UpdateWrongAnswers(int answers)
     {
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
-        correctAnswers[idx] = answers;
+        wrongAnswers[idx] = answers;
+    }
+
+    public int GetOptFeedback(int idx)
+    {
+        return optFeedback[idx];
+    }
+
+    public void UpdateOptFeedback (int num)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        optFeedback[idx] += num;
     }
 
     public int GetTextFeedback(int idx)
@@ -236,20 +257,42 @@ public class GameManager : MonoBehaviour
         return textFeedback[idx];
     }
 
-    public void UpdateTextFeedback()
+    public void UpdateTextFeedback(int num)
     {
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
-        videoFeedback[idx]++;
+        textFeedback[idx] += num;
     }
     public int GetVideoFeedback(int idx)
     {
         return videoFeedback[idx];
     }
 
-    public void UpdateVideoFeedback()
+    public void UpdateVideoFeedback(int num)
     {
         int idx = SceneManager.GetActiveScene().buildIndex - 1;
-        videoFeedback[idx]++;
+        videoFeedback[idx] += num;
+    }
+
+    public int GetGoodFeedback(int idx)
+    {
+        return goodFeedback[idx];
+    }
+
+    public void UpdateGoodFeedback(int num)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        goodFeedback[idx] = num;
+    }
+
+     public int GetBadFeedback(int idx)
+    {
+        return badFeedback[idx];
+    }
+
+    public void UpdateBadFeedback(int num)
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex - 1;
+        badFeedback[idx] = num;
     }
 
     private void InitScenesLocker()

@@ -496,6 +496,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void CorrectFeedback()
+    {
+        numOptFeedback++;
+        ElaborateFeedback();
+    }
     public void ElaborateFeedback()
     {
         CorrectReviewPanel.SetActive(false);
@@ -529,6 +534,7 @@ public class UIManager : MonoBehaviour
 
     public void CallReview()
     {
+        numOptFeedback++;
         //Player choose to review videos/images about incorrect answer
         //Disactive ReviewOrNot Panel
         //Active Review Panel
@@ -543,7 +549,6 @@ public class UIManager : MonoBehaviour
 
     public void CallTextReview()
     {
-        GameManager.Instance.UpdateTextFeedback();
         numTextFeedback++;
         ReviewTextPanel.gameObject.SetActive(true);
         ReviewPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, 400);
@@ -554,7 +559,6 @@ public class UIManager : MonoBehaviour
 
     public void CallVideoReview()
     {
-        GameManager.Instance.UpdateVideoFeedback();
         numVideoFeedback++;
         ReviewButtons.SetActive(false);
         FinishReviewButton.SetActive(true);
@@ -572,7 +576,6 @@ public class UIManager : MonoBehaviour
     }
     public void CallSimilarQuestion()
     {
-        //ReviewPanel.gameObject.SetActive(false);
         //display different question of similar type at her
         //do not know how to implement yet
         //need to add more contents at here later
@@ -599,6 +602,18 @@ public class UIManager : MonoBehaviour
         feedbacking = true;
         FeedbackPanel.gameObject.SetActive(true);
         Dialogue.GetComponent<TMPro.TextMeshProUGUI>().text = "How do you feel about this question?";
+    }
+
+    public void GoodFeedback()
+    {
+        numGoodFeedback++;
+        CallNextQuestion();
+    }
+
+    public void BadFeedback()
+    {
+        numBadFeedback++;
+        CallNextQuestion();
     }
 
     public void CallNextQuestion()
@@ -784,5 +799,15 @@ public class UIManager : MonoBehaviour
     public void OpenWindow()
     {
         Application.OpenURL("https://www.youtube.com/watch?v=VpQVQv5DSe8");
+    }
+
+    public void ExportData()
+    {
+        GameManager gm = GameManager.Instance;
+        gm.UpdateBadFeedback(numBadFeedback);
+        gm.UpdateGoodFeedback(numGoodFeedback);
+        gm.UpdateOptFeedback(numOptFeedback);
+        gm.UpdateTextFeedback(numTextFeedback);
+        gm.UpdateVideoFeedback(numVideoFeedback);
     }
 }

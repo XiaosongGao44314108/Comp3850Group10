@@ -106,7 +106,8 @@ public class QuestionManager : MonoBehaviour
         {
             GameManager.Instance.UpdateTime();
             GameManager.Instance.UpdateCorrectAnswers(numCorrectAnswers);
-            GameManager.Instance.UpdateWrongAnswers(numCorrectAnswers);
+            GameManager.Instance.UpdateWrongAnswers(numWrongAnswers);
+            UIManager.ExportData();
             GameManager.Instance.UpdateAttempts();
             
             UIManager.BackToMain();

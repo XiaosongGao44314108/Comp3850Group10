@@ -1441,7 +1441,7 @@ GameObject:
   - component: {fileID: 710519762}
   - component: {fileID: 710519761}
   m_Layer: 5
-  m_Name: Good Health and Well-Being
+  m_Name: GoodHealthandWell-Being
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 3, y: -3}
-  m_UseGraphicAlpha: 1
+  m_UseGraphicAlpha: 0
 --- !u!114 &710519762
 MonoBehaviour:
   m_ObjectHideFlags: 0

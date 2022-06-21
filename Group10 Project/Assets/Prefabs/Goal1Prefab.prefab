@@ -512,11 +512,11 @@ PrefabInstance:
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: avatars.Array.data[0]
       value: 
-      objectReference: {fileID: 2800000, guid: 610c00c2b3405c54599a70036837fce2, type: 3}
+      objectReference: {fileID: 2800000, guid: 969ef1563bc9b6a4aa3b162f13661233, type: 3}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: avatars.Array.data[1]
       value: 
-      objectReference: {fileID: 2800000, guid: 53e6c05615983be4086cd72613f62ea9, type: 3}
+      objectReference: {fileID: 2800000, guid: d0da8a2a97c8c2c49827b13bc822b207, type: 3}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: ElaborateFeedbackPanel
       value: 

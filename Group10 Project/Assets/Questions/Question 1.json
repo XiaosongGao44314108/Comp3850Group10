@@ -26,6 +26,7 @@
 					"timeLimit": 40,
 					"points": 100,
 					"hint": "It's all of them",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "The correct answer is D. However, income is the best numerical indicator for poverty as most definitions of poverty are mostly based on income.",
 					"hasTimer": true
 				},
@@ -43,6 +44,7 @@
 					"timeLimit": 30,
 					"points": 50,
 					"hint": "It's 4",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "Divide the 1st number by the 2nd and the remainder is your answer",
 					"hasTimer": false
 				}
@@ -68,8 +70,8 @@
 					"numericAnswer": 56,
 					"correctIdx": 0,
 					"timeLimit": 40,
-					"points": 100,
 					"hint": "It's 56",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "Starting from 0, add the 1st number n times where n is the 2nd number. E.g. 7*8 = 7+7+7+7+7+7+7+7.",
 					"hasTimer": true
 				}
@@ -98,6 +100,7 @@
 					"timeLimit": 40,
 					"points": 100,
 					"hint": "Find the average of the two middle numbers",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "The two middle numbers are 3 & 6. Their average is 4.5",
 					"hasTimer": false
 				}
@@ -126,7 +129,8 @@
 					"timeLimit": 40,
 					"points": 100,
 					"hint": "It's all of them",
-					"elaborateFeedback": " For datasets like income, it'’'s normal to have some extremely high or low values. Therefore, the median income would be a better reference to poverty.",
+					"feedback":"normal feedback",
+					"elaborateFeedback": " For datasets like income, it's normal to have some extremely high or low values. Therefore, the median income would be a better reference to poverty.",
 					"hasTimer": false
 				}
 			]
@@ -154,6 +158,7 @@
 					"timeLimit": 30,
 					"points": 20,
 					"hint": "It's 2",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "If we start from the 1st number in the equation, in this case 1 and then count up n times where n equals the 2nd number in the equation, in this case it is also 1. So starting from 1 we count up 1 time so we go from 1->2 and 2 is our answer",
 					"hasTimer": true
 				}
@@ -182,6 +187,7 @@
 					"timeLimit": 20,
 					"points": 40,
 					"hint": "It's 25",
+					"feedback":"normal feedback",
 					"elaborateFeedback": "Same as addition but backwards, 30->29->28->27->26->25",
 					"hasTimer": true
 				}

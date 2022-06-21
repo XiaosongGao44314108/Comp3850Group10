@@ -57,8 +57,8 @@ public class QuestionManager : MonoBehaviour
         public int numericAnswer;
         public int correctIdx;
         public int timeLimit;
-        public int points;
         public string hint;
+        public string feedback;
         public string elaborateFeedback;
         public bool hasTimer;
     }
@@ -295,6 +295,13 @@ public class QuestionManager : MonoBehaviour
     public void NextDialogue()
     {
         currentDialogueIdx++;
+    }
+
+    public string GetFeedback()
+    {
+        questionList = questionPool.questionPool[currentQuestionIdx];
+        question = questionList.questions[randomQuestion];
+        return question.feedback;
     }
 
     public string GetElaborateFeedback()

@@ -1,0 +1,485 @@
+{
+	"questionPool": [
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 1 A",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "Correct Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 1 B",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Numeric Question 2 A (Type in 1)",
+					"numericQuestion": true,
+					"hasImage": true,
+					"imageIdx": 1,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 1,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 1",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Numeric Question 2 B (Type in 2)",
+					"numericQuestion": true,
+					"hasImage": true,
+					"imageIdx": 1,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 2,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 2",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 3 A",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Correct Answer",
+					"numericAnswer": 0,
+					"correctIdx": 3,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 3 B",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Correct Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 4 A",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 2,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 4 B",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 1,
+					"ans0": "Correct Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 5 A",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Correct Answer",
+					"numericAnswer": 0,
+					"correctIdx": 3,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 5 B",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Numeric Question 6 A (Type in 1)",
+					"numericQuestion": true,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 1,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 1",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Numeric Question 6 B (Type in 2)",
+					"numericQuestion": true,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 2,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 2",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 7 A",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Correct Answer",
+					"ans2": "Incorrect Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 7 B",
+					"numericQuestion": false,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Numeric Question 8 A (Type in 1)",
+					"numericQuestion": true,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 1,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 1",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Numeric Question 8 B (Type in 2)",
+					"numericQuestion": true,
+					"hasImage": true,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 2,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 2",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Question 9 A",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Question 9 B",
+					"numericQuestion": false,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "Incorrect Answer",
+					"ans1": "Incorrect Answer",
+					"ans2": "Correct Answer",
+					"ans3": "Incorrect Answer",
+					"numericAnswer": 0,
+					"correctIdx": 2,
+					"timeLimit": 40,
+					"hint": "It's all of them",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elborate feedback",
+					"hasTimer": true
+				}
+			]
+		},
+		{
+			"dialogue": [
+				{
+					"speaker": 0,
+					"speech": "Professor Talking"
+				},
+				{
+					"speaker": 1,
+					"speech": "Other Charcter Talking"
+				}
+			],
+			"questions": [
+				{
+					"question": "Numeric Question 10 A (Type in 1)",
+					"numericQuestion": true,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 1,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 1",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				},
+				{
+					"question": "Numeric Question 10 B (Type in 2)",
+					"numericQuestion": true,
+					"hasImage": false,
+					"imageIdx": 0,
+					"ans0": "",
+					"ans1": "",
+					"ans2": "",
+					"ans3": "",
+					"numericAnswer": 2,
+					"correctIdx": 0,
+					"timeLimit": 40,
+					"hint": "It's 2",
+					"feedback":"normal feedback",
+					"elaborateFeedback": "elaborate feedback",
+					"hasTimer": true
+				}
+			]
+		}
+	
+	]
+}

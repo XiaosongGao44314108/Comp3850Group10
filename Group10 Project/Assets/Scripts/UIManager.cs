@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
 
     private GameManager GManager;
     public QuestionManager QManager;
+    public TextMeshProUGUI feedback;
     public TextMeshProUGUI elaborateFeedback;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI Lvl1HighscoreText;
@@ -497,6 +498,12 @@ public class UIManager : MonoBehaviour
         numOptFeedback++;
         ElaborateFeedback();
     }
+
+    public void TextFeedback()
+    {
+        feedback.GetComponent<TMPro.TextMeshProUGUI>().text = QManager.GetFeedback();
+    }
+
     public void ElaborateFeedback()
     {
         CorrectReviewPanel.SetActive(false);
@@ -551,6 +558,8 @@ public class UIManager : MonoBehaviour
         ReviewButtons.SetActive(false);
         FinishReviewButton.SetActive(true);
         FinishReviewButton.GetComponent<RectTransform>().localPosition = new Vector2(0, -170);
+        TextFeedback();
+
     }
 
     public void CallVideoReview()

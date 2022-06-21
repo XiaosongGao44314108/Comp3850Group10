@@ -321,6 +321,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3161730241094532837}
     - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
+      propertyPath: feedback
+      value: 
+      objectReference: {fileID: 1042401970821210965}
+    - target: {fileID: 3056675687419582738, guid: dda626be6538aec43a38e9c9c8e167d0, type: 3}
       propertyPath: badButton
       value: 
       objectReference: {fileID: 3161730242177847885}

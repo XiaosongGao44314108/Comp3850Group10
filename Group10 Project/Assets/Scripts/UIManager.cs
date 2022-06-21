@@ -243,27 +243,39 @@ public class UIManager : MonoBehaviour
         //lock/unlock goal buttons:
         if (GManager.GetLockState(0))
         {
+            Image G1 = GameObject.Find("NoPovertyImage").GetComponent<Image>();
+            G1.color = new Color32(255,255,255,255);
             goalOneButton.interactable = true;
         }
         else
         {
+            Image G1 = GameObject.Find("NoPovertyImage").GetComponent<Image>();
+            G1.color = new Color32(255,255,255,50);
             goalOneButton.interactable = false;
         }
         if (GManager.GetLockState(3))
         {
+            Image G2 = GameObject.Find("QualityEducation").GetComponent<Image>();
+            G2.color = new Color32(255,255,255,255);
             goalTwoButton.interactable = true;
         }
         else
         {
+            Image G2 = GameObject.Find("QualityEducation").GetComponent<Image>();
+            G2.color = new Color32(255,255,255,50);
             goalTwoButton.interactable = false;
         }
 
         if (GManager.GetLockState(6))
         {
+            Image G3 = GameObject.Find("GoodHealthandWell-Being").GetComponent<Image>();
+            G3.color = new Color32(255,255,255,255);
             goalThreeButton.interactable = true;
         }
         else
         {
+            Image G3 = GameObject.Find("GoodHealthandWell-Being").GetComponent<Image>();
+            G3.color = new Color32(255,255,255,100);
             goalThreeButton.interactable = false;
         }
     }
